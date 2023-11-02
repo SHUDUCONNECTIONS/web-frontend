@@ -1,0 +1,82 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  width: 300px; /* Adjust the width to the desired value */
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-family: Arial, sans-serif; /* Adjust the font family to match the buttons */
+}
+
+.logo {
+  margin-bottom: 20px;
+}
+
+.logo-image {
+  width: 100px;
+  height: 100px;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 1px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.input:focus {
+  cursor: text; /* Shows the cursor only when the input is focused */
+}
+
+.loginButton,
+.signUpButton {
+  width: 107%; /* Adjust the width to 100% */
+  padding: 10px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 1px;
+  outline: none;
+  font-family: Arial, sans-serif; /* Adjust the font family to match the title */
+}
+
+.loginButton:hover,
+.signUpButton:hover {
+  background-color: #2980b9;
+}
+
+.error-message {
+  color: red;
+  font-family: Arial, sans-serif;
+}
+
+.already-account {
+  margin-top: 20px;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+}
+
+.login-link {
+  cursor: pointer;
+  color: #2980b9;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  background-color: #f7f7f7;
+}
+
