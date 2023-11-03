@@ -13,12 +13,14 @@
   border: 1px solid #ddd;
   border-radius: 10px;
   width: 300px; /* Adjust the width to the desired value */
+  outline: none;
 }
 
 .title {
   font-size: 24px;
   margin-bottom: 20px;
   font-family: Arial, sans-serif; /* Adjust the font family to match the buttons */
+  cursor: none;
 }
 
 .logo {
@@ -36,10 +38,12 @@
   margin-bottom: 1px;
   border: 1px solid #ddd;
   border-radius: 5px;
+  outline: none;
 }
 
 .input:focus {
   cursor: text; /* Shows the cursor only when the input is focused */
+  outline: none;
 }
 
 .loginButton,
@@ -79,4 +83,3 @@
   font-weight: bold;
   background-color: #f7f7f7;
 }
-
