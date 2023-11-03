@@ -10,8 +10,8 @@ const Home = () => {
   const handleLogin = () => {
     if (!username || !password) {
       setError('Please enter both username and password');
-    } else if (password.length < 6) {
-      setError('Password should be at least 6 characters long');
+    } else if (password.length < 8) {
+      setError('Password should be at least 8 characters long');
     } else {
       // Perform login actions
       console.log('Username:', username);
