@@ -15,13 +15,16 @@ const Home = () => {
       .required('Please enter your password'),
   });
 
+
   const handleLogin = async () => {
     try {
       await validationSchema.validate({ username, password }, { abortEarly: false });
-      // Perform login actions
-      console.log('Username:', username);
-      console.log('Password:', password);
-      setError('');
+      // Replace the console logs with your login logic
+      if (username === 'example' && password === 'password') {
+        router.push('/menu'); // Replace '/menu' with the route of your menu page
+      } else {
+        setError('Incorrect username or password');
+      }
     } catch (err: any) {
       if (err.name === 'ValidationError') {
         setError(err.errors[0]);

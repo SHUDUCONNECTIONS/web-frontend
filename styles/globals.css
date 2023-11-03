@@ -39,6 +39,7 @@
   border: 1px solid #ddd;
   border-radius: 5px;
   outline: none;
+  cursor:text;
 }
 
 .input:focus {
@@ -83,3 +84,41 @@
   font-weight: bold;
   background-color: #f7f7f7;
 }
+
+.button {
+  width: 107%; /* Adjust the width to 100% */
+  padding: 10px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 1px;
+  outline: none;
+  font-family: Arial, sans-serif; /* Adjust the font family to match the title */  
+  font-weight: bold;
+  align-items: center;
+}
+
+.button:hover {
+  background-color: #2980b9;
+}
+
+.icon {
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.navigation-bar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 150px; /* Adjust the margin to fit the position */
+  margin-right: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 0 0 0 5px;
+  cursor: pointer;
+}
+
