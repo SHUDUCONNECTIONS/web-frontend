@@ -19,7 +19,7 @@ const Home = () => {
     }
 
     if (password.length < 8) {
-      setError('Password should be at least 8 characters long');
+      setError('Password should be at least8 characters long');
       return;
     }
 
