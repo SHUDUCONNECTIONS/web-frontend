@@ -7,13 +7,12 @@ const ForgotPassword = () => {
   const router = useRouter();
 
   const handleResetPassword = () => {
-  
     console.log('Reset password for:', email);
-    router.push('/resetpass'); // Replace '/login' with the route of your login page
+    router.push('/resetpass'); // Replace '/resetpass' with the route of your reset password page
   };
 
   const handleGoBack = () => {
-    router.push('/'); // Replace '/login' with the route of your login page
+    router.push('/'); // Replace '/' with the route of your login page
   };
 
   return (
@@ -35,8 +34,8 @@ const ForgotPassword = () => {
         <button onClick={handleResetPassword} className="button">
           Reset Password
         </button>
-        <br></br>
-        <button  onClick={handleGoBack} className= "button">
+        <br />
+        <button onClick={handleGoBack} className="button">
           Back to Login
         </button>
       </div>
