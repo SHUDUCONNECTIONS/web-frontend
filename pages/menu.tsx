@@ -75,9 +75,6 @@ const Home = () => {
           <span className="button-text">Billing Information</span>
         </button>
       </div>
-      <div className="navigation-bar">
-        <FontAwesomeIcon icon={faBars} />
-      </div>
     </div>
   );
 };

@@ -15,7 +15,6 @@ const Home = () => {
       .required('Please enter your password'),
   });
 
-
   const handleLogin = async () => {
     try {
       await validationSchema.validate({ username, password }, { abortEarly: false });
@@ -34,6 +33,10 @@ const Home = () => {
 
   const handleSignUp = () => {
     router.push('/signup'); // Replace '/signup' with the route of your sign-up page
+  };
+
+  const handleForgotPassword = () => {
+    router.push('/forgotpassword'); // Replace '/forgotpassword' with the route of your forgot password page
   };
 
   return (
@@ -67,6 +70,9 @@ const Home = () => {
         <button onClick={handleSignUp} className="signUpButton">
           Sign Up
         </button>
+        <p className="forgotPassword" onClick={handleForgotPassword}>
+          Forgot Password?
+        </p>
       </div>
     </div>
   );

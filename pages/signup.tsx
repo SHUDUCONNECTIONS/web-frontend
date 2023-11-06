@@ -99,15 +99,6 @@ const Home = () => {
         {errors.lastName && <p className="error-message">{errors.lastName}</p>}
         <input
           type="text"
-          placeholder="Contact Number"
-          value={contactNumber}
-          onChange={(e) => setContactNumber(e.target.value)}
-          className="input"
-        />
-        <br />
-        {errors.contactNumber && <p className="error-message">{errors.contactNumber}</p>}
-        <input
-          type="text"
           placeholder="Email Address"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -115,15 +106,6 @@ const Home = () => {
         />
         <br />
         {errors.email && <p className="error-message">{errors.email}</p>}
-        <input
-          type="text"
-          placeholder="Physical Address"
-          value={physicalAddress}
-          onChange={(e) => setPhysicalAddress(e.target.value)}
-          className="input"
-        />
-        <br />
-        {errors.physicalAddress && <p className="error-message">{errors.physicalAddress}</p>}
         <input
           type="password"
           placeholder="Password"
