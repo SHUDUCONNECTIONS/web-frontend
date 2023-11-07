@@ -22,6 +22,11 @@ const ForgotPassword = () => {
         <div className="logo">
           <img src="/carerunnerlogo.png" alt="Your Logo" className="logo-image" />
         </div>
+
+        <div className="back-to-login" onClick={handleGoBack}>
+          Back to Login
+        </div>
+        <br></br>
         <input
           type="text"
           placeholder="Email"
@@ -34,13 +39,10 @@ const ForgotPassword = () => {
         <button onClick={handleResetPassword} className="button">
           Reset Password
         </button>
-        <br></br>
-        <button onClick={handleGoBack} className="button">
-          Back to Login
-        </button>
       </div>
     </div>
   );
 };
 
 export default ForgotPassword;
+
