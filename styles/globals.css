@@ -1,3 +1,4 @@
+@media only screen and (min-width: 200px) {
 .container {
   display: flex;
   justify-content: center;
@@ -9,63 +10,61 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 60px; /* Increased padding for desktop view */
-  border: 2px solid #ddd; /* Increased border size for desktop view */
-  border-radius: 15px; /* Increased border radius for desktop view */
-  width: 400px; /* Adjusted width for desktop view */
-  outline: none;
+  padding: 60px;
+  border: 2px solid #ddd;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 400px;
 }
 
 .title {
-  font-size: 30px; /* Increased font size for desktop view */
-  margin-bottom: 30px; /* Increased margin bottom for desktop view */
+  font-size: 30px;
+  margin-bottom: 30px;
   font-family: Arial, sans-serif;
-  cursor: none;
 }
 
 .logo {
-  margin-bottom: 30px; /* Increased margin bottom for desktop view */
+  margin-bottom: 30px;
 }
 
 .logo-image {
-  width: 150px; /* Increased width for desktop view */
-  height: 150px; /* Increased height for desktop view */
+  width: 150px;
+  height: 150px;
 }
 
 .input {
   width: 100%;
-  padding: 15px; /* Increased padding for desktop view */
-  margin-bottom: 10px; /* Increased margin bottom for desktop view */
-  border: 2px solid #ddd; /* Increased border size for desktop view */
-  border-radius: 8px; /* Increased border radius for desktop view */
+  padding: 15px;
+  margin-bottom: 10px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
   outline: none;
   cursor: text;
 }
 
 .input:focus {
-  cursor: text;
   outline: none;
 }
 
 .loginButton,
 .signUpButton,
 .button {
-  width: 110%;
-  padding: 15px; /* Increased padding for desktop view */
+  width: 108%;
+  padding: 15px;
   background-color: #3498db;
   color: #fff;
   border: none;
-  border-radius: 8px; /* Increased border radius for desktop view */
+  border-radius: 8px;
   cursor: pointer;
-  margin-bottom: 10px; /* Increased margin bottom for desktop view */
-  outline: none;
+  margin-bottom: 10px;
   font-family: Arial, sans-serif;
   font-weight: bold;
 }
 
 .loginButton:hover,
 .signUpButton:hover,
-.button:hover {
+.button:hover,
+.button-menu:hover {
   background-color: #2980b9;
 }
 
@@ -76,7 +75,7 @@
 
 .login-link,
 .forgotPassword {
-  margin-top: 30px; /* Increased margin top for desktop view */
+  margin-top: 30px;
   font-family: Arial, sans-serif;
   font-weight: bold;
   color: #2980b9;
@@ -84,20 +83,70 @@
 }
 
 .already-account {
-  margin-top: 30px; /* Increased margin top for desktop view */
+  margin-top: 30px;
   font-family: Arial, sans-serif;
   font-weight: bold;
+  color: #000000;
+  cursor: pointer;
 }
 
-.button-text {
-  color: white;
-  font-size: 20px;
-  font-weight: bold;
-  text-align: left;
-  margin-top: 50px;
-  margin-left: 0px;
-}
 
 .icon {
-  margin-left: 0px;
+  font-size: 20px;
+  margin-right: 10px;
+  padding: 10px;
+}
+
+
+  .form {
+    padding: 60px;
+    border: 2px solid #ddd;
+    border-radius: 15px;
+    width: 400px;
+  }
+
+  .title {
+    font-size: 30px;
+    margin-bottom: 30px;
+  }
+
+  .logo-image {
+    width: 150px;
+    height: 150px;
+  }
+
+  .input {
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+  }
+
+ 
+  .button-menu {
+    width: 110%;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+  }
+
+  .button-text {
+    font-size: 20px;
+    margin-top: -20px;
+    text-align: left;
+    margin-bottom: -20px;
+    margin-left: 100px;
+  }
+
+  .icon {
+    font-size: 20px;
+    margin-right: 10px;
+  }
 }

@@ -36,7 +36,7 @@ const Home = () => {
   };
 
   const handleForgotPassword = () => {
-    router.push('/forgotpassword'); // Replace '/forgotpassword' with the route of your forgot password page
+    router.push('/forgot-password'); // Replace '/forgotpassword' with the route of your forgot password page
   };
 
   return (
