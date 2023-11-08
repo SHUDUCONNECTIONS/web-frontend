@@ -46,20 +46,38 @@
   outline: none;
 }
 
+.input,
 .loginButton,
 .signUpButton,
 .button {
-  width: 108%;
+  width: 100%;
   padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  cursor: text;
+  box-sizing: border-box; /* Adding box-sizing property to include padding and border in the element's total width and height */
+}
+
+.input {
+  border: 2px solid #ddd;
+  height: 50px; /* Adjusting the height for the input */
+}
+
+.input:focus {
+  outline: none;
+}
+
+.loginButton,
+.signUpButton,
+.button {
   background-color: #3498db;
   color: #fff;
   border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-bottom: 10px;
+  height: 50px; /* Adjusting the height for the button */
   font-family: Arial, sans-serif;
   font-weight: bold;
 }
+
 
 .loginButton:hover,
 .signUpButton:hover,
@@ -123,7 +141,7 @@
 
  
   .button-menu {
-    width: 110%;
+    width: 100%;
     padding: 10px;
     margin-bottom: 10px;
     display: flex;

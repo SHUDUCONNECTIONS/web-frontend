@@ -44,15 +44,6 @@ const ForgotPassword = () => {
         <div className="logo">
           <img src="/carerunnerlogo.png" alt="Your Logo" className="logo-image" />
         </div>
-        
-        <input
-          type="text"
-          placeholder="Code"
-          value={code}
-          onChange={(e) => setCode(e.target.value)}
-          className="input"
-        />
-        <br></br>
         <input
           type="password"
           placeholder="New Password"

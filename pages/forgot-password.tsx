@@ -1,18 +1,30 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import * as Yup from 'yup';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const router = useRouter();
 
+  const validationSchema = Yup.object().shape({
+    email: Yup.string()
+      .email('Invalid email format')
+      .required('Email is required'),
+  });
+
   const handleResetPassword = () => {
-    console.log('Reset password for:', email);
-    router.push('/reset-password'); // Redirects to '/reset-password' page
+    validationSchema
+      .validate({ email })
+      .then(() => {
+        console.log('Reset password');
+        // Add your password reset logic here
+      })
+      .catch((err) => setError(err.message));
   };
 
   const handleGoBack = () => {
-    router.push('/'); // Redirects to the login page
+    router.push('/'); // Replace '/' with the route of your login page
   };
 
   return (
@@ -22,27 +34,22 @@ const ForgotPassword = () => {
         <div className="logo">
           <img src="/carerunnerlogo.png" alt="Your Logo" className="logo-image" />
         </div>
-
-        <div className="back-to-login" onClick={handleGoBack}>
-          Back to Login
-        </div>
-        <br></br>
         <input
-          type="text"
+          type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="input"
         />
-        <br />
         {error && <p className="error-message">{error}</p>}
+        <br />
         <button onClick={handleResetPassword} className="button">
           Reset Password
         </button>
+        <br />
       </div>
     </div>
   );
 };
 
 export default ForgotPassword;
-
