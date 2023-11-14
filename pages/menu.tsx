@@ -35,6 +35,16 @@ const Home = () => {
     router.push('/membership-access');
   };
 
+  const handleFirmRecords = () => {
+    // Replace '/firm-records' with the route of your firm records page
+    router.push('/firm-records');
+  };
+
+  const handleUploadCase = () => {
+    // Replace '/uploadcasepage' with the route of your upload case page
+    router.push('/upload-case');
+  };
+
   return (
     <div className="container">
       <div className="form">
@@ -49,14 +59,14 @@ const Home = () => {
           <span className="button-text">Pick Up Request</span>
         </button>
         <br />
-        <button onClick={() => console.log('Button 2 clicked')} className="button-menu">
+        <button onClick={handleUploadCase} className="button-menu">
           <span className="icon">
             <FontAwesomeIcon icon={faFileUpload} />
           </span>
           <span className="button-text">Upload Case</span>
         </button>
         <br />
-        <button onClick={() => console.log('Button 3 clicked')} className="button-menu">
+        <button onClick={handleFirmRecords} className="button-menu">
           <span className="icon">
             <FontAwesomeIcon icon={faFolder} />
           </span>
