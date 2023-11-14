@@ -12,18 +12,21 @@
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@next/bundle-analyzer": "^14.0.2",
     "formik": "^2.4.5",
     "next": "14.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-native": "^0.72.6",
     "yup": "^1.3.2"
   },
   "devDependencies": {
     "@types/node": "20.8.9",
     "@types/react": "18.2.33",
     "@types/react-dom": "18.2.14",
+    "@types/react-native": "^0.72.6",
     "eslint": "8.52.0",
     "eslint-config-next": "14.0.0",
-    "typescript": "5.2.2"
+    "typescript": "^5.2.2"
   }
 }

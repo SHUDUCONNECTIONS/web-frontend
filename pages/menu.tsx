@@ -26,6 +26,11 @@ const Home = () => {
     router.push('/signup');
   };
 
+  const handleBillingInfo = () => {
+    // Replace '/billing' with the route of your billing page
+    router.push('/billing-page');
+  };
+
   return (
     <div className="container">
       <div className="form">
@@ -68,7 +73,7 @@ const Home = () => {
           <span className="button-text">Membership Access</span>
         </button>
         <br />
-        <button onClick={() => console.log('Button 6 clicked')} className="button-menu">
+        <button onClick={handleBillingInfo} className="button-menu">
           <span className="icon">
             <FontAwesomeIcon icon={faMoneyBill} />
           </span>

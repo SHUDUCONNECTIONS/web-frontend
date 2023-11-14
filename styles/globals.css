@@ -78,7 +78,6 @@
   font-weight: bold;
 }
 
-
 .loginButton:hover,
 .signUpButton:hover,
 .button:hover,
@@ -138,7 +137,6 @@
     border: 2px solid #ddd;
     border-radius: 8px;
   }
-
  
   .button-menu {
     width: 100%;
@@ -178,4 +176,3 @@
     padding: 1px;
   }
 }
-
