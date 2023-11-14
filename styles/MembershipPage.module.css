@@ -1,0 +1,65 @@
+.container {
+    margin: 20px;
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .packages {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .package {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 10px;
+    width: 200px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .package.selected {
+    border-color: #3498db;
+  }
+  
+  .price {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  
+  .stars {
+    display: flex;
+    margin-bottom: 8px;
+  }
+  
+  .stars span {
+    color: #f1c40f;
+  }
+  
+  .description {
+    font-size: 14px;
+    margin-bottom: 16px;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Use a class for the button styles */
+  .button-style {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Add hover styles for the button */
+  .button-style:hover {
+    background-color: #2980b9;
+  }
+  

@@ -8,7 +8,6 @@ import {
   faUser,
   faUserShield,
   faMoneyBill,
-  faBars
 } from '@fortawesome/free-solid-svg-icons';
 
 const Home = () => {
@@ -29,6 +28,11 @@ const Home = () => {
   const handleBillingInfo = () => {
     // Replace '/billing' with the route of your billing page
     router.push('/billing-page');
+  };
+
+  const handleMemberAccess = () => {
+    // Replace '/membership' with the route of your membership access page
+    router.push('/membership-access');
   };
 
   return (
@@ -66,7 +70,7 @@ const Home = () => {
           <span className="button-text">Account Profile</span>
         </button>
         <br />
-        <button onClick={() => console.log('Button 5 clicked')} className="button-menu">
+        <button onClick={handleMemberAccess} className="button-menu">
           <span className="icon">
             <FontAwesomeIcon icon={faUserShield} />
           </span>
