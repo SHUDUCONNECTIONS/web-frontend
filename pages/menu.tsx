@@ -43,6 +43,7 @@ const Home = () => {
   const handleUploadCase = () => {
     // Replace '/uploadcasepage' with the route of your upload case page
     router.push('/upload-case');
+    
   };
 
   return (
