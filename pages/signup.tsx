@@ -1,9 +1,10 @@
-import { useState } from 'react';
+// Import React and other necessary libraries
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import * as Yup from 'yup';
 
 type Errors = {
-  [key: string]: string;
+  [key: string]: boolean;
 };
 
 const Home = () => {
@@ -16,27 +17,23 @@ const Home = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const router = useRouter();
   const [errors, setErrors] = useState<Errors>({
-    firstName: '',
-    lastName: '',
-    contactNumber: '',
-    email: '',
-    physicalAddress: '',
-    password: '',
-    confirmPassword: '',
+    firstName: false,
+    lastName: false,
+    contactNumber: false,
+    email: false,
+    physicalAddress: false,
+    password: false,
+    confirmPassword: false,
   });
 
   const schema = Yup.object().shape({
-    firstName: Yup.string().required('First name is required'),
-    lastName: Yup.string().required('Last name is required'),
-    contactNumber: Yup.string().required('Contact number is required'),
-    email: Yup.string().email('Invalid email').required('Email is required'),
-    physicalAddress: Yup.string().required('Physical address is required'),
-    password: Yup.string()
-      .min(8, 'Password should be at least 8 characters long')
-      .required('Password is required'),
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref('password')], 'Passwords must match')
-      .required('Please confirm your password'),
+    firstName: Yup.string().required(),
+    lastName: Yup.string().required(),
+    contactNumber: Yup.string().required(),
+    email: Yup.string().email().required(),
+    physicalAddress: Yup.string().required(),
+    password: Yup.string().min(8).required(),
+    confirmPassword: Yup.string().oneOf([Yup.ref('password')]).required(),
   });
 
   const handleSignUp = async () => {
@@ -53,6 +50,18 @@ const Home = () => {
         },
         { abortEarly: false }
       );
+
+      // Reset errors
+      setErrors({
+        firstName: false,
+        lastName: false,
+        contactNumber: false,
+        email: false,
+        physicalAddress: false,
+        password: false,
+        confirmPassword: false,
+      });
+
       // Rest of the logic for handleSignUp function
       router.push('/signup');
     } catch (validationError) {
@@ -60,7 +69,7 @@ const Home = () => {
         const validationErrors: Errors = {};
         validationError.inner.forEach((error) => {
           if (error.path) {
-            validationErrors[error.path] = error.message;
+            validationErrors[error.path] = true;
           }
         });
         setErrors(validationErrors);
@@ -84,45 +93,40 @@ const Home = () => {
           placeholder="First Name"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
-          className="input"
+          className={`input ${errors.firstName && 'error'}`}
         />
         <br />
-        {errors.firstName && <p className="error-message">{errors.firstName}</p>}
         <input
           type="text"
           placeholder="Last Name"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
-          className="input"
+          className={`input ${errors.lastName && 'error'}`}
         />
         <br />
-        {errors.lastName && <p className="error-message">{errors.lastName}</p>}
         <input
           type="text"
           placeholder="Email Address"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="input"
+          className={`input ${errors.email && 'error'}`}
         />
         <br />
-        {errors.email && <p className="error-message">{errors.email}</p>}
         <input
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="input"
+          className={`input ${errors.password && 'error'}`}
         />
         <br />
-        {errors.password && <p className="error-message">{errors.password}</p>}
         <input
           type="password"
           placeholder="Confirm Password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
-          className="input"
+          className={`input ${errors.confirmPassword && 'error'}`}
         />
-        {errors.confirmPassword && <p className="error-message">{errors.confirmPassword}</p>}
         <br />
         <button onClick={handleSignUp} className="signUpButton">
           Sign Up
