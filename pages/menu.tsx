@@ -1,6 +1,9 @@
+import globalStyles from '../styles/menu2.module.css';
+import React from 'react';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import styles from '../styles/menu2.module.css'; // Import the CSS module
 import {
   faCar,
   faFileUpload,
@@ -15,88 +18,71 @@ const Home = () => {
   const [error, setError] = useState<string>('');
 
   const handleLogin = () => {
-    // Replace this logic with your own login implementation
     console.log('Performing login actions');
     setError('');
   };
 
   const handleSignUp = () => {
-    // Replace '/signup' with the route of your sign-up page
     router.push('/signup');
   };
 
   const handleBillingInfo = () => {
-    // Replace '/billing' with the route of your billing page
     router.push('/billing-page');
   };
 
   const handleMemberAccess = () => {
-    // Replace '/membership' with the route of your membership access page
     router.push('/membership-access');
   };
 
   const handleFirmRecords = () => {
-    // Replace '/firm-records' with the route of your firm records page
     router.push('/firm-records');
   };
 
   const handleUploadCase = () => {
-    // Replace '/uploadcasepage' with the route of your upload case page
     router.push('/upload-case');
-    
+  };
+
+  const handleAccountProfile = () => {
+    router.push('');
   };
 
   return (
-    <div className="container">
-      <div className="form">
-        <div className="logo">
-          <img src="/carerunnerlogo.png" alt="Your Logo" className="logo-image" />
-        </div>
+    <div className={styles.container}>
 
-        <button onClick={() => console.log('Button 1 clicked')} className="button-menu">
-          <span className="icon">
-            <FontAwesomeIcon icon={faCar} />
-          </span>
-          <span className="button-text">Pick Up Request</span>
-        </button>
-        <br />
-        <button onClick={handleUploadCase} className="button-menu">
-          <span className="icon">
-            <FontAwesomeIcon icon={faFileUpload} />
-          </span>
-          <span className="button-text">Upload Case</span>
-        </button>
-        <br />
-        <button onClick={handleFirmRecords} className="button-menu">
-          <span className="icon">
-            <FontAwesomeIcon icon={faFolder} />
-          </span>
-          <span className="button-text">Firm Records</span>
-        </button>
-        <br />
-        <button onClick={() => console.log('Button 4 clicked')} className="button-menu">
-          <span className="icon">
-            <FontAwesomeIcon icon={faUser} />
-          </span>
-          <span className="button-text">Account Profile</span>
-        </button>
-        <br />
-        <button onClick={handleMemberAccess} className="button-menu">
-          <span className="icon">
-            <FontAwesomeIcon icon={faUserShield} />
-          </span>
-          <span className="button-text">Membership Access</span>
-        </button>
-        <br />
-        <button onClick={handleBillingInfo} className="button-menu">
-          <span className="icon">
-            <FontAwesomeIcon icon={faMoneyBill} />
-          </span>
-          <span className="button-text">Billing Information</span>
-        </button>
+        <a href="/link-to-desired-url" className={styles['card-menu']} onClick={() => console.log('Button 1 clicked')}>
+          <img src="/menu1.png" alt="Car Icon" className={styles['card-image']} />
+          <button style={{ width: '100%' }} className={styles['card-button']}>Request Pickup</button>
+        </a>
+
+        <a href="/link-to-desired-url" className={styles['card-menu']} onClick={(handleUploadCase) => console.log('Button 1 clicked')}>
+          <img src="/menu2.png" alt="Car Icon" className={styles['card-image']} />
+          <button style={{ width: '100%' }} className={styles['card-button']}>Upload Case FIle</button>
+        </a>
+        
+        <a href="/link-to-desired-url" className={styles['card-menu']} onClick={(handleFirmRecords) => console.log('Button 1 clicked')}>
+          <img src="/menu3.png" alt="Car Icon" className={styles['card-image']} />
+          <button style={{ width: '100%' }} className={styles['card-button']}>Law-Firm Records</button>
+        </a>
+
+        <a href="/link-to-desired-url" className={styles['card-menu']} onClick={(handleAccountProfile) => console.log('Button 1 clicked')}>
+          <img src="/menu4.png" alt="Car Icon" className={styles['card-image']} />
+          <button style={{ width: '100%' }} className={styles['card-button']}>Lawyer Account Profile</button>
+        </a>
+        
+        <a href="/link-to-desired-url" className={styles['card-menu']} onClick={(handleMemberAccess) => console.log('Button 1 clicked')}>
+          <img src="/menu5.png" alt="Car Icon" className={styles['card-image']} />
+          <button style={{ width: '100%' }} className={styles['card-button']}>Membership Access</button>
+        </a>
+
+        <a href="/billing-page.tsx" className={styles['card-menu']} onClick={(handleBillingInfo) => console.log('Button 1 clicked')}>
+          <img src="/menu6.png" alt="Car Icon" className={styles['card-image']} />
+          <button style={{ width: '100%' }} className={styles['card-button']}>Billing Information</button>
+        </a>
+        
+        
       </div>
-    </div>
   );
 };
+
 
 export default Home;
