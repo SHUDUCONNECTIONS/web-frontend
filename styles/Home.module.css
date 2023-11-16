@@ -1,26 +1,56 @@
-.container {
-  padding: 0 2rem;
+/* Default styles for all screen sizes */
+body {
+  min-height: 100vh;
+  background-color: #f2f2f2;
 }
 
+.button-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.button-text {
+  margin-top: 5px; /* Add space between icon and text */
+}
+
+/* Styles for the container */
+.container {
+  margin: 0;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Set height to 100% of the viewport height */
+  overflow-y: hidden; /* Hide vertical scrollbar */
+}
+
+
+/* Styles for the main content area */
 .main {
   min-height: 100vh;
   padding: 4rem 0;
-  flex: 1;
+  flex: 1; /* Make the main content take up remaining space */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+/* Styles for the footer */
 .footer {
   display: flex;
-  flex: 1;
+  flex: 1; /* Make the footer take up remaining space */
   padding: 2rem 0;
   border-top: 1px solid #eaeaea;
   justify-content: center;
   align-items: center;
 }
 
+/* Styles for links in the footer */
 .footer a {
   display: flex;
   justify-content: center;
@@ -28,34 +58,40 @@
   flex-grow: 1;
 }
 
+/* Styles for the title link */
 .title a {
   color: #0070f3;
   text-decoration: none;
 }
 
+/* Styles for hover/focus state of title link */
 .title a:hover,
 .title a:focus,
 .title a:active {
   text-decoration: underline;
 }
 
+/* Styles for the title text */
 .title {
   margin: 0;
   line-height: 1.15;
   font-size: 4rem;
 }
 
+/* Styles for the title and description text */
 .title,
 .description {
   text-align: center;
 }
 
+/* Styles for the description text */
 .description {
   margin: 4rem 0;
   line-height: 1.5;
   font-size: 1.5rem;
 }
 
+/* Styles for code blocks */
 .code {
   background: #fafafa;
   border-radius: 5px;
@@ -65,6 +101,7 @@
     Bitstream Vera Sans Mono, Courier New, monospace;
 }
 
+/* Styles for the grid layout */
 .grid {
   display: flex;
   align-items: center;
@@ -73,6 +110,7 @@
   max-width: 800px;
 }
 
+/* Styles for individual cards */
 .card {
   margin: 1rem;
   padding: 1.5rem;
@@ -85,6 +123,7 @@
   max-width: 300px;
 }
 
+/* Styles for hover/focus/active state of cards */
 .card:hover,
 .card:focus,
 .card:active {
@@ -92,38 +131,17 @@
   border-color: #0070f3;
 }
 
+/* Styles for card headings */
 .card h2 {
   margin: 0 0 1rem 0;
   font-size: 1.5rem;
 }
 
+/* Styles for card paragraphs */
 .card p {
   margin: 0;
   font-size: 1.25rem;
   line-height: 1.5;
 }
 
-.logo {
-  height: 1em;
-  margin-left: 0.5rem;
-}
-
-@media (max-width: 600px) {
-  .grid {
-    width: 100%;
-    flex-direction: column;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .card,
-  .footer {
-    border-color: #222;
-  }
-  .code {
-    background: #111;
-  }
-  .logo img {
-    filter: invert(1);
-  }
-}
+/* Styles
