@@ -1,0 +1,20 @@
+/* accountProfile.module.css */
+
+.container {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .profileSection {
+    margin-top: 20px;
+  }
+  
+  .profileInfo {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  /* Add more styles as needed */
+  
