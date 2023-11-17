@@ -15,7 +15,7 @@ const MembershipPage = () => {
   const packages: Package[] = [
     { id: 1, name: 'Bronze', price: 'R350.00/month', stars: 1, description: 'RAM: 2 GB | Support & Maintenance' },
     { id: 2, name: 'Silver', price: 'R550.00/month', stars: 2, description: 'RAM: 4 GB | Support & Maintenance' },
-    { id: 3, name: 'Gold', price: 'R650.00/month', stars: 3, description: 'RAM: 6 GB | Support & Maintenance' },
+    { id: 3, name: 'Gold',  price: 'R650.00/month', stars: 3, description: 'RAM: 6 GB | Support & Maintenance' },
     { id: 4, name: 'Platinum', price: 'R750.00/month', stars: 4, description: 'RAM: 4 GB | Support & Maintenance' },
     { id: 5, name: 'Palladium', price: 'R1 200.00/month', stars: 5, description: 'RAM: 6 GB | Support & Maintenance' },
   ];
