@@ -23,17 +23,16 @@ const Home = () => {
   };
 
   const handleAccountProfile = () => {
-    router.push('/account-profile'); // Redirect to the "account-profile" page
+    router.push('');
   };
 
   return (
     <div className={styles.container}>
-      <a className={styles['card-menu']} onClick={() => console.log('Button 1 clicked')}>
-        <img src="/menu1.png" alt="Car Icon" className={styles['card-image']} />
-        <button style={{ width: '100%' }} className={styles['card-button']}>
-          Request Pickup
-        </button>
-      </a>
+
+        <a href="/link-to-desired-url" className={styles['card-menu']} onClick={() => console.log('Button 1 clicked')}>
+          <img src="/menu1.png" alt="Car Icon" className={styles['card-image']} />
+          <button style={{ width: '100%' }} className={styles['card-button']}>Request Pickup</button>
+        </a>
 
       <a className={styles['card-menu']} onClick={handleUploadCase}>
         <img src="/menu2.png" alt="Car Icon" className={styles['card-image']} />
@@ -63,13 +62,13 @@ const Home = () => {
         </button>
       </a>
 
-      <a className={styles['card-menu']} onClick={handleBillingInfo}>
-        <img src="/menu6.png" alt="Car Icon" className={styles['card-image']} />
-        <button style={{ width: '100%' }} className={styles['card-button']}>
-          Billing Information
-        </button>
-      </a>
-    </div>
+        <a href="/billing-page.tsx" className={styles['card-menu']} onClick={(handleBillingInfo) => console.log('Button 1 clicked')}>
+          <img src="/menu6.png" alt="Car Icon" className={styles['card-image']} />
+          <button style={{ width: '100%' }} className={styles['card-button']}>Billing Information</button>
+        </a>
+        
+        
+      </div>
   );
 };
 
