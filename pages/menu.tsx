@@ -62,7 +62,7 @@ const Home = () => {
         </button>
       </a>
 
-        <a href="/billing-page.tsx" className={styles['card-menu']} onClick={(handleBillingInfo) => console.log('Button 1 clicked')}>
+        <a className={styles['card-menu']} onClick={(handleBillingInfo) => console.log('Button 1 clicked')}>
           <img src="/menu6.png" alt="Car Icon" className={styles['card-image']} />
           <button style={{ width: '100%' }} className={styles['card-button']}>Billing Information</button>
         </a>
