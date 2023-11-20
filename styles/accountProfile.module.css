@@ -1,20 +1,44 @@
-/* accountProfile.module.css */
-
+/* LawFirmAccountProfile.module.css */
 .container {
-    padding: 20px;
-    text-align: center;
-  }
-  
-  .profileSection {
-    margin-top: 20px;
-  }
-  
-  .profileInfo {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    margin-bottom: 20px;
-  }
-  
-  /* Add more styles as needed */
-  
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.leftPanel,
+.rightPanel {
+  flex: 1;
+  padding: 10px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.updateButton {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+}
+
+.input {
+  width: 50%;
+  padding: 15px;
+  margin-bottom: 10px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  cursor: text;
+}
+
+.input:focus {
+  outline: none;
+}

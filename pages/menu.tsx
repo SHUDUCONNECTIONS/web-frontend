@@ -23,7 +23,7 @@ const Home = () => {
   };
 
   const handleAccountProfile = () => {
-    router.push('');
+    router.push('/account-profile');
   };
 
   return (
@@ -61,13 +61,10 @@ const Home = () => {
           Membership Access
         </button>
       </a>
-
         <a className={styles['card-menu']} onClick={(handleBillingInfo) => console.log('Button 1 clicked')}>
           <img src="/menu6.png" alt="Car Icon" className={styles['card-image']} />
           <button style={{ width: '100%' }} className={styles['card-button']}>Billing Information</button>
         </a>
-        
-        
       </div>
   );
 };
