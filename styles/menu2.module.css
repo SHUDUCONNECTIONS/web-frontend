@@ -1,14 +1,80 @@
+
+.navbar {
+  margin-top: 0px;
+  padding: 5px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 83px;
+  width: 100%;
+  background-color: lightgray;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+}
+
+.navList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  font-family: Arial, sans-serif;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  margin-right: 20px; /* Added margin */
+}
+
+
+.navItem a {
+  text-decoration: none;
+  color: rgb(80, 80, 80);
+  width: 100%;
+  text-align: center;
+  margin-left: 39px;
+  font-family: Arial, sans-serif;
+}
+
+.centered-text {
+  margin-right: 100px;
+  
+}
+
+.navItem .fa-icon {
+  margin-left: 5px!important;
+}
+
+.navItem img {
+  display: block; /* Make the image a block element */
+  margin: 0 auto; /* Center the image horizontally */
+}
+
+.navItem a:not(:first-child) {
+  margin-left: 20px; /* Move the rest of the links to the right */
+}
+
+
+
 /* This Media part is for DESKTOP*/
 
 @media only screen and (min-width: 425px) {
   .container {
-    display: flex;
-    justify-content: center;
-    background-color: rgba(44, 44, 44, 0.781);
-    align-items: center;
-    height: 100vh;
-    flex-wrap: wrap; /* Wrap the cards to multiple lines if necessary */
-    gap: 7px; /* Add spacing between the cards */
+    position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw; /* Use vw instead of px to make it responsive */
+  height: 100vh; /* Use vh instead of px to make it responsive */
+  display: flex;
+  justify-content: center;
+  background-color: rgba(44, 44, 44, 0.781);
+  align-items: center;
+  flex-wrap: wrap; /* Wrap the cards to multiple lines if necessary */
+  gap: 7px; /* Add spacing between the cards */
   }
 
   .card-menu {
@@ -16,7 +82,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgb(44, 44, 44);
+    background-color: rgba(44, 44, 44, 0.781);
     border-radius: 10px;
     font-family: Arial, sans-serif;
     font-weight: bold;
@@ -292,3 +358,13 @@
 }
 
 }
+
+
+
+
+
+
+
+
+
+
