@@ -30,7 +30,7 @@ const Home = () => {
   };
 
   const handleBillingInfo = () => {
-    router.push('/navbar');
+    router.push('/billing-page');
   };
 
   const handleMemberAccess = () => {
@@ -49,14 +49,14 @@ const Home = () => {
     router.push('');
   }; 
 
-  interface IconProps {
-    link: string;
-  }
   
   return (
     <div className={styles.container}>
       
       <div className={`${styles.container2} ${styles.mobile}`}>
+      
+
+
         <div className={`${styles.form} ${styles.mobile}`}>
           <div className={`${styles.logo} ${styles.mobile}`}>
            <img src="/carerunnerlogo.png" alt="Your Logo" className={`${styles['logo-image']} ${styles.mobile}`} />
@@ -115,7 +115,7 @@ const Home = () => {
     </a>
 
     <li className={styles.navItem}>
-      <a href="/link-to-desired-url">
+      <a href="/menu">
         <FontAwesomeIcon icon={faHouse} />
         <span>  HOME</span>
       </a>
@@ -183,13 +183,32 @@ const Home = () => {
           <button style={{ width: '100%' }} className={styles['card-button']}>Membership Access</button>
         </a>
 
-        <a href="/navbar" className={styles['card-menu']} onClick={(handleBillingInfo) => console.log('Button 1 clicked')}>
+        <a href="/billing-page" className={styles['card-menu']} onClick={(handleBillingInfo) => console.log('Button 1 clicked')}>
           <img src="/menu6.png" alt="Car Icon" className={styles['card-image']} />
           <button style={{ width: '100%' }} className={styles['card-button']}>Billing Information</button>
         </a>
         
       </div>
-    </div>
+
+      <div className="footer">
+      <nav className={styles.footer}>
+      <li className={styles.navItem2}>
+        <a>
+        <span><strong>SHUDU</strong></span>
+        </a>
+      </li>
+        
+          <a className="centered-text2" href="/menu">
+            <img src="/shudu.png" width="90" />
+          </a>
+          <li className={styles.navItem2}>
+        <a >
+          <span><strong>CONNECTIONS</strong></span>
+        </a>
+      </li>
+        </nav>
+      </div>
+  </div>
   );
 };
 
