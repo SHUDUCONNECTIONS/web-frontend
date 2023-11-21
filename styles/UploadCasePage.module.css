@@ -67,4 +67,23 @@
       margin-bottom: 10px;
     }
   }
+
+.fileInputContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.fileInput {
+  display: none; /* Hide the default file input */
+}
+
+.uploadIcon {
+  margin-left: 8px;
+  cursor: pointer;
+  color: #007bff; /* Customize the color as needed */
+}
+
+/* ... existing styles ... */
+
   

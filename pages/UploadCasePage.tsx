@@ -1,10 +1,15 @@
 // Import React and other necessary libraries
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent, useRef } from 'react';
 import styles from '../styles/UploadCasePage.module.css';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUpload } from '@fortawesome/free-solid-svg-icons';
 
 const UploadCasePage = () => {
   const [caseNumber, setCaseNumber] = useState('');
   const [caseType, setCaseType] = useState('');
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleCaseNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCaseNumber(event.target.value);
@@ -14,9 +19,24 @@ const UploadCasePage = () => {
     setCaseType(event.target.value);
   };
 
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (files && files.length > 0) {
+      setSelectedFile(files[0]);
+    }
+  };
+
+  const handleUploadButtonClick = () => {
+    // Trigger the file input click
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
   const handleUpload = () => {
-    // Implement your logic for handling case upload
-    console.log(`Uploading case with case number: ${caseNumber} and case type: ${caseType}`);
+    // Implement your logic for handling case upload, including the selected file
+    console.log(`Uploading case with case number: ${caseNumber}, case type: ${caseType}, and file: ${selectedFile?.name}`);
+    // Additional logic to handle file upload can be implemented here
   };
 
   return (
@@ -44,6 +64,23 @@ const UploadCasePage = () => {
           onChange={handleCaseTypeChange}
           className={styles.input}
         />
+
+        <label htmlFor="file" className={styles.label}>
+          File:
+        </label>
+        <div className={styles.fileInputContainer}>
+          <input
+            type="file"
+            id="file"
+            onChange={handleFileChange}
+            className={styles.fileInput}
+            ref={fileInputRef}
+          />
+          <button onClick={handleUploadButtonClick} className={styles.button}>
+            <FontAwesomeIcon icon={faUpload} className={styles.uploadIcon} />
+            Select File
+          </button>
+        </div>
 
         <button onClick={handleUpload} className={styles.button}>
           Upload Case
