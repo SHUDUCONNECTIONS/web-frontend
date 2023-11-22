@@ -1,5 +1,4 @@
 import React from 'react';
-import './Footer.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse } from '@fortawesome/free-solid-svg-icons';
 import styles from '../styles/menu2.module.css'; // Import the CSS module

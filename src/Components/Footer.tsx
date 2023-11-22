@@ -1,5 +1,4 @@
 import React from 'react';
-import './Footer.css';
 import styles from '../styles/menu2.module.css'; // Import the CSS module
 
 const Footer: React.FC = () => {
