@@ -17,11 +17,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 
-import Navbar from '../Components/Navbar';
-import Home from '../pages/menu';
-import Footer from '../Components/Footer';
+import Navbar from '../src/Components/Navbar';
+import Home from '../pages/Home';
+import Footer from '../src/Components/Footer';
 
-const App: React.FC = () => {
+const App: React.FC = () => { 
   return (
     <React.Fragment>
       <Navbar />
