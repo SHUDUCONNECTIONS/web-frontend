@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,6 +9,10 @@ import {
   faUser,
   faUserShield,
   faMoneyBill,
+  faHouse,
+  faHandshake,
+  faFileShield,
+  faSignOut,
 } from '@fortawesome/free-solid-svg-icons';
 
 const Home = () => {
