@@ -32,7 +32,7 @@ const Home = () => {
   };
 
   const handleAccountProfile = () => {
-    router.push('account-profile');
+    router.push('');
   }; 
 
   interface IconProps {
@@ -99,27 +99,27 @@ const Home = () => {
       <div className={`${styles.container} ${styles.desktop}`}>
       
 
-        <a className={styles['card-menu']} onClick={() => console.log('Button 1 clicked')}>
+        <a href="/link-to-desired-url" className={styles['card-menu']} onClick={() => console.log('Button 1 clicked')}>
           <img src="/menu1.png" alt="Car Icon" className={styles['card-image']} />
           <button style={{ width: '100%' }} className={styles['card-button']}>Request Pickup</button>
         </a>
 
-        <a className={styles['card-menu']} onClick={(handleUploadCase) => console.log('Button 1 clicked')}>
+        <a href="/link-to-desired-url" className={styles['card-menu']} onClick={(handleUploadCase) => console.log('Button 1 clicked')}>
           <img src="/menu2.png" alt="Car Icon" className={styles['card-image']} />
           <button style={{ width: '100%' }} className={styles['card-button']}>Upload Case FIle</button>
         </a>
         
-        <a className={styles['card-menu']} onClick={(handleFirmRecords) => console.log('Button 1 clicked')}>
+        <a href="/link-to-desired-url" className={styles['card-menu']} onClick={(handleFirmRecords) => console.log('Button 1 clicked')}>
           <img src="/menu3.png" alt="Car Icon" className={styles['card-image']} />
           <button style={{ width: '100%' }} className={styles['card-button']}>Law-Firm Records</button>
         </a>
 
-        <a className={styles['card-menu']} onClick={(handleAccountProfile) => console.log('Button 1 clicked')}>
+        <a href="/link-to-desired-url" className={styles['card-menu']} onClick={(handleAccountProfile) => console.log('Button 1 clicked')}>
           <img src="/menu4.png" alt="Car Icon" className={styles['card-image']} />
           <button style={{ width: '100%' }} className={styles['card-button']}>Lawyer Account Profile</button>
         </a>
         
-        <a className={styles['card-menu']} onClick={(handleMemberAccess) => console.log('Button 1 clicked')}>
+        <a href="/link-to-desired-url" className={styles['card-menu']} onClick={(handleMemberAccess) => console.log('Button 1 clicked')}>
           <img src="/menu5.png" alt="Car Icon" className={styles['card-image']} />
           <button style={{ width: '100%' }} className={styles['card-button']}>Membership Access</button>
         </a>
