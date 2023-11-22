@@ -9,11 +9,8 @@ import {
   faUser,
   faUserShield,
   faMoneyBill,
-  faHouse,
-  faHandshake,
-  faFileShield,
-  faSignOut,
 } from '@fortawesome/free-solid-svg-icons';
+
 
 const Home = () => {
   const router = useRouter();
@@ -100,55 +97,7 @@ const Home = () => {
       </div>
 
       <div className={`${styles.container} ${styles.desktop}`}>
-      <nav className={styles.navbar}>
-  <ul className={styles.navList}>
-    <a className="centered-text" href="/">
-      <img src="/logo.png" width="75" />
-    </a>
-
-    <li className={styles.navItem}>
-      <a href="/link-to-desired-url">
-        <FontAwesomeIcon icon={faHouse} />
-        <span>  HOME</span>
-      </a>
-    </li>
-
-    <li className={styles.navItem}>
-      <a href="/link-to-desired-url" onClick={handleUploadCase}>
-        <FontAwesomeIcon icon={faHandshake} />
-        <span>  CONSULTATION</span>
-      </a>
-    </li>
-
-    <li className={styles.navItem}>
-      <a href="/link-to-desired-url" onClick={handleFirmRecords}>
-        <FontAwesomeIcon icon={faCar} />
-        <span>  REQUEST PICK-UP</span>
-      </a>
-    </li>
-
-    <li className={styles.navItem}>
-      <a href="/link-to-desired-url" onClick={handleAccountProfile}>
-        <FontAwesomeIcon icon={faFileShield} />
-        <span>  T's & C's</span>
-      </a>
-    </li>
-
-    <li className={styles.navItem}>
-      <a href="/link-to-desired-url" onClick={handleAccountProfile}>
-        <FontAwesomeIcon icon={faUser} />
-        <span>  PROFILE</span>
-      </a>
-    </li>
-
-    <li className={styles.navItem}>
-      <a href="/index" onClick={handleBillingInfo}>
-        <FontAwesomeIcon icon={faSignOut} />
-        <span>  SIGN OUT</span>
-      </a>
-    </li>
-  </ul>
-</nav>
+      
 
         <a href="/link-to-desired-url" className={styles['card-menu']} onClick={() => console.log('Button 1 clicked')}>
           <img src="/menu1.png" alt="Car Icon" className={styles['card-image']} />
