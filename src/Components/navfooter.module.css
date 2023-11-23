@@ -1,0 +1,416 @@
+/*Styling for the NAVIGATION bar*/
+.navbar {
+    margin-top: 0px;
+    padding: 5px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 4.2rem;
+    width: 100%;
+    background-color: lightgray;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+  }
+  
+  /*Styling for the FOOTER*/
+  .footer {
+    border-radius: 50px 50px 0px 0px;
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    height: 3.6rem;
+    width: 100%;
+    background-color: rgb(2, 124, 133);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .centered-text2 {
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .centered-text2 span {
+    font-weight: bold;
+  }
+  
+  .navItem2 {
+    display: flex;
+    align-items: center;
+  }
+  
+  
+  .navItem2 a {
+    text-decoration: none;
+    color: white;
+    width: 100%;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    pointer-events: none;
+  }
+  
+  .navList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    font-family: Arial, sans-serif;
+  }
+  
+  .navItem {
+    display: flex;
+    align-items: center;
+    margin-right: 20px; /* Added margin */
+  }
+  
+  
+  .navItem a {
+    text-decoration: none;
+    color: rgb(80, 80, 80);
+    width: 100%;
+    text-align: center;
+    margin-left: 39px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .centered-text {
+    margin-right: 100px;
+    
+  }
+  
+  .navItem .fa-icon {
+    margin-left: 5px!important;
+  }
+  
+  .navItem img {
+    display: block; /* Make the image a block element */
+    margin: 0 auto; /* Center the image horizontally */
+  }
+  
+  .navItem a:not(:first-child) {
+    margin-left: 20px; /* Move the rest of the links to the right */
+  }
+  
+  
+  
+  /* This Media part is for DESKTOP*/
+  
+  @media only screen and (min-width: 425px) {
+  
+    .container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Use vw instead of px to make it responsive */
+    height: 100%; /* Use vh instead of px to make it responsive */
+    display: flex;
+    justify-content: center;
+    background-color: rgba(44, 44, 44, 0.781);
+    align-items: center;
+    flex-wrap: wrap; /* Wrap the cards to multiple lines if necessary */
+    }
+  
+    .card-menu {
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: rgba(44, 44, 44, 0.781);
+      border-radius: 10px;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      margin: 5px auto; /* Center the card horizontally */
+      width: 43%; /* Set the width of the card */
+      height: 27%;
+      box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    }
+  
+    .card-image {
+      border-radius: 10px 10px 0px 0px;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  
+    .card-text {
+      margin-bottom: 10px;
+      width: 100%; /* Make the text stretch across the full width of the card */
+      text-align: center; /* Center the text horizontally */
+    }
+  
+    .card-button {
+      height: 80px !important;
+      background-color: rgb(2, 124, 133);
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 10px;
+      border: none;
+      margin-top: 0px;
+      width: 213px;
+      cursor: pointer;
+      box-sizing: border-box;
+      border-radius: 0px 0px 10px 10px; /* Include padding and border in the button's total width and height */
+    }
+  
+    .card-button:hover {
+      background-color: #2980b9;
+    }
+    .mobile{
+      display:none;
+    }
+  }
+  
+  
+  @media only screen and (min-width: 768px) {
+    .container {
+      display: flex;
+      justify-content: center;
+      background-color: rgba(44, 44, 44, 0.781);
+      align-items: center;
+      height: 100vh;
+      width: 100%;
+      flex-wrap: wrap; /* Wrap the cards to multiple lines if necessary */
+       /* Add spacing between the cards */
+    }
+  
+  
+    .card-menu {
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: rgb(44, 44, 44);
+      border-radius: 10px;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      margin: 5px; /* Center the card horizontally */
+      width: 175px; /* Set the width of the card */
+      height: 225px;
+      box-sizing: border-box; /* Include padding and border in the element's total width and height */
+      
+    }
+  
+    .card-image {
+      border-radius: 10px 10px 0px 0px;
+      width: 100%;
+      height: 100%;
+    }
+  
+    .card-text {
+      margin-bottom: 10px;
+      width: 100%; /* Make the text stretch across the full width of the card */
+      text-align: center; /* Center the text horizontally */
+    }
+  
+    .card-button {
+      height: 80px !important;
+      background-color: rgb(2, 124, 133);
+      color: #fff;
+      font-size: 20px;
+      font-weight: bold;
+      padding: 10px;
+      border: none;
+      margin-top: 0px;
+      width: 213px;
+      cursor: pointer;
+      box-sizing: border-box;
+      border-radius: 0px 0px 10px 10px; /* Include padding and border in the button's total width and height */
+    }
+  
+    .card-button:hover {
+      background-color: #2980b9;
+    }
+    .mobile{
+      display:none;
+    }
+  }
+  
+  
+  
+
+  @media only screen and (max-width: 1024px) {
+    
+  }
+  
+  
+  @media only screen and (min-width: 1440px) {
+    .container {
+      display: flex;
+      justify-content: center;
+      background-color: rgba(44, 44, 44, 0.781);
+      align-items: center;
+      height: 100vh;
+      width: 100%;
+      flex-wrap: wrap; /* Wrap the cards to multiple lines if necessary */
+       /* Add spacing between the cards */
+    }
+  
+    .card-menu {
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: rgb(44, 44, 44);
+      border-radius: 10px;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      margin: 13px; /* Center the card horizontally */
+      width: 190px; /* Set the width of the card */
+      height: 260px;
+      box-sizing: border-box; /* Include padding and border in the element's total width and height */
+      
+    }
+  
+    .card-image {
+      border-radius: 10px 10px 0px 0px;
+      width: 100%;
+      height: 80%;
+    }
+  
+    .card-text {
+      margin-bottom: 10px;
+      width: 100%; /* Make the text stretch across the full width of the card */
+      text-align: center; /* Center the text horizontally */
+    }
+  
+    .card-button {
+      height: 80px !important;
+      background-color: rgb(2, 124, 133);
+      color: #fff;
+      font-size: 20px;
+      font-weight: bold;
+      padding: 10px;
+      border: none;
+      margin-top: 0px;
+      width: 213px;
+      cursor: pointer;
+      box-sizing: border-box;
+      border-radius: 0px 0px 10px 10px; /* Include padding and border in the button's total width and height */
+    }
+  
+    .card-button:hover {
+      background-color: #2980b9;
+    }
+    .mobile{
+      display:none;
+    }
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  /* Mobile view point*/
+  @media only screen and (max-width: 375px){
+  
+    .container {
+      display: grid;
+      place-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+    }
+  
+    .form {
+      position: relative;
+        border: 2px solid #ddd;
+        border-radius: 15px;
+        width: 100%; /* Set width based on viewport width */
+        box-sizing: border-box; /* Include padding and border in the width calculation */
+        background-color: rgba(44, 44, 44, 0.781);
+        display: grid;
+        height: 700px;
+      place-content: center;
+      }
+    
+    .title {
+      font-size: 30px;
+      margin-bottom: 30px;
+      font-family: Arial, sans-serif;
+    }
+    
+    .logo {
+        margin-bottom: 30px;
+        margin-top: 1%;
+        display: flex; /* Use flexbox for centering */
+        justify-content: center; /* Center content horizontally */
+      }
+    
+    .logo-image {
+      width: 200px;
+      height: 200px;
+      align-items: center;
+    }
+    
+      .title {
+        font-size: 30px;
+        margin-bottom: 30px;
+      }
+    
+      .button-menu {
+        width: 300px;
+        height: 50px;
+        padding: 10px;
+        margin-bottom: 13px;
+        display: flex;
+        align-items: center;
+        margin-right: 10px; /* Center text horizontally */
+        margin-left: 10px;
+        background-color: rgb(2, 124, 133);
+        color: #fffefe;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-family: Arial, sans-serif;
+        font-weight: bold;
+        position: relative;
+        overflow: hidden;
+      }
+  
+      .button-text {
+        
+        font-size: 20px;
+        text-align: center;
+        margin-left: 15px;
+        width: 100%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+  
+      .footer {
+        display:none;
+      }
+    
+  
+      .desktop{
+       display:none;
+      }
+  
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

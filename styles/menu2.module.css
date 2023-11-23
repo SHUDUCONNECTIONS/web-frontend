@@ -109,14 +109,13 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vw; /* Use vw instead of px to make it responsive */
-  height: 100vh; /* Use vh instead of px to make it responsive */
+  width: 100%; /* Use vw instead of px to make it responsive */
+  height: 100%; /* Use vh instead of px to make it responsive */
   display: flex;
   justify-content: center;
   background-color: rgba(44, 44, 44, 0.781);
   align-items: center;
   flex-wrap: wrap; /* Wrap the cards to multiple lines if necessary */
-  gap: 7px; /* Add spacing between the cards */
   }
 
   .card-menu {
@@ -128,9 +127,9 @@
     border-radius: 10px;
     font-family: Arial, sans-serif;
     font-weight: bold;
-    margin: 10px auto; /* Center the card horizontally */
-    width: 165px; /* Set the width of the card */
-    height: 210px;
+    margin: 5px auto; /* Center the card horizontally */
+    width: 43%; /* Set the width of the card */
+    height: 27%;
     box-sizing: border-box; /* Include padding and border in the element's total width and height */
   }
 

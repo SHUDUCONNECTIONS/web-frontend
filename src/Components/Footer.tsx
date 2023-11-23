@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../styles/menu2.module.css'; // Import the CSS module
+import styles from './navfooter.module.css'; // Import the CSS module
 
 const Footer: React.FC = () => {
   return (

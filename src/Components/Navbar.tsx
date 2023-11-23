@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse } from '@fortawesome/free-solid-svg-icons';
-import styles from '../styles/menu2.module.css'; // Import the CSS module
+import styles from './navfooter.module.css'; // Import the CSS module
 import {
   faCar,
   faFileUpload,
@@ -16,8 +16,6 @@ import {
 
 const Navbar: React.FC = () => {
   return (
-    <footer className="footer">
-      <div className="footer-content">
         <nav className={styles.navbar}>
           <ul className={styles.navList}>
             <a className="centered-text" href="/">
@@ -67,8 +65,6 @@ const Navbar: React.FC = () => {
             </li>
           </ul>
         </nav>
-      </div>
-    </footer>
   );
 };
 
