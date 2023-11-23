@@ -44,7 +44,7 @@ const Navbar: React.FC = () => {
             </li>
 
             <li className={styles.navItem}>
-              <a href="/link-to-desired-url">
+              <a href="/terms-condition">
                 <FontAwesomeIcon icon={faFileShield} />
                 <span>  T's & C's</span>
               </a>
