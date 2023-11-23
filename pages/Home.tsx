@@ -1,8 +1,6 @@
 import React from 'react';
-import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse } from '@fortawesome/free-solid-svg-icons';
 import styles from '../styles/menu2.module.css'; // Import the CSS module
 import {
   faCar,
@@ -11,9 +9,6 @@ import {
   faUser,
   faUserShield,
   faMoneyBill,
-  faSignOut,
-  faFileShield,
-  faHandshake,
 } from '@fortawesome/free-solid-svg-icons';
 
 
@@ -102,7 +97,6 @@ const Home = () => {
       </div>
 
       <div className={`${styles.container} ${styles.desktop}`}>
-      
 
         <a href="/link-to-desired-url" className={styles['card-menu']} onClick={() => console.log('Button 1 clicked')}>
           <img src="/menu1.png" alt="Car Icon" className={styles['card-image']} />
@@ -111,7 +105,7 @@ const Home = () => {
 
         <a href="/link-to-desired-url" className={styles['card-menu']} onClick={(handleUploadCase) => console.log('Button 1 clicked')}>
           <img src="/menu2.png" alt="Car Icon" className={styles['card-image']} />
-          <button style={{ width: '100%' }} className={styles['card-button']}>Upload Case FIle</button>
+          <button style={{ width: '100%' }} className={styles['card-button']}>Upload Case File</button>
         </a>
         
         <a href="/link-to-desired-url" className={styles['card-menu']} onClick={(handleFirmRecords) => console.log('Button 1 clicked')}>
