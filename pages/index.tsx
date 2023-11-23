@@ -20,7 +20,7 @@ const Home = () => {
       await validationSchema.validate({ username, password }, { abortEarly: false });
       // Replace the console logs with your login logic
       if (username === 'example' && password === 'password') {
-        router.push('/App'); // Replace '/menu' with the route of your menu page
+        router.push('/_app'); // Replace '/menu' with the route of your menu page
       } else {
         setError('Incorrect username or password');
       }

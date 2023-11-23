@@ -118,7 +118,7 @@ const Home = () => {
           <button style={{ width: '100%' }} className={styles['card-button']}>Lawyer Account Profile</button>
         </a>
         
-        <a href="/link-to-desired-url" className={styles['card-menu']} onClick={(handleMemberAccess) => console.log('Button 1 clicked')}>
+        <a href="/membership-access" className={styles['card-menu']} onClick={(handleMemberAccess) => console.log('Button 1 clicked')}>
           <img src="/menu5.png" alt="Car Icon" className={styles['card-image']} />
           <button style={{ width: '100%' }} className={styles['card-button']}>Membership Access</button>
         </a>
