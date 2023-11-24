@@ -51,6 +51,7 @@ const TermsAndConditions: React.FC = () => {
         ))}
       </div>
 
+
       {selectedPolicy && (
         <div className={styles.previewContainer}>
           <iframe
