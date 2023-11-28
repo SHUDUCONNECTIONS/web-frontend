@@ -1,0 +1,44 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .mapContainer {
+    margin-bottom: 20px;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .label {
+    margin-bottom: 10px;
+  }
+  
+  .input,
+  .select {
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .button-secondary {
+    background-color: #6c757d;
+  }
+  
+  /* Add more styles as needed */
+  

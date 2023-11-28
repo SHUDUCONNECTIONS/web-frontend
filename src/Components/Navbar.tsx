@@ -37,7 +37,7 @@ const Navbar: React.FC = () => {
             </li>
 
             <li className={styles.navItem}>
-              <a href="/link-to-desired-url">
+              <a href="/request-pickup">
                 <FontAwesomeIcon icon={faCar} />
                 <span>  REQUEST PICK-UP</span>
               </a>
