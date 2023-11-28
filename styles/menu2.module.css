@@ -90,9 +90,9 @@
   margin-left: 5px!important;
 }
 
-.navItem img {
-  display: block; /* Make the image a block element */
-  margin: 0 auto; /* Center the image horizontally */
+.navItem Image {
+  display: block; /* Make the Image a block element */
+  margin: 0 auto; /* Center the Image horizontally */
 }
 
 .navItem a:not(:first-child) {
@@ -133,7 +133,7 @@
     box-sizing: border-box; /* Include padding and border in the element's total width and height */
   }
 
-  .card-image {
+  .card-img {
     border-radius: 10px 10px 0px 0px;
     width: 100%;
     height: 100%;
@@ -199,10 +199,11 @@
     
   }
 
-  .card-image {
+  .card-img {
     border-radius: 10px 10px 0px 0px;
     width: 100%;
     height: 100%;
+    object-fit: cover;
   }
 
   .card-text {
@@ -266,10 +267,11 @@
     
   }
 
-  .card-image {
+  .card-img {
     border-radius: 10px 10px 0px 0px;
     width: 100%;
-    height: 80%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .card-text {
@@ -347,7 +349,7 @@
       justify-content: center; /* Center content horizontally */
     }
   
-  .logo-image {
+  .logo-Image {
     width: 200px;
     height: 200px;
     align-items: center;

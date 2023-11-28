@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 import * as Yup from 'yup';
 
 const Home = () => {
@@ -20,7 +21,7 @@ const Home = () => {
       await validationSchema.validate({ username, password }, { abortEarly: false });
       // Replace the console logs with your login logic
       if (username === 'example' && password === 'password') {
-        router.push('/_app'); // Replace '/menu' with the route of your menu page
+        router.push('/Main'); // Replace '/menu' with the route of your menu page
       } else {
         setError('Incorrect username or password');
       }
@@ -44,7 +45,7 @@ const Home = () => {
       <div className="form">
         <h1 className="title">LOGIN</h1>
         <div className="logo">
-          <img src="/carerunnerlogo.png" alt="Your Logo" className="logo-image" />
+          <Image src="/carerunnerlogo.png" width="75" height="75" alt="Your Logo" className="logo-Image" />
         </div>
         <input
           type="text"

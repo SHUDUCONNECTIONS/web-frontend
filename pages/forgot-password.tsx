@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import * as Yup from 'yup';
+import Image from 'next/image';
+
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
@@ -32,7 +34,7 @@ const ForgotPassword = () => {
       <div className="form">
         <h1 className="title">FORGOT PASSWORD</h1>
         <div className="logo">
-          <img src="/carerunnerlogo.png" alt="Your Logo" className="logo-image" />
+          <Image src="/carerunnerlogo.png" alt="Your Logo" className="logo-Image" />
         </div>
         <input
           type="email"

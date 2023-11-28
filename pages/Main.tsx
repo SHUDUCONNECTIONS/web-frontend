@@ -1,7 +1,11 @@
 import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { customImageLoader } from "../src/Components/customImageLoader";
 import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from '../styles/menu2.module.css'; // Import the CSS module
+
 import {
   faCar,
   faFileUpload,
@@ -12,7 +16,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 
-const Home = () => {
+const Main = () => {
   const router = useRouter();
 
   const handleBillingInfo = () => {
@@ -48,8 +52,15 @@ const Home = () => {
 
         <div className={`${styles.form} ${styles.mobile}`}>
           <div className={`${styles.logo} ${styles.mobile}`}>
-           <img src="/carerunnerlogo.png" alt="Your Logo" className={`${styles['logo-image']} ${styles.mobile}`} />
-          </div>
+          <Image
+              loader={customImageLoader}
+              src="carerunnerlogo.png" 
+              alt="Your Logo"
+              width={50}
+              height={50}
+              className={`${styles['logo-image']} ${styles.mobile}`} 
+            />          
+            </div>
 
           <button onClick={() => console.log('Button 1 clicked')} className={`${styles['button-menu']} ${styles.mobile}`}>
             <span className="icon">
@@ -98,38 +109,80 @@ const Home = () => {
 
       <div className={`${styles.container} ${styles.desktop}`}>
 
-        <a href="/link-to-desired-url" className={styles['card-menu']} onClick={() => console.log('Button 1 clicked')}>
-          <img src="/menu1.png" alt="Car Icon" className={styles['card-image']} />
+        <Link href="/link-to-desired-url" className={styles['card-menu']} onClick={() => console.log('Button 1 clicked')}>
+          <Image
+             loader={customImageLoader}
+            src="menu1.png"
+            alt="request pickup"
+             width={50}
+             height={50}
+            className={styles['card-img']}
+          />
           <button style={{ width: '100%' }} className={styles['card-button']}>Request Pickup</button>
-        </a>
+        </Link>
 
-        <a href="/UploadCasePage" className={styles['card-menu']} onClick={(handleUploadCase) => console.log('Button 1 clicked')}>
-          <img src="/menu2.png" alt="Car Icon" className={styles['card-image']} />
+        <Link href="/UploadCasePage" className={styles['card-menu']} onClick={(handleUploadCase) => console.log('Button 1 clicked')}>
+          <Image
+             loader={customImageLoader}
+            src="menu2.png"
+            alt="Upload case file"
+             width={50}
+             height={50}
+            className={styles['card-img']}
+          />
           <button style={{ width: '100%' }} className={styles['card-button']}>Upload Case File</button>
-        </a>
+        </Link>
         
-        <a href="/firm-records" className={styles['card-menu']} onClick={(handleFirmRecords) => console.log('Button 1 clicked')}>
-          <img src="/menu3.png" alt="Car Icon" className={styles['card-image']} />
+        <Link href="/firm-records" className={styles['card-menu']} onClick={(handleFirmRecords) => console.log('Button 1 clicked')}>
+          <Image
+             loader={customImageLoader}
+            src="menu3.png"
+            alt="records"
+             width={50}
+             height={50}
+            className={styles['card-img']}
+          />
           <button style={{ width: '100%' }} className={styles['card-button']}>Law-Firm Records</button>
-        </a>
+        </Link>
 
-        <a href="/account-profile" className={styles['card-menu']} onClick={(handleAccountProfile) => console.log('Button 1 clicked')}>
-          <img src="/menu4.png" alt="Car Icon" className={styles['card-image']} />
+        <Link href="/link-to-desired-url" className={styles['card-menu']} onClick={(handleAccountProfile) => console.log('Button 1 clicked')}>
+          <Image
+             loader={customImageLoader}
+            src="menu4.png"
+            alt="profile"
+             width={50}
+             height={50}
+            className={styles['card-img']}
+          />
           <button style={{ width: '100%' }} className={styles['card-button']}>Lawyer Account Profile</button>
-        </a>
+        </Link>
         
-        <a href="/membership-access" className={styles['card-menu']} onClick={(handleMemberAccess) => console.log('Button 1 clicked')}>
-          <img src="/menu5.png" alt="Car Icon" className={styles['card-image']} />
+        <Link href="/membership-access" className={styles['card-menu']} onClick={(handleMemberAccess) => console.log('Button 1 clicked')}>
+        <Image
+             loader={customImageLoader}
+            src="menu5.png"
+            alt="Membership access"
+             width={50}
+             height={50}
+            className={styles['card-img']}
+          />          
           <button style={{ width: '100%' }} className={styles['card-button']}>Membership Access</button>
-        </a>
+        </Link>
 
-        <a href="/navbar" className={styles['card-menu']} onClick={(handleBillingInfo) => console.log('Button 1 clicked')}>
-          <img src="/menu6.png" alt="Car Icon" className={styles['card-image']} />
+        <Link href="/billing-page" className={styles['card-menu']} onClick={(handleBillingInfo) => console.log('Button 1 clicked')}>
+        <Image
+             loader={customImageLoader}
+            src="menu6.png"
+            alt="Billing Info"
+             width={50}
+             height={50}
+            className={styles['card-img']}
+          />          
           <button style={{ width: '100%' }} className={styles['card-button']}>Billing Information</button>
-        </a>
+        </Link>
       </div>
     </div>
   );
 };
 
-export default Home;
+export default Main;

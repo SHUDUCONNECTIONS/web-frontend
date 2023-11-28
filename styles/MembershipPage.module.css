@@ -1,65 +1,120 @@
 .container {
-    margin: 20px;
-  }
-  
-  .title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    font-family: Arial, sans-serif;
-  }
-  
-  .packages {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .package {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 16px;
-    margin: 10px;
-    width: 200px;
-    font-family: Arial, sans-serif;
-  }
-  
-  .package.selected {
-    border-color: #3498db;
-  }
-  
-  .price {
-    font-size: 16px;
-    margin-bottom: 8px;
-  }
-  
-  .stars {
-    display: flex;
-    margin-bottom: 8px;
-  }
-  
-  .stars span {
-    color: #f1c40f;
-  }
-  
-  .description {
-    font-size: 14px;
-    margin-bottom: 16px;
-    font-family: Arial, sans-serif;
-  }
-  
-  /* Use a class for the button styles */
-  .button-style {
-    background-color: #3498db;
-    color: #fff;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-family: Arial, sans-serif;
-  }
-  
-  /* Add hover styles for the button */
-  .button-style:hover {
-    background-color: #2980b9;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(36, 35, 35, 0.781);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  overflow: auto;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: rgb(185, 185, 185);
+  margin-right: 53rem;
+}
+
+.packages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  color: rgb(185, 185, 185);
+  font-family: Arial, sans-serif;
+}
+
+.package {
+  border-radius: 20px;
+  color: rgb(185, 185, 185);
+  padding: 1rem;
+  height: 100%;
+  width: 12rem;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  transition: all 0.1s ease-in-out;
+  background-color: rgba(44, 44, 44, 0.781);
+  transition: all 0.3s ease-in-out;
+  font-family: Arial, sans-serif;
+}
+
+.package:hover {
+  background-color: #bdbcbc;
+  font-family: Arial, sans-serif;
+}
+
+.button-style {
+  background-color: rgba(44, 44, 44, 0.781);
+  color: rgb(185, 185, 185);
+  border: 1px solid rgb(131, 129, 129);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  transition: all 0.3s ease-in-out;
+}
+
+.button-style:hover {
+  box-shadow: 0 4px 8px rgba(80, 186, 75, 0.25);
+  font-family: Arial, sans-serif;
+  background-color: rgba(44, 44, 44, 0.781);
+}
+
+.package.selected {
+  border-color:rgba(80, 186, 75, 0.25);
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+
+
+.price {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: rgb(185, 185, 185);
+  font-family: Arial, sans-serif;
+}
+
+.stars {
+  display: flex;
+  margin-bottom: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.stars span {
+  color: #f1c40f;
+  font-size: 14px;
+}
+
+.description {
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: rgb(185, 185, 185);
+  font-family: Arial, sans-serif;
+}
+
+.package:hover * {
+  color: rgba(44, 44, 44, 0.781);
+}
+
+.package:hover .button-style {
+  background-color: rgba(44, 44, 44, 0.781);
+  color: #cccbcb;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+}
+
+
