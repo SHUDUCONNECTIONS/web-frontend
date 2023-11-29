@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import styles from './home.module.css'; // Import the CSS module
+import styles from '../styles/Home.module.css'; // Import the CSS module
 import {
   faCar,
   faFileUpload,

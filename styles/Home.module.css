@@ -1,5 +1,5 @@
 /* Default styles for all screen sizes */
-body {
+.body {
   min-height: 100vh;
   background-color: #f2f2f2;
 }
@@ -144,4 +144,4 @@ body {
   line-height: 1.5;
 }
 
-/* Styles
+/* Styles */
