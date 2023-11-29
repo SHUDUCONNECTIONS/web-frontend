@@ -102,6 +102,10 @@
     margin-left: 20px; /* Move the rest of the links to the right */
   }
   
+  .menuIcon {
+    display: none;
+  }
+ 
   
   
   /* This Media part is for DESKTOP*/
@@ -186,6 +190,8 @@
     .mobile{
       display:none;
     }
+
+
   }
   
   
@@ -265,14 +271,14 @@
     .mobile{
       display:none;
     }
+
+ 
   }
   
   
   
 
-  @media only screen and (max-width: 1024px) {
-    
-  }
+
   
   
   @media only screen and (min-width: 1440px) {
@@ -352,6 +358,7 @@
     .mobile{
       display:none;
     }
+ 
   }
   
   
@@ -362,7 +369,7 @@
  
   
   /* Mobile view point*/
-  @media only screen and (max-width: 375px){
+@media only screen and (max-width: 375px){
 
 
 
@@ -421,11 +428,7 @@
   background-color: rgba(185, 185, 185, 0.3); /* Change background color on hover */
 }
 
-
-
-
-
-    .container {
+.container {
       display: grid;
       place-content: center;
       align-items: center;

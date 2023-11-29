@@ -122,39 +122,131 @@
 
 
 
-
 /* For mobile view */
 @media only screen and (max-width: 375px) {
+
   .container {
-    padding: 4.5rem 10px 0; /* Adjust container padding and add space for the title */
-    height: calc(100vh - 4.5rem); /* Adjust height for scrollable content */
-    overflow-y: auto; /* Add vertical scroll for overflow */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Adjust alignment */
+    background-color: rgba(36, 35, 35, 0.781);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 4.5rem 10px 0; /* Adjust padding for title visibility and scroll effect */
+    height: calc(100vh - 4.5rem); /* Adjust height for the viewport minus the title */
+    overflow-y: auto; /* Enable vertical scroll */
+    
   }
-
+  
   .title {
-    margin-right: 0; /* Reset margin-right */
-    margin-top: 0; /* Adjust margin-top to fit at the top */
-    width: 70%;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: rgb(185, 185, 185);
+    width: 70%; /* Adjust width */
+    margin-right: auto; /* Move title to the left */
+    margin-left: auto; /* Move title to the right */
   }
-
+  
   .packages {
-    gap: 10px; /* Increase gap between packages */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    color: rgb(185, 185, 185);
+    font-family: Arial, sans-serif;
+    height: 30%;
+    
   }
-
+  
   .package {
-    width: 70%; /* Occupy full width */
+    border-radius: 20px;
+    color: rgb(185, 185, 185);
+    padding: 1rem;
+    width: 70%; /* Adjust width */
     max-width: 100%; /* Set max-width to 100% */
-    height: auto; /* Adjust height for dynamic content */
     margin-bottom: 20px; /* Increase space between cards */
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+    background-color: rgba(44, 44, 44, 0.781);
+    font-family: Arial, sans-serif;
+    
+  }
+  
+  .package:hover {
+    background-color: #bdbcbc;
+    font-family: Arial, sans-serif;
   }
 
+  
   .button-style {
-    width: 70%; /* Occupy full width */
+    background-color: rgba(44, 44, 44, 0.781);
+    color: rgb(185, 185, 185);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 70%; /* Adjust button width */
+    transition: all 0.3s ease-in-out;
+    font-family: Arial, sans-serif;
   }
-
-  .price,
-  .description,
+  
+  .button-style:hover {
+    box-shadow: 0 4px 8px rgba(80, 186, 75, 0.25);
+    font-family: Arial, sans-serif;
+    background-color: rgba(44, 44, 44, 0.781);
+  }
+  
+  .package.selected {
+    border-color: rgba(80, 186, 75, 0.25);
+    color: #fff;
+    font-family: Arial, sans-serif;
+  }
+  
+  .price {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: rgb(185, 185, 185);
+    font-family: Arial, sans-serif;
+  }
+  
+  .stars {
+    display: flex;
+    margin-bottom: 8px;
+    justify-content: center;
+    align-items: center;
+  }
+  
   .stars span {
-    text-align: center; /* Center text */
+    color: #f1c40f;
+    font-size: 14px;
   }
+  
+  .description {
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: rgb(185, 185, 185);
+    font-family: Arial, sans-serif;
+  }
+  
+  .package:hover * {
+    color: rgba(44, 44, 44, 0.781);
+  }
+  
+  .package:hover .button-style {
+    background-color: rgba(44, 44, 44, 0.781);
+    color: #cccbcb;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+  }
+  
 }
