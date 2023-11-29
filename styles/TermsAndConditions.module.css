@@ -1,3 +1,4 @@
+/* Common styles for both desktop and mobile */
 .container {
   display: flex;
   flex-direction: column;
@@ -12,6 +13,17 @@
   overflow: auto;
 }
 
+.title {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: rgb(185, 185, 185);
+  margin-top: 0;
+}
+
+/* Desktop styles */
 .policyContainer {
   font-family: Arial, sans-serif;
   display: grid;
@@ -37,30 +49,9 @@
   justify-content: space-between;
 }
 
-
-
-.policyCard:hover {
-  opacity: 0.8; /* Reduce opacity when hovering over the card */
-}
-
-.policyName {
-  margin-bottom: auto;
-  text-align: center; /* Center align the policy name */
-  transition: opacity 0.3s; /* Apply opacity transition to the policy name */
-}
-
+/* Increase opacity of the policy name when hovering over the card */
 .policyCard:hover .policyName {
-  opacity: 5; /* Increase opacity of the policy name when hovering over the card */
-}
-
-.title {
-  font-size: 30px;
-  font-weight: bold;
-  margin-bottom: 2rem;
-  font-family: Arial, sans-serif;
-  text-align: center;
-  color: rgb(185, 185, 185);
-  margin-top: 0;
+  opacity: 5;
 }
 
 .cardFooter {
@@ -87,4 +78,55 @@
 
 .downloadButton:hover {
   background-color: #0056b3;
+}
+
+/* Navigation styles */
+.navbar {
+  background-color: #333;
+  overflow: hidden;
+}
+
+.navbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Media query for smaller screens (mobile view) */
+@media screen and (max-width: 275px) {
+  /* Mobile styles */
+  .policyTitle {
+    margin-right: 0; /* Adjust margin for mobile */
+  }
+
+  .policyContainer {
+    grid-template-columns: 1fr; /* Single column for mobile */
+  }
+
+  .navbar {
+    background-color: #333;
+    overflow: hidden;
+  }
+  
+  .navbar a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  .navbar a:hover {
+    background-color: #ddd;
+    color: black;
+  }
 }

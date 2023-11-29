@@ -55,6 +55,7 @@
   margin-bottom: 10px;
   border-radius: 8px;
   cursor: text;
+  border: none;
   box-sizing: border-box; /* Adding box-sizing property to include padding and border in the element's total width and height */
 }
 
