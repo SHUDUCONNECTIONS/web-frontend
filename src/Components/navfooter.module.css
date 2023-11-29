@@ -359,14 +359,72 @@
   
   
   
-  
-  
-  
-  
+ 
   
   /* Mobile view point*/
   @media only screen and (max-width: 375px){
-  
+
+
+
+/* Hamburger Menu Icon */
+/* Hamburger Menu Icon */
+.menuIcon {
+  display: block;
+  cursor: pointer;
+  color: rgba(44, 44, 44, 0.781); /* Color for the hamburger icon */
+  font-size: 24px; /* Adjust size as needed */
+  padding: 10px;
+  margin-left: 17.3rem;
+}
+
+/* Navigation Menu */
+.navList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  color: rgba(44, 44, 44, 0.781);
+  display: none; /* Hide the menu by default */
+  background-color: rgb(185, 185, 185); /* Background color for the menu */
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  transition: transform 0.3s ease; /* Smooth transition for opening */
+  transform: translateX(-100%); /* Initially off-screen */
+  border-radius: 15px;
+  width: 18rem;
+}
+
+/* Menu Open */
+.navList.open {
+  display: block; /* Show the menu when open class is applied */
+  transform: translateX(0); /* Slide in the menu */
+}
+
+/* Menu Items */
+.navItem {
+  margin-bottom: 25px; /* Adjust spacing between menu items */
+}
+
+/* Menu Links */
+.navItem a {
+  text-decoration: none;
+  color: rgb(80, 80, 80);
+  display: block;
+  padding: 8px;
+  font-family: Arial, sans-serif;
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+/* Menu Link Hover */
+.navItem a:hover {
+  background-color: rgba(185, 185, 185, 0.3); /* Change background color on hover */
+}
+
+
+
+
+
     .container {
       display: grid;
       place-content: center;
@@ -451,6 +509,9 @@
       .desktop{
        display:none;
       }
+
+      
+      
   
   }
   

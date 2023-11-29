@@ -349,7 +349,7 @@
       justify-content: center; /* Center content horizontally */
     }
   
-  .logo-Image {
+  .logo-image {
     width: 200px;
     height: 200px;
     align-items: center;
@@ -392,23 +392,18 @@
       transform: translate(-50%, -50%);
     }
 
-    .footer {
+    .navbar{
       display:none;
     }
-  
 
     .desktop{
      display:none;
     }
 
+    .desktop{
+      display:none;
+     }
+    
+  
+
 }
-
-
-
-
-
-
-
-
-
-

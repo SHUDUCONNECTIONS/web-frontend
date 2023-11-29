@@ -145,7 +145,7 @@ const Main = () => {
           <button style={{ width: '100%' }} className={styles['card-button']}>Law-Firm Records</button>
         </Link>
 
-        <Link href="/link-to-desired-url" className={styles['card-menu']} onClick={(handleAccountProfile) => console.log('Button 1 clicked')}>
+        <Link href="/account-profile" className={styles['card-menu']} onClick={(handleAccountProfile) => console.log('Button 1 clicked')}>
           <Image
              loader={customImageLoader}
             src="menu4.png"

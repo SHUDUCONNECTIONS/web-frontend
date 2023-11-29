@@ -118,3 +118,43 @@
 }
 
 
+
+
+
+
+
+/* For mobile view */
+@media only screen and (max-width: 375px) {
+  .container {
+    padding: 4.5rem 10px 0; /* Adjust container padding and add space for the title */
+    height: calc(100vh - 4.5rem); /* Adjust height for scrollable content */
+    overflow-y: auto; /* Add vertical scroll for overflow */
+  }
+
+  .title {
+    margin-right: 0; /* Reset margin-right */
+    margin-top: 0; /* Adjust margin-top to fit at the top */
+    width: 70%;
+  }
+
+  .packages {
+    gap: 10px; /* Increase gap between packages */
+  }
+
+  .package {
+    width: 70%; /* Occupy full width */
+    max-width: 100%; /* Set max-width to 100% */
+    height: auto; /* Adjust height for dynamic content */
+    margin-bottom: 20px; /* Increase space between cards */
+  }
+
+  .button-style {
+    width: 70%; /* Occupy full width */
+  }
+
+  .price,
+  .description,
+  .stars span {
+    text-align: center; /* Center text */
+  }
+}
