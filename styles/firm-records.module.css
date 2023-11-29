@@ -1,73 +1,93 @@
-.main_row {
+.container {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(36, 35, 35, 0.781);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  overflow: auto;
+  
 }
 
-.mobile_hide {
-  display: none !important;
-}
-
-.main_card {
-  margin-bottom: 20px;
-  padding: 0;
-}
-
-.card_img {
+#case-files {
   width: 100%;
-  height: 150px;
-  object-fit: cover;
+  margin: 0 auto;
+  padding: 10px;
 }
 
-.card_con {
+.caseTitle {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  color: rgb(185, 185, 185);
+  
+}
+.caseTitle h2{
+  margin-bottom: 1.7em;
+  margin-right: 53rem;
+  font-weight: bold;
+}
+
+.caseTable {
+  border-collapse: collapse;
+  width: 60rem;
+  background-color: rgba(44, 44, 44, 0.781);
   padding: 20px;
+  border-radius: 10px;
+  height: 180px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  color: rgb(185, 185, 185);
+  table-layout: fixed;
+  
 }
 
-.card_title {
+.caseTable th,
+.caseTable td {
+  padding: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 30px; /* Limiting height for each row */
+  white-space: nowrap;
+}
+
+.caseTable th {
+  background-color: #ccc;
+  padding: 20px;
+  color: rgba(44, 44, 44, 0.781);
+}
+
+.caseTable tr {
+  border-radius: 10px 10px 0 0;
+  background: none;
+}
+
+.caseTable a {
+  text-decoration: none;
+  font-family: Arial, sans-serif;
+  color: rgb(185, 185, 185);
+}
+
+.caseTable a:hover {
+  color: #007bff;
+  text-decoration: underline;
+}
+
+.deleteButton {
+  font-family: Arial, sans-serif;
+  color: rgb(185, 185, 185);
+  background: none; 
+  font-size: 15px;
   font-weight: bold;
-  font-size: 18px;
-  margin-bottom: 5px;
+  border: none; 
+  cursor: pointer;
 }
 
-.card_title_sub {
-  font-size: 14px;
-  color: #777;
+.deleteButton:hover {
+  text-decoration: underline; 
 }
 
-.file_lable {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-  font-weight: bold;
-  font-size: 14px;
-}
 
-.file_lable_sub {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-  font-size: 14px;
-}
-
-.col {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.btnUpdate {
-  margin-right: 10px;
-}
-
-.btnDelete {
-  margin-left: 10px;
-}
-
-.loader {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #772828;
-}

@@ -5,13 +5,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 4.2rem;
+    height: 3rem;
     width: 100%;
     background-color: lightgray;
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 999;
+    z-index: 999; 
+
+    margin-bottom: 15px;
   }
   
   /*Styling for the FOOTER*/
@@ -28,6 +30,12 @@
     left: 0;
     width: 100%;
     justify-content: center;
+
+  }
+
+  .footer span {
+    color: lightgrey;
+    font-weight: 50px;
   }
   
   .centered-text2 {
@@ -40,13 +48,9 @@
     font-weight: bold;
   }
   
-  .navItem2 {
-    display: flex;
-    align-items: center;
-  }
   
   
-  .navItem2 a {
+  .navItem2  {
     text-decoration: none;
     color: white;
     width: 100%;
@@ -89,9 +93,9 @@
     margin-left: 5px!important;
   }
   
-  .navItem img {
-    display: block; /* Make the image a block element */
-    margin: 0 auto; /* Center the image horizontally */
+  .navItem Image {
+    display: block; /* Make the Image a block element */
+    margin: 0 auto; /* Center the Image horizontally */
   }
   
   .navItem a:not(:first-child) {
@@ -132,7 +136,7 @@
       box-sizing: border-box; /* Include padding and border in the element's total width and height */
     }
   
-    .card-image {
+    .card-Image {
       border-radius: 10px 10px 0px 0px;
       width: 100%;
       height: 100%;
@@ -143,6 +147,22 @@
       margin-bottom: 10px;
       width: 100%; /* Make the text stretch across the full width of the card */
       text-align: center; /* Center the text horizontally */
+    }
+
+    .navItem a {
+      text-decoration: none;
+      color: rgb(80, 80, 80);
+      width: 100%;
+      text-align: center;
+      margin-left: 39px;
+      font-family: Arial, sans-serif;
+      transition: text-decoration 0.3s ease; /* Add transition for a smooth effect */
+    }
+    
+
+    .navItem a:hover,
+    .navItem a:hover navIcon { 
+     text-decoration: underline 3px; 
     }
   
     .card-button {
@@ -180,7 +200,21 @@
       flex-wrap: wrap; /* Wrap the cards to multiple lines if necessary */
        /* Add spacing between the cards */
     }
-  
+    .navItem a {
+      text-decoration: none;
+      color: rgb(80, 80, 80);
+      width: 100%;
+      text-align: center;
+      margin-left: 39px;
+      font-family: Arial, sans-serif;
+      transition: text-decoration 0.3s ease; /* Add transition for a smooth effect */
+    }
+    
+
+    .navItem a:hover,
+    .navItem a:hover navIcon { 
+     text-decoration: underline 3px; 
+    }
   
     .card-menu {
       text-decoration: none;
@@ -198,7 +232,7 @@
       
     }
   
-    .card-image {
+    .card-Image {
       border-radius: 10px 10px 0px 0px;
       width: 100%;
       height: 100%;
@@ -268,8 +302,24 @@
       box-sizing: border-box; /* Include padding and border in the element's total width and height */
       
     }
+
+    .navItem a {
+      text-decoration: none;
+      color: rgb(80, 80, 80);
+      width: 100%;
+      text-align: center;
+      margin-left: 39px;
+      font-family: Arial, sans-serif;
+      transition: text-decoration 0.3s ease; /* Add transition for a smooth effect */
+    }
+    
+   
+    .navItem a:hover,
+    .navItem a:hover navIcon { 
+     text-decoration: underline 3px; 
+    }
   
-    .card-image {
+    .card-Image {
       border-radius: 10px 10px 0px 0px;
       width: 100%;
       height: 80%;
@@ -350,7 +400,7 @@
         justify-content: center; /* Center content horizontally */
       }
     
-    .logo-image {
+    .logo-Image {
       width: 200px;
       height: 200px;
       align-items: center;

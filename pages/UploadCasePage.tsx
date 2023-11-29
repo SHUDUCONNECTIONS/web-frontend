@@ -41,7 +41,7 @@ const UploadCasePage = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Upload Case</h1>
+      <h1 className={styles.title}>Upload Case File</h1>
       <div className={styles.form}>
         <label htmlFor="caseNumber" className={styles.label}>
           Case Number:
@@ -52,6 +52,7 @@ const UploadCasePage = () => {
           value={caseNumber}
           onChange={handleCaseNumberChange}
           className={styles.input}
+          placeholder="Enter Case Number"
         />
 
         <label htmlFor="caseType" className={styles.label}>
@@ -63,6 +64,7 @@ const UploadCasePage = () => {
           value={caseType}
           onChange={handleCaseTypeChange}
           className={styles.input}
+          placeholder="Enter Case Type"
         />
 
         <label htmlFor="file" className={styles.label}>
@@ -77,7 +79,7 @@ const UploadCasePage = () => {
             ref={fileInputRef}
           />
           <button onClick={handleUploadButtonClick} className={styles.button}>
-            <FontAwesomeIcon icon={faUpload} className={styles.uploadIcon} />
+            <FontAwesomeIcon icon={faUpload} className={styles.uploadIcon} />&nbsp;
             Select File
           </button>
         </div>

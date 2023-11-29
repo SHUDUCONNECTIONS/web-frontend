@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import * as Yup from 'yup';
+import Image from 'next/image';
+
 
 type Errors = {
   [key: string]: boolean;
@@ -86,7 +88,7 @@ const Home = () => {
       <div className="form">
         <h1 className="title">SIGN UP</h1>
         <div className="logo">
-          <img src="/carerunnerlogo.png" alt="Your Logo" className="logo-image" />
+          <Image src="/carerunnerlogo.png" width="75" height="75" alt="Your Logo" className="logo-Image" />
         </div>
         <input
           type="text"

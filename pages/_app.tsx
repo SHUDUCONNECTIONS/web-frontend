@@ -1,16 +1,19 @@
-import { AppProps } from 'next/app';
 import '../styles/globals.css';
+import type { AppProps } from 'next/app';
 import Navbar from '../src/Components/Navbar';
 import Footer from '../src/Components/Footer';
+import { useRouter } from 'next/router';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return (
+ const router = useRouter();
+
+ return (
     <>
-      <Navbar />
+      {router.pathname !== '/' && router.pathname !== '/signup' && <Navbar />}
       <Component {...pageProps} />
-      <Footer />
+      {router.pathname !== '/' && router.pathname !== '/signup' && <Footer />}
     </>
-  );
+ );
 }
 
 export default MyApp;

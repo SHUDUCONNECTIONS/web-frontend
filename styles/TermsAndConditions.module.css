@@ -1,68 +1,90 @@
 .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
-  .title {
-    text-align: center;
-    margin-top: 30%;
-  }
-  
-  .buttonsContainer {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .policyContainer {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  
-  .policyCard {
-    border: 1px solid #ccc;
-    padding: 20px;
-    width: 100%;
-    max-width: 300px;
-    position: relative;
-  }
-  
-  .selected {
-    border-color: #007bff;
-  }
-  
-  .policyName {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  
-  .cardFooter {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
-  }
-  
-  .previewButton,
-  .downloadButton {
-    padding: 10px;
-    cursor: pointer;
-    background-color: rgb(2, 124, 133);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 14px;
-    transition: background-color 0.3s;
-  }
-  
-  .previewButton:hover,
-  .downloadButton:hover {
-    background-color: #0056b3;
-  }
-  
-  .previewButton {
-    margin-right: 5px;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(36, 35, 35, 0.781);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  overflow: auto;
+}
+
+.policyContainer {
+  font-family: Arial, sans-serif;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(2, 1fr); /* Two columns */
+  grid-template-rows: repeat(2, 1fr); /* Two rows */
+  gap: 1rem; /* Gap between cards */
+  color: rgb(185, 185, 185);
+  padding: 1rem; /* Padding around the container */
+}
+
+.policyCard {
+  border: 1px solid #ccc;
+  padding: 8px;
+  background-color: rgba(44, 44, 44, 0.781);
+  position: relative;
+  font-family: Arial, sans-serif;
+  align-items: center;
+  cursor: pointer;
+  width: 100%; /* Adjust width of individual card */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+
+.policyCard:hover {
+  opacity: 0.8; /* Reduce opacity when hovering over the card */
+}
+
+.policyName {
+  margin-bottom: auto;
+  text-align: center; /* Center align the policy name */
+  transition: opacity 0.3s; /* Apply opacity transition to the policy name */
+}
+
+.policyCard:hover .policyName {
+  opacity: 5; /* Increase opacity of the policy name when hovering over the card */
+}
+
+.title {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: rgb(185, 185, 185);
+  margin-top: 0;
+}
+
+.cardFooter {
+  display: flex;
+  text-align: center;
+  color: rgb(185, 185, 185);
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.downloadButton {
+  padding: 10px;
+  cursor: pointer;
+  background-color: rgb(2, 124, 133);
+  color: white;
+  border: none;
+  border-radius: 7px;
+  font-size: 14px;
+  transition: background-color 0.3s;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.downloadButton:hover {
+  background-color: #0056b3;
+}

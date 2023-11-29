@@ -31,20 +31,16 @@ const TermsAndConditions: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Terms and Conditions</h1>
+      <h1 className={styles.title}>Care Runners Policy Section</h1>
 
       <div className={styles.policyContainer}>
         {policies.map((policy) => (
           <div key={policy.id} className={`${styles.policyCard} ${selectedPolicy === policy ? styles.selected : ''}`}>
             <h2 className={styles.policyName}>{policy.name}</h2>
             <div className={styles.cardFooter}>
-              <button onClick={() => previewPolicy(policy)} className={styles.previewButton}>
-                <FontAwesomeIcon icon={faEye} />
-                Preview
-              </button>
               <button onClick={() => downloadPolicy()} className={styles.downloadButton}>
                 <FontAwesomeIcon icon={faDownload} />
-                Download
+                &nbsp; Download
               </button>
             </div>
           </div>
@@ -52,18 +48,7 @@ const TermsAndConditions: React.FC = () => {
       </div>
 
 
-      {selectedPolicy && (
-        <div className={styles.previewContainer}>
-          <iframe
-            title="PDF Preview"
-            src={selectedPolicy.file}
-            width="100%"
-            height="600px"
-            frameBorder="0"
-            allowFullScreen
-          ></iframe>
-        </div>
-      )}
+ 
     </div>
   );
 };
