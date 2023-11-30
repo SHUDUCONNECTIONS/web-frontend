@@ -12,7 +12,6 @@
     top: 0;
     left: 0;
     z-index: 999; 
-
     margin-bottom: 15px;
   }
   
@@ -374,7 +373,6 @@
 
 
 /* Hamburger Menu Icon */
-/* Hamburger Menu Icon */
 .menuIcon {
   display: block;
   cursor: pointer;
@@ -454,18 +452,7 @@
       font-family: Arial, sans-serif;
     }
     
-    .logo {
-        margin-bottom: 30px;
-        margin-top: 1%;
-        display: flex; /* Use flexbox for centering */
-        justify-content: center; /* Center content horizontally */
-      }
-    
-    .logo-Image {
-      width: 200px;
-      height: 200px;
-      align-items: center;
-    }
+ 
     
       .title {
         font-size: 30px;
@@ -493,7 +480,6 @@
       }
   
       .button-text {
-        
         font-size: 20px;
         text-align: center;
         margin-left: 15px;
@@ -503,19 +489,14 @@
         left: 50%;
         transform: translate(-50%, -50%);
       }
-  
+
       .footer {
         display:none;
       }
     
-  
       .desktop{
        display:none;
       }
-
-      
-      
-  
   }
   
   
