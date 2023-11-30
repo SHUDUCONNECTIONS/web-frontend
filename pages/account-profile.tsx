@@ -87,8 +87,8 @@ const LawFirmAccountProfile: React.FC = () => {
         </label>
         <br />
         <label className={styles.label}>
-            Contact Number:
-            <br></br>
+          Contact Number:
+          <br></br>
           <input
             className={styles.input}
             type="text"
@@ -167,7 +167,11 @@ const LawFirmAccountProfile: React.FC = () => {
           />
         </label>
       </div>
-      
+      <div className={styles.updateButtonContainer}>
+        <button className={styles.updateButton} onClick={handleUpdate}>
+          Update Profile
+        </button>
+      </div>
     </div>
   );
 };

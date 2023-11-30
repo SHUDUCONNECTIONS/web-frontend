@@ -17,16 +17,19 @@
   margin-bottom: 8px;
 }
 
+.updateButtonContainer {
+  margin-top: auto; /* Push the container to the bottom */
+  text-align: center;
+}
+
 .updateButton {
-  margin-top: 20px;
-  display: flex;
-  align-items: center;
-  color: #fff;
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
   border: none;
-  border-radius: 8px;
+  border-radius: 4px;
   cursor: pointer;
-  font-family: Arial, sans-serif;
-  font-weight: bold;
 }
 
 .input {
