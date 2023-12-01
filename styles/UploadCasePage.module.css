@@ -89,7 +89,7 @@
 }
 
 /* Mobile styles */
-@media only screen and (max-width: 375px) {
+@media only screen and (max-width: 724px) {
   .title {
     margin-right: 0; /* Reset margin-right */
     margin-top: 2rem; /* Adjusted margin-top */
