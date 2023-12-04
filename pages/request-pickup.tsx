@@ -123,6 +123,7 @@ const RequestPickUpPage: React.FC<RequestPickUpPageProps> = ({ googleMapsApiKey 
             <option value="premium">Premium</option>
           </select>
         </label>
+        
         <button onClick={handleFindLocation}>Find Location</button>
         <button onClick={handleRequestPickUp}>Request Pick Up</button>
       </div>
