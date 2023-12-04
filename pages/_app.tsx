@@ -5,15 +5,18 @@ import Footer from '../src/Components/Footer';
 import { useRouter } from 'next/router';
 
 function MyApp({ Component, pageProps }: AppProps) {
- const router = useRouter();
+  const router = useRouter();
 
- return (
+  const excludePages = ['/', '/signup', '/forgot-password'];
+
+  return (
     <>
-      {router.pathname !== '/' && router.pathname !== '/signup' && <Navbar />}
+      {!excludePages.includes(router.pathname) && <Navbar />}
       <Component {...pageProps} />
-      {router.pathname !== '/' && router.pathname !== '/signup' && <Footer />}
+      {!excludePages.includes(router.pathname) && <Footer />}
     </>
- );
+  );
 }
 
 export default MyApp;
+ 

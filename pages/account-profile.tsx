@@ -20,20 +20,20 @@ interface CompanyProfile {
 
 const LawFirmAccountProfile: React.FC = () => {
   const [userProfile, setUserProfile] = useState<UserProfile>({
-    name: 'Zwivhuya',
-    lastName: 'Vhangani',
-    email: 'morganvhangani@gmail.com',
-    phoneNumber: '067 132 9311',
+    name: '',
+    lastName: '',
+    email: '',
+    phoneNumber: '',
   });
 
   const [companyProfile, setCompanyProfile] = useState<CompanyProfile>({
-    companyName: 'Law Firm XYZ',
-    address: '123 Main Street, Cityville',
-    contactPerson: 'Jane Smith',
-    postalCode: '0008',
-    companyEmail: 'morganvhangani@gmail.com',
-    telephoneNo: '012 406 5214',
-    companyRegistration: 'ck100000',
+    companyName: '',
+    address: '',
+    contactPerson: '',
+    postalCode: '',
+    companyEmail: '',
+    telephoneNo: '',
+    companyRegistration: '',
   });
 
   const handleUserProfileUpdate = (updatedProfile: UserProfile) => {
@@ -50,26 +50,29 @@ const LawFirmAccountProfile: React.FC = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.leftPanel}>
-        <h2>User Profile</h2>
-        <label className={styles.label}>
-          Name:
-          <br></br>
-          <input
-            className={styles.input}
-            type="text"
-            value={userProfile.name}
-            onChange={(e) => handleUserProfileUpdate({ ...userProfile, name: e.target.value })}
-          />
-        </label>
-        <br />
-        <label className={styles.label}>
+    <div className={styles.body}>
+      <div className={styles.container}>
+        <form className={styles.form}>
+          <div className={styles.profileSection}>
+          <h2 className={styles.heading}>User Profile</h2>
+            <label className={styles.label}>
+              Name:
+              <br />
+              <input
+                className={styles.input}
+                type="text"
+                placeholder="Enter your name"
+                value={userProfile.name}
+                onChange={(e) => handleUserProfileUpdate({ ...userProfile, name: e.target.value })}
+              />
+            </label>
+            <label className={styles.label}>
           Last Name:
           <br></br>
           <input
             className={styles.input}
             type="text"
+            placeholder="Enter your last name"
             value={userProfile.lastName}
             onChange={(e) => handleUserProfileUpdate({ ...userProfile, lastName: e.target.value })}
           />
@@ -81,6 +84,7 @@ const LawFirmAccountProfile: React.FC = () => {
           <input
             className={styles.input}
             type="text"
+            placeholder="Enter your email address"
             value={userProfile.email}
             onChange={(e) => handleUserProfileUpdate({ ...userProfile, email: e.target.value })}
           />
@@ -92,30 +96,34 @@ const LawFirmAccountProfile: React.FC = () => {
           <input
             className={styles.input}
             type="text"
+            placeholder="Enter your contact number"
             value={userProfile.phoneNumber}
             onChange={(e) => handleUserProfileUpdate({ ...userProfile, phoneNumber: e.target.value })}
           />
         </label>
-      </div>
-      <div className={styles.rightPanel}>
-        <h2>Company Profile</h2>
-        <label className={styles.label}>
-          Company Name:
-          <br></br>
-          <input
-            className={styles.input}
-            type="text"
-            value={companyProfile.companyName}
-            onChange={(e) => handleCompanyProfileUpdate({ ...companyProfile, companyName: e.target.value })}
-          />
-        </label>
-        <br />
-        <label className={styles.label}>
+          </div>
+          <div className={styles.companyprofileSection}>
+          <h2 className={styles.heading}>Company Profile</h2>
+            <label className={styles.label}>
+              Company Name:
+              <br />
+              <input
+                className={styles.input}
+                type="text"
+                placeholder="Enter your company name"
+                value={companyProfile.companyName}
+                onChange={(e) =>
+                  handleCompanyProfileUpdate({ ...companyProfile, companyName: e.target.value })
+                }
+              />
+            </label>
+            <label className={styles.label}>
           Company Email:
           <br></br>
           <input
             className={styles.input}
             type="text"
+            placeholder="Enter company's email address"
             value={companyProfile.companyEmail}
             onChange={(e) => handleCompanyProfileUpdate({ ...companyProfile, companyEmail: e.target.value })}
           />
@@ -127,6 +135,7 @@ const LawFirmAccountProfile: React.FC = () => {
           <input
             className={styles.input}
             type="text"
+            placeholder="Enter company's physical address"
             value={companyProfile.address}
             onChange={(e) => handleCompanyProfileUpdate({ ...companyProfile, address: e.target.value })}
           />
@@ -138,6 +147,7 @@ const LawFirmAccountProfile: React.FC = () => {
           <input
             className={styles.input}
             type="text"
+            placeholder="Enter company's postal code"
             value={companyProfile.postalCode}
             onChange={(e) => handleCompanyProfileUpdate({ ...companyProfile, postalCode: e.target.value })}
           />
@@ -149,6 +159,7 @@ const LawFirmAccountProfile: React.FC = () => {
           <input
             className={styles.input}
             type="text"
+            placeholder="Enter company's telephone number"
             value={companyProfile.telephoneNo}
             onChange={(e) => handleCompanyProfileUpdate({ ...companyProfile, telephoneNo: e.target.value })}
           />
@@ -160,17 +171,19 @@ const LawFirmAccountProfile: React.FC = () => {
           <input
             className={styles.input}
             type="text"
+            placeholder="Enter company's registration number"
             value={companyProfile.companyRegistration}
             onChange={(e) =>
               handleCompanyProfileUpdate({ ...companyProfile, companyRegistration: e.target.value })
-            }
-          />
+            }/>
         </label>
-      </div>
-      <div className={styles.updateButtonContainer}>
-        <button className={styles.updateButton} onClick={handleUpdate}>
-          Update Profile
-        </button>
+          </div>
+          <div className={styles.centeredButtonContainer}>
+            <button className={styles.centeredButton} onClick={handleUpdate}>
+              Update Profile
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );

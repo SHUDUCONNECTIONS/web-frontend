@@ -1,6 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
+import { customImageLoader } from "../src/Components/customImageLoader";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from '../styles/Home.module.css'; // Import the CSS module
 import {
@@ -45,8 +47,15 @@ const Home = () => {
     <div className={styles.container}>
       <div className={styles.form}>
         <div className={styles.logo}>
-          <img src="/carerunnerlogo.png" alt="Your Logo" className={styles['logo-image']} />
-        </div>
+        <Image
+              loader={customImageLoader}
+              src="carerunnerlogo.png" 
+              alt="Your Logo"
+              width={50}
+              height={50}
+              className={`${styles['logo-image']} ${styles.mobile}`} 
+            />          
+            </div> 
 
         <button onClick={() => console.log('Button 1 clicked')} className={styles['button-menu']}>
           <span className="icon">

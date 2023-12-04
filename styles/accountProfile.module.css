@@ -1,47 +1,101 @@
-/* LawFirmAccountProfile.module.css */
-.container {
+/* accountProfile.module.css */
+
+.body {
   display: flex;
-  justify-content: space-between;
-  margin: 20px;
-  font-family: Arial, sans-serif;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(36, 35, 35, 0.781);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  overflow: auto;
 }
 
-.leftPanel,
-.rightPanel {
-  flex: 1;
-  padding: 10px;
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.form {
+  margin-top: 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%; /* Adjust as needed */
+  max-width: 800px; /* Adjust maximum width */
+  padding: 20px;
+  background-color: rgba(44, 44, 44, 0.781);
+  border-radius: 10px;
+}
+.heading {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 2px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: rgb(185, 185, 185);
+  margin-right: 0; /* Adjusted margin */
 }
 
 .label {
-  display: block;
-  margin-bottom: 8px;
-}
-
-.updateButtonContainer {
-  margin-top: auto; /* Push the container to the bottom */
-  text-align: center;
-}
-
-.updateButton {
-  background-color: #4caf50;
-  color: white;
-  padding: 10px 20px;
-  font-size: 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  font-family: Arial, sans-serif;
+  color: rgb(185, 185, 185);
 }
 
 .input {
-  width: 50%;
-  padding: 15px;
-  margin-bottom: 10px;
-  border: 2px solid #ddd;
-  border-radius: 8px;
-  outline: none;
-  cursor: text;
+  width: 100%;
+  border-radius: 7px;
+  color: rgb(238, 233, 233);
+  padding: 8px;
+  font-family: Arial, sans-serif;
+  background-color: rgba(44, 44, 44, 0.781);
+  margin-bottom: 15px;
+  box-sizing: border-box;
+  font-size: 15px;
 }
 
-.input:focus {
-  outline: none;
+.centeredButtonContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10%; /* Stick to the bottom */
+  width: 100%;
+}
+
+.centeredButton {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  max-width: 200px;
+}
+
+/* User Profile Section */
+.profileSection {
+  width: 70%; /* Adjust as needed */
+}
+
+/* Company Profile Section */
+.companyprofileSection {
+  width: 70%; /* Adjust as needed */
+}
+
+
+
+/* Media query for smaller screens (if needed) */
+@media screen and (max-width: 768px) {
+  .form {
+    width: 90%;
+  }
 }

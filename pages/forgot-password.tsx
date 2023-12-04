@@ -34,7 +34,7 @@ const ForgotPassword = () => {
       <div className="form">
         <h1 className="title">FORGOT PASSWORD</h1>
         <div className="logo">
-          <Image src="/carerunnerlogo.png" alt="Your Logo" className="logo-Image" />
+          <Image src="/carerunnerlogo.png" width="75" height="75" alt="Your Logo" className="logo-Image" />
         </div>
         <input
           type="email"
