@@ -1,5 +1,4 @@
-/* styles/UploadCasePage.module.css */
-
+/* Common styles for both desktop and mobile */
 .container {
   display: flex;
   flex-direction: column;
@@ -13,84 +12,66 @@
   height: 100%;
   overflow: auto;
 }
+
 .title {
   font-size: 30px;
   font-weight: bold;
-  margin-bottom: 2rem;
+  margin-bottom: 2px;
   font-family: Arial, sans-serif;
   text-align: center;
   color: rgb(185, 185, 185);
-  margin-right: 41rem;
+  margin-right: 0; /* Adjusted margin */
+
 }
-  
-  .form {
-    background-color: rgba(44, 44, 44, 0.781);
-    padding: 20px;
-    width: 70%;
-    border-radius: 10px;
-    
-  }
-  
-  .label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: bold;
-    font-family: Arial, sans-serif;
-    color: rgb(185, 185, 185);
-  }
-  
-  .input {
-    width: 100%;
-    border-radius: 7px;
-    color: rgb(255, 255, 255);
-    padding: 8px;
-    font-family: Arial, sans-serif;
-    background-color: rgba(44, 44, 44, 0.781);
-    margin-bottom: 15px;
-    box-sizing: border-box;
-    font-size: 15px;
-  }
-  
-  .input:placeholder {
-    font-size: 18px;
-    font-family: Arial, sans-serif;
-  }
-  .button {
-    background-color: rgba(44, 44, 44, 0.781);
-    color: rgb(185, 185, 185);
-    padding: 10px 15px;
-    border: none;
-    font-size: 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-family: Arial, sans-serif;
-    border: 1px solid #ccc;
-  }
-  
-  .button:hover {
-    background-color: #297fb8;
-  }
-  
-  /* Responsive Styles */
-  @media (max-width: 600px) {
-    .container {
-      max-width: 100%;
-      padding: 0 20px;
-    }
-    
-    .title {
-      font-size: 20px;
-      font-family: Arial, sans-serif;
-    }
-    
-    .form {
-      padding: 15px;
-    }
-    
-    .input {
-      margin-bottom: 10px;
-    }
-  }
+
+.form {
+  background-color: rgba(44, 44, 44, 0.781);
+  padding: 20px;
+  width: 70%;
+  border-radius: 10px;
+  margin-top: 2rem; /* Adjusted margin */
+}
+
+.label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  color: rgb(185, 185, 185);
+}
+
+.input {
+  width: 100%;
+  border-radius: 7px;
+  color: rgb(255, 255, 255);
+  padding: 8px;
+  font-family: Arial, sans-serif;
+  background-color: rgba(44, 44, 44, 0.781);
+  margin-bottom: 15px;
+  box-sizing: border-box;
+  font-size: 15px;
+}
+
+.input::placeholder {
+  font-size: 18px;
+  font-family: Arial, sans-serif;
+}
+
+.button {
+  background-color: rgba(44, 44, 44, 0.781);
+  color: rgb(185, 185, 185);
+  padding: 10px 15px;
+  border: none;
+  font-size: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  border: 1px solid #ccc;
+}
+
+.button:hover {
+  background-color: #297fb8;
+}
 
 .fileInputContainer {
   display: flex;
@@ -99,14 +80,32 @@
 }
 
 .fileInput {
-  display: none; 
+  display: none;
 }
-
 
 .uploadIcon {
   cursor: pointer;
-  color: rgb(185, 185, 185); 
+  color: rgb(185, 185, 185);
 }
 
+/* Mobile styles */
+@media only screen and (max-width: 724px) {
+  .title {
+    margin-right: 0; /* Reset margin-right */
+    margin-top: 2rem; /* Adjusted margin-top */
+    width: 70%; /* Adjusted width */
+  }
 
-  
+  .form {
+    width: 70%; /* Adjusted width */
+    margin-bottom:4rem; /* Adjusted margin */
+  }
+
+  .input::placeholder {
+    font-size: 15px; /* Adjusted placeholder font size */
+  }
+
+  .button {
+    width: 50%; /* Adjusted width */
+  }
+}

@@ -1,4 +1,5 @@
 /*Styling for the NAVIGATION bar*/
+
 .navbar {
     margin-top: 0px;
     padding: 5px 40px;
@@ -12,7 +13,6 @@
     top: 0;
     left: 0;
     z-index: 999; 
-
     margin-bottom: 15px;
   }
   
@@ -108,100 +108,14 @@
  
   
   
-  /* This Media part is for DESKTOP*/
   
-  @media only screen and (min-width: 425px) {
-  
-    .container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%; /* Use vw instead of px to make it responsive */
-    height: 100%; /* Use vh instead of px to make it responsive */
-    display: flex;
-    justify-content: center;
-    background-color: rgba(44, 44, 44, 0.781);
-    align-items: center;
-    flex-wrap: wrap; /* Wrap the cards to multiple lines if necessary */
-    }
-  
-    .card-menu {
-      text-decoration: none;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background-color: rgba(44, 44, 44, 0.781);
-      border-radius: 10px;
-      font-family: Arial, sans-serif;
-      font-weight: bold;
-      margin: 5px auto; /* Center the card horizontally */
-      width: 43%; /* Set the width of the card */
-      height: 27%;
-      box-sizing: border-box; /* Include padding and border in the element's total width and height */
-    }
-  
-    .card-Image {
-      border-radius: 10px 10px 0px 0px;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  
-    .card-text {
-      margin-bottom: 10px;
-      width: 100%; /* Make the text stretch across the full width of the card */
-      text-align: center; /* Center the text horizontally */
-    }
-
-    .navItem a {
-      text-decoration: none;
-      color: rgb(80, 80, 80);
-      width: 100%;
-      text-align: center;
-      margin-left: 39px;
-      font-family: Arial, sans-serif;
-      transition: text-decoration 0.3s ease; /* Add transition for a smooth effect */
-    }
-    
-
-    .navItem a:hover,
-    .navItem a:hover navIcon { 
-     text-decoration: underline 3px; 
-    }
-  
-    .card-button {
-      height: 80px !important;
-      background-color: rgb(2, 124, 133);
-      color: #fff;
-      font-size: 16px;
-      font-weight: bold;
-      padding: 10px;
-      border: none;
-      margin-top: 0px;
-      width: 213px;
-      cursor: pointer;
-      box-sizing: border-box;
-      border-radius: 0px 0px 10px 10px; /* Include padding and border in the button's total width and height */
-    }
-  
-    .card-button:hover {
-      background-color: #2980b9;
-    }
-    .mobile{
-      display:none;
-    }
-
-
-  }
-  
-  
-  @media only screen and (min-width: 768px) {
+  @media only screen and (min-width: 725px) {
     .container {
       display: flex;
       justify-content: center;
       background-color: rgba(44, 44, 44, 0.781);
       align-items: center;
-      height: 100vh;
+      height: 100%;
       width: 100%;
       flex-wrap: wrap; /* Wrap the cards to multiple lines if necessary */
        /* Add spacing between the cards */
@@ -220,6 +134,7 @@
     .navItem a:hover,
     .navItem a:hover navIcon { 
      text-decoration: underline 3px; 
+  
     }
   
     .card-menu {
@@ -276,250 +191,281 @@
   }
   
   
-  
+ /*------------------------------------------------------*/
 
-
   
-  
-  @media only screen and (min-width: 1440px) {
-    .container {
-      display: flex;
-      justify-content: center;
-      background-color: rgba(44, 44, 44, 0.781);
-      align-items: center;
-      height: 100vh;
-      width: 100%;
-      flex-wrap: wrap; /* Wrap the cards to multiple lines if necessary */
-       /* Add spacing between the cards */
-    }
-  
-    .card-menu {
-      text-decoration: none;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background-color: rgb(44, 44, 44);
-      border-radius: 10px;
-      font-family: Arial, sans-serif;
-      font-weight: bold;
-      margin: 13px; /* Center the card horizontally */
-      width: 190px; /* Set the width of the card */
-      height: 260px;
-      box-sizing: border-box; /* Include padding and border in the element's total width and height */
-      
-    }
-
-    .navItem a {
-      text-decoration: none;
-      color: rgb(80, 80, 80);
-      width: 100%;
-      text-align: center;
-      margin-left: 39px;
-      font-family: Arial, sans-serif;
-      transition: text-decoration 0.3s ease; /* Add transition for a smooth effect */
-    }
-    
-   
-    .navItem a:hover,
-    .navItem a:hover navIcon { 
-     text-decoration: underline 3px; 
-    }
-  
-    .card-Image {
-      border-radius: 10px 10px 0px 0px;
-      width: 100%;
-      height: 80%;
-    }
-  
-    .card-text {
-      margin-bottom: 10px;
-      width: 100%; /* Make the text stretch across the full width of the card */
-      text-align: center; /* Center the text horizontally */
-    }
-  
-    .card-button {
-      height: 80px !important;
-      background-color: rgb(2, 124, 133);
-      color: #fff;
-      font-size: 20px;
-      font-weight: bold;
-      padding: 10px;
-      border: none;
-      margin-top: 0px;
-      width: 213px;
-      cursor: pointer;
-      box-sizing: border-box;
-      border-radius: 0px 0px 10px 10px; /* Include padding and border in the button's total width and height */
-    }
-  
-    .card-button:hover {
-      background-color: #2980b9;
-    }
-    .mobile{
-      display:none;
-    }
- 
-  }
-  
-  
-  
-  
-  
-  
- 
   
   /* Mobile view point*/
-@media only screen and (max-width: 375px){
+@media only screen and (max-width: 724px){
 
 
 
-/* Hamburger Menu Icon */
-/* Hamburger Menu Icon */
-.menuIcon {
-  display: block;
-  cursor: pointer;
-  color: rgba(44, 44, 44, 0.781); /* Color for the hamburger icon */
-  font-size: 24px; /* Adjust size as needed */
-  padding: 10px;
-  margin-left: 17.3rem;
-}
-
-/* Navigation Menu */
-.navList {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  color: rgba(44, 44, 44, 0.781);
-  display: none; /* Hide the menu by default */
-  background-color: rgb(185, 185, 185); /* Background color for the menu */
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 999;
-  transition: transform 0.3s ease; /* Smooth transition for opening */
-  transform: translateX(-100%); /* Initially off-screen */
-  border-radius: 15px;
-  width: 18rem;
-}
-
-/* Menu Open */
-.navList.open {
-  display: block; /* Show the menu when open class is applied */
-  transform: translateX(0); /* Slide in the menu */
-}
-
-/* Menu Items */
-.navItem {
-  margin-bottom: 25px; /* Adjust spacing between menu items */
-}
-
-/* Menu Links */
-.navItem a {
-  text-decoration: none;
-  color: rgb(80, 80, 80);
-  display: block;
-  padding: 8px;
-  font-family: Arial, sans-serif;
-  transition: background-color 0.3s ease; /* Smooth transition */
-}
-
-/* Menu Link Hover */
-.navItem a:hover {
-  background-color: rgba(185, 185, 185, 0.3); /* Change background color on hover */
-}
-
-.container {
-      display: grid;
-      place-content: center;
-      align-items: center;
-      height: 100%;
-      width: 100%;
-    }
+  /* Hamburger Menu Icon */
+  .menuIcon {
+    display: block;
+    cursor: pointer;
+    color: rgba(44, 44, 44, 0.781); /* Color for the hamburger icon */
+    font-size: 24px; /* Adjust size as needed */
+    padding: 10px;
+    margin-left: 83%;
+  }
   
-    .form {
-      position: relative;
-        border: 2px solid #ddd;
-        border-radius: 15px;
-        width: 100%; /* Set width based on viewport width */
-        box-sizing: border-box; /* Include padding and border in the width calculation */
-        background-color: rgba(44, 44, 44, 0.781);
+  /* Navigation Menu */
+  .navList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    color: rgba(44, 44, 44, 0.781);
+    display: none; /* Hide the menu by default */
+    background-color: rgb(185, 185, 185); /* Background color for the menu */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    transition: transform 0.3s ease; /* Smooth transition for opening */
+    transform: translateX(-100%); /* Initially off-screen */
+    border-radius: 15px;
+    width: 18rem;
+  }
+  
+  /* Menu Open */
+  .navList.open {
+    display: block; /* Show the menu when open class is applied */
+    transform: translateX(0); /* Slide in the menu */
+  }
+  
+  /* Menu Items */
+  .navItem {
+    margin-bottom: 25px; /* Adjust spacing between menu items */
+  }
+  
+  /* Menu Links */
+  .navItem a {
+    text-decoration: none;
+    color: rgb(80, 80, 80);
+    display: block;
+    padding: 8px;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.3s ease; /* Smooth transition */
+  }
+  
+  /* Menu Link Hover */
+  .navItem a:hover {
+    background-color: rgba(185, 185, 185, 0.3); /* Change background color on hover */
+  }
+  
+  .container {
         display: grid;
-        height: 700px;
-      place-content: center;
+        place-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
       }
     
-    .title {
-      font-size: 30px;
-      margin-bottom: 30px;
-      font-family: Arial, sans-serif;
-    }
-    
-    .logo {
-        margin-bottom: 30px;
-        margin-top: 1%;
-        display: flex; /* Use flexbox for centering */
-        justify-content: center; /* Center content horizontally */
-      }
-    
-    .logo-Image {
-      width: 200px;
-      height: 200px;
-      align-items: center;
-    }
-    
+      .form {
+        position: relative;
+          border: 2px solid #ddd;
+          border-radius: 15px;
+          width: 100%; /* Set width based on viewport width */
+          box-sizing: border-box; /* Include padding and border in the width calculation */
+          background-color: rgba(44, 44, 44, 0.781);
+          display: grid;
+          height: 700px;
+        place-content: center;
+        }
+      
       .title {
         font-size: 30px;
         margin-bottom: 30px;
-      }
-    
-      .button-menu {
-        width: 300px;
-        height: 50px;
-        padding: 10px;
-        margin-bottom: 13px;
-        display: flex;
-        align-items: center;
-        margin-right: 10px; /* Center text horizontally */
-        margin-left: 10px;
-        background-color: rgb(2, 124, 133);
-        color: #fffefe;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
         font-family: Arial, sans-serif;
-        font-weight: bold;
-        position: relative;
-        overflow: hidden;
       }
-  
-      .button-text {
-        
-        font-size: 20px;
-        text-align: center;
-        margin-left: 15px;
-        width: 100%;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      }
-  
-      .footer {
-        display:none;
-      }
+      
+   
+      
+        .title {
+          font-size: 30px;
+          margin-bottom: 30px;
+        }
+      
+        .button-menu {
+          width: 300px;
+          height: 50px;
+          padding: 10px;
+          margin-bottom: 13px;
+          display: flex;
+          align-items: center;
+          margin-right: 10px; /* Center text horizontally */
+          margin-left: 10px;
+          background-color: rgb(2, 124, 133);
+          color: #fffefe;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          font-family: Arial, sans-serif;
+          font-weight: bold;
+          position: relative;
+          overflow: hidden;
+        }
     
+        .button-text {
+          font-size: 20px;
+          text-align: center;
+          margin-left: 15px;
+          width: 100%;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
   
-      .desktop{
-       display:none;
-      }
+        .footer {
+          display:none;
+        }
+      
+        .desktop{
+         display:none;
+        }
+    }
+    
+   
 
-      
-      
+     
   
+    
+  /* Mobile view point*/
+@media only screen and (max-width: 724px){
+
+
+
+  /* Hamburger Menu Icon */
+  .menuIcon {
+    display: block;
+    cursor: pointer;
+    color: rgba(44, 44, 44, 0.781); /* Color for the hamburger icon */
+    font-size: 24px; /* Adjust size as needed */
+    padding: 10px;
+    margin-left: 83%;
   }
   
+  /* Navigation Menu */
+  .navList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    color: rgba(44, 44, 44, 0.781);
+    display: none; /* Hide the menu by default */
+    background-color: rgb(185, 185, 185); /* Background color for the menu */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    transition: transform 0.3s ease; /* Smooth transition for opening */
+    transform: translateX(-100%); /* Initially off-screen */
+    border-radius: 15px;
+    width: 18rem;
+  }
   
+  /* Menu Open */
+  .navList.open {
+    display: block; /* Show the menu when open class is applied */
+    transform: translateX(0); /* Slide in the menu */
+  }
   
+  /* Menu Items */
+  .navItem {
+    margin-bottom: 25px; /* Adjust spacing between menu items */
+  }
+  
+  /* Menu Links */
+  .navItem a {
+    text-decoration: none;
+    color: rgb(80, 80, 80);
+    display: block;
+    padding: 8px;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.3s ease; /* Smooth transition */
+  }
+  
+  /* Menu Link Hover */
+  .navItem a:hover {
+    background-color: rgba(185, 185, 185, 0.3); /* Change background color on hover */
+  }
+  
+  .container {
+        display: grid;
+        place-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+      }
+    
+      .form {
+        position: relative;
+          border: 2px solid #ddd;
+          border-radius: 15px;
+          width: 100%; /* Set width based on viewport width */
+          box-sizing: border-box; /* Include padding and border in the width calculation */
+          background-color: rgba(44, 44, 44, 0.781);
+          display: grid;
+          height: 700px;
+        place-content: center;
+        }
+      
+      .title {
+        font-size: 30px;
+        margin-bottom: 30px;
+        font-family: Arial, sans-serif;
+      }
+      
+   
+      
+        .title {
+          font-size: 30px;
+          margin-bottom: 30px;
+        }
+      
+        .button-menu {
+          width: 300px;
+          height: 50px;
+          padding: 10px;
+          margin-bottom: 13px;
+          display: flex;
+          align-items: center;
+          margin-right: 10px; /* Center text horizontally */
+          margin-left: 10px;
+          background-color: rgb(2, 124, 133);
+          color: #fffefe;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          font-family: Arial, sans-serif;
+          font-weight: bold;
+          position: relative;
+          overflow: hidden;
+        }
+    
+        .button-text {
+          font-size: 20px;
+          text-align: center;
+          margin-left: 15px;
+          width: 100%;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+  
+        .footer {
+          display:none;
+        }
+      
+        .desktop{
+         display:none;
+        }
+    }
+    
+   
+      
   
   
   

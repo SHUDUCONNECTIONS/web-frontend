@@ -32,8 +32,9 @@
 }
 
 .caseTable {
-  border-collapse: collapse;
-  width: 60rem;
+  width: 89%; /* Adjust width to 89% */
+  max-width: 60rem; /* Set maximum width */
+  margin: 0 auto; /* Center the table */
   background-color: rgba(44, 44, 44, 0.781);
   padding: 20px;
   border-radius: 10px;
@@ -90,8 +91,46 @@
 }
 
 /* Media query for smaller screens (mobile view) */
-@media screen and (max-width: 275px) {
+@media screen and (max-width: 724px) {
   .caseTitle h2 {
     margin-right: 0; /* Mobile margin */
+  }
+
+  .container {
+    padding: 0 10px; /* Adjust padding for smaller screens */
+  }
+
+  .caseTable {
+    width: 100%; /* Adjust table width for smaller screens */
+    max-width: 100%; /* Limit maximum width for responsiveness */
+    height: auto; /* Adjust height to fit content */
+    font-size: 12px; /* Reduce font size for better mobile display */
+  }
+
+  .caseTable th,
+  .caseTable td {
+    max-height: none; /* Remove maximum height for better mobile display */
+  }
+}
+
+@media screen and (min-width: 725px) {
+  .caseTitle h2 {
+    margin-right: 0; /* Mobile margin */
+  }
+
+  .container {
+    padding: 0 10px; /* Adjust padding for smaller screens */
+  }
+
+  .caseTable {
+    width: 100%; /* Adjust table width for smaller screens */
+    max-width: 100%; /* Limit maximum width for responsiveness */
+    height: auto; /* Adjust height to fit content */
+    font-size: 12px; /* Reduce font size for better mobile display */
+  }
+
+  .caseTable th,
+  .caseTable td {
+    max-height: none; /* Remove maximum height for better mobile display */
   }
 }

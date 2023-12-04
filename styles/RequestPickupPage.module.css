@@ -7,7 +7,6 @@
   .title {
     font-size: 24px;
     margin-bottom: 20px;
-    font-family: Arial, sans-serif;
   }
   
   .mapContainer {
@@ -17,19 +16,16 @@
   .form {
     display: flex;
     flex-direction: column;
-    font-family: Arial, sans-serif;
   }
   
   .label {
     margin-bottom: 10px;
-    font-family: Arial, sans-serif;
   }
   
   .input,
   .select {
     padding: 8px;
     margin-bottom: 10px;
-    font-family: Arial, sans-serif;
   }
   
   .button {
@@ -37,7 +33,6 @@
     color: #fff;
     padding: 10px;
     cursor: pointer;
-    font-family: Arial, sans-serif;
   }
   
   .button-secondary {
