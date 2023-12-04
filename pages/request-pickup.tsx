@@ -91,11 +91,11 @@ const RequestPickUpPage: React.FC<RequestPickUpPageProps> = ({ googleMapsApiKey 
           <input type="text" placeholder="Enter Street Code or Building Name" />
         </label>
         <label>
-          Recipient's Name:
+          Recipient&apos;s Name:
           <input type="text" value={recipientName} onChange={(e) => setRecipientName(e.target.value)} />
         </label>
         <label>
-          Recipient's Cellphone Number:
+          Recipient&apos;s Cellphone Number:
           <input type="text" value={recipientPhone} onChange={(e) => setRecipientPhone(e.target.value)} />
         </label>
         <label>
