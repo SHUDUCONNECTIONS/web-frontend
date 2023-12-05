@@ -35,8 +35,6 @@ const Consultation = () => {
             Chatting with {selectedLawyer} Lawyer
           </h2>
           <div className={styles.chatContainer}>
-            {/* Chatroom component goes here */}
-            {/* You can use a third-party chat library or implement your own chat functionality */}
           </div>
         </div>
       )}

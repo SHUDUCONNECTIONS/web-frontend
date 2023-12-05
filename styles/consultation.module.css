@@ -1,34 +1,49 @@
 /* consultation.module.css */
 
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    min-height: 100vh;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(36, 35, 35, 0.781);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  overflow: auto;
+}
   
   .lawyerSelection {
     text-align: center;
     margin-bottom: 40px;
+    font-family: Arial, sans-serif;
   }
   
   .title {
-    font-size: 24px;
-    margin-bottom: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    font-family: Arial, sans-serif;
+    color: rgb(185, 185, 185);
+    text-align: center;
+    margin-right: 53rem;
   }
   
   .dropdownContainer {
-    width: 200px;
+    width: 15%;
   }
   
   .dropdown {
+    background-color: rgba(36, 35, 35, 0.781);
     width: 100%;
     padding: 10px;
     font-size: 16px;
     border: 2px solid #3498db;
     border-radius: 5px;
     outline: none;
+    font-family: Arial, sans-serif;
+    color: rgb(185, 185, 185);
   }
   
   .dropdown:hover {
