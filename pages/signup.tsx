@@ -1,77 +1,108 @@
-// Import React and other necessary libraries
-import React, { useState } from 'react';
+
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import * as Yup from 'yup';
 import Image from 'next/image';
+import '../styles/globals.css';
+
+import { useMutation, gql, ApolloClient, InMemoryCache } from '@apollo/client';
 
 
-type Errors = {
-  [key: string]: boolean;
-};
+const client = new ApolloClient({
+  uri: 'https://sea-lion-app-j3oyi.ondigitalocean.app/graphql',
+  cache: new InMemoryCache()
+});
 
-const Home = () => {
+
+const REGISTER_USER = gql`
+  mutation RegisterUser(
+    $firstName: String!
+    $lastName: String!
+    $email: String!
+    $cellphone: String!
+    $password: String!
+    $type: String!
+  ) {
+    registerUser(
+      firstName: $firstName
+      lastName: $lastName
+      email: $email
+      cellphone: $cellphone
+      password: $password
+      type: $type
+    ) {
+      user {
+        id
+        firstName
+        lastName
+        cellphone
+        type
+        verified
+        email
+      }
+      errors {
+        field
+        message
+      }
+    }
+  }
+`;
+
+const SignupForm = () => {
+  const [registerUser] = useMutation(REGISTER_USER);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [contactNumber, setContactNumber] = useState('');
+  const [cellphone, setCellphone] = useState('');
   const [email, setEmail] = useState('');
-  const [physicalAddress, setPhysicalAddress] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const router = useRouter();
-  const [errors, setErrors] = useState<Errors>({
-    firstName: false,
-    lastName: false,
-    contactNumber: false,
-    email: false,
-    physicalAddress: false,
-    password: false,
-    confirmPassword: false,
-  });
 
-  const schema = Yup.object().shape({
-    firstName: Yup.string().required(),
-    lastName: Yup.string().required(),
-    contactNumber: Yup.string().required(),
-    email: Yup.string().email().required(),
-    physicalAddress: Yup.string().required(),
-    password: Yup.string().min(8).required(),
-    confirmPassword: Yup.string().oneOf([Yup.ref('password')]).required(),
-  });
+  const [errors, setErrors] = useState<{
+    firstName?: string;
+    lastName?: string;
+    cellphone?: string;
+    email?: string;
+    password?: string;
+    confirmPassword?: string;
+  }>({});
 
   const handleSignUp = async () => {
-    try {
-      await schema.validate(
-        {
-          firstName,
-          lastName,
-          contactNumber,
-          email,
-          physicalAddress,
-          password,
-          confirmPassword,
-        },
-        { abortEarly: false }
-      );
+    const schema = Yup.object().shape({
+      firstName: Yup.string().required(),
+      lastName: Yup.string().required(),
+      cellphone: Yup.string().required(),
+      email: Yup.string().email().required(),
+      password: Yup.string().min(8).required(),
+      confirmPassword: Yup.string().oneOf([Yup.ref('password')]).required(),
+    });
 
-      // Reset errors
-      setErrors({
-        firstName: false,
-        lastName: false,
-        contactNumber: false,
-        email: false,
-        physicalAddress: false,
-        password: false,
-        confirmPassword: false,
+    try {
+      await schema.validate({
+        firstName, lastName, cellphone, email, password, confirmPassword,
+      }, { abortEarly: false });
+
+      setErrors({}); 
+
+      const { data } = await registerUser({
+        variables: {firstName, lastName, email, cellphone,
+          password,
+          type: 'driver'
+        },
       });
 
-      // Rest of the logic for handleSignUp function
-      router.push('/signup');
-    } catch (validationError) {
+
+      if (data && data.registerUser && data.registerUser.user) {
+        router.push('/Main');
+      }
+    } catch (validationError: any) {
+      console.error('Validation error:', validationError); 
+    
       if (validationError instanceof Yup.ValidationError) {
-        const validationErrors: Errors = {};
+        const validationErrors: { [key: string]: string } = {};
         validationError.inner.forEach((error) => {
           if (error.path) {
-            validationErrors[error.path] = true;
+            validationErrors[error.path] = error.message;
           }
         });
         setErrors(validationErrors);
@@ -79,11 +110,13 @@ const Home = () => {
     }
   };
 
+
   const handleLogin = () => {
     router.push('/');
   };
 
-  return (
+  
+ return (
     <div className="container">
       <div className="form">
         <h1 className="title">SIGN UP</h1>
@@ -115,6 +148,14 @@ const Home = () => {
         />
         <br />
         <input
+          type="text"
+          placeholder="Cellphone"
+          value={cellphone}
+          onChange={(e) => setCellphone(e.target.value)}
+          className={`input ${errors.cellphone && 'error'}`}
+        />
+        <br />
+        <input
           type="password"
           placeholder="Password"
           value={password}
@@ -141,7 +182,7 @@ const Home = () => {
         </p>
       </div>
     </div>
-  );
+ );
 };
 
-export default Home;
+export default SignupForm;
