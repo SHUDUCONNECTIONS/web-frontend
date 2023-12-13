@@ -1,34 +1,62 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import { useMutation, gql } from '@apollo/client';
 import * as Yup from 'yup';
 
+const LOGIN_USER = gql`
+  mutation Login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      user {
+        id
+        firstName
+        lastName
+        cellphone
+        type
+        verified
+        email
+      }
+      token
+      errors {
+        field
+        message
+      }
+    }
+  }
+`;
+
 const Home = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
   const [error, setError] = useState<string>('');
 
+  const [loginUser] = useMutation(LOGIN_USER);
+
   const validationSchema = Yup.object().shape({
-    username: Yup.string().required('Please enter your username'),
-    password: Yup.string()
-      .min(8, 'Password should be at least 8 characters long')
-      .required('Please enter your password'),
+    email: Yup.string().email('Invalid email').required('Please enter your email'),
+    password: Yup.string().min(8, 'Password should be at least 8 characters long').required('Please enter your password'),
   });
 
   const handleLogin = async () => {
     try {
-      await validationSchema.validate({ username, password }, { abortEarly: false });
-      // Replace the console logs with your login logic
-      if (username === 'example' && password === 'password') {
-        router.push('/Main'); // Replace '/menu' with the route of your menu page
+      await validationSchema.validate({ email, password }, { abortEarly: false });
+
+      const { data } = await loginUser({
+        variables: { email, password },
+      });
+
+      const loginResponse = data.login;
+
+      if (loginResponse.errors) {
+        setError(loginResponse.errors[0].message);
       } else {
-        setError('Incorrect username or password');
+        // Login successful, you may want to store the token or user information
+        router.push('/Main'); // Replace '/Main' with the route of your menu page
       }
     } catch (err: any) {
-      if (err.name === 'ValidationError') {
-        setError(err.errors[0]);
-      }
+      console.error('Login error:', err.message);
+      setError('An error occurred during login. Please try again.');
     }
   };
 
@@ -49,9 +77,9 @@ const Home = () => {
         </div>
         <input
           type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           className="input"
         />
         <br />
