@@ -4,7 +4,8 @@ import { useRouter } from 'next/router';
 import * as Yup from 'yup';
 import Image from 'next/image';
 
-
+import { client } from '../services/graphql.service';
+import { RegisterUser } from '../graphql/registerUser'
 type Errors = {
   [key: string]: boolean;
 };
@@ -40,6 +41,24 @@ const Home = () => {
 
   const handleSignUp = async () => {
     try {
+
+
+      const {data, errors} = await client.mutate({
+        mutation:RegisterUser,
+        variables:{
+          firstName,
+          lastName,
+          type:'ADMIN',
+          cellphone:'0614211737',
+          email:'giftretu',
+          password:'password'
+        }
+      })
+      console.log(data,"pppp") 
+  
+
+
+
       await schema.validate(
         {
           firstName,
@@ -64,8 +83,10 @@ const Home = () => {
         confirmPassword: false,
       });
 
+
+
       // Rest of the logic for handleSignUp function
-      router.push('/signup');
+      // router.push('/signup');
     } catch (validationError) {
       if (validationError instanceof Yup.ValidationError) {
         const validationErrors: Errors = {};
