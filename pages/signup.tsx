@@ -1,13 +1,14 @@
-// Import React and other necessary libraries
+
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import * as Yup from 'yup';
 import Image from 'next/image';
+import * as yup from 'yup';
 
-import { client } from '../services/graphql.service';
-import { RegisterUser } from '../graphql/registerUser'
+import { client } from './services/graphql.service';
+import { RegisterUser } from '../graphql/registerUser';
+
 type Errors = {
-  [key: string]: boolean;
+  [key: string]: boolean | string;
 };
 
 const Home = () => {
@@ -15,7 +16,6 @@ const Home = () => {
   const [lastName, setLastName] = useState('');
   const [contactNumber, setContactNumber] = useState('');
   const [email, setEmail] = useState('');
-  const [physicalAddress, setPhysicalAddress] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const router = useRouter();
@@ -24,78 +24,106 @@ const Home = () => {
     lastName: false,
     contactNumber: false,
     email: false,
-    physicalAddress: false,
     password: false,
     confirmPassword: false,
+    emailInUse: false,
+    cellphoneInUse: false,
   });
 
-  const schema = Yup.object().shape({
-    firstName: Yup.string().required(),
-    lastName: Yup.string().required(),
-    contactNumber: Yup.string().required(),
-    email: Yup.string().email().required(),
-    physicalAddress: Yup.string().required(),
-    password: Yup.string().min(8).required(),
-    confirmPassword: Yup.string().oneOf([Yup.ref('password')]).required(),
+  const validationSchema = yup.object().shape({
+    firstName: yup.string().required('Please enter your First Name'),
+    lastName: yup.string().required('Please enter your Last Name'),
+    contactNumber: yup
+      .string()
+      .matches(/^\d{10}$/, 'Phone number must be 10 digits')
+      .required('Please enter your Contact Number'),
+    email: yup.string().email('Please enter a valid Email').required('Please enter your Email'),
+    password: yup.string().min(8, 'Password should be at least 8 characters Long').required('Please enter your Password'),
+    confirmPassword: yup.string().oneOf([yup.ref('password')], 'Passwords must Match').required('Please Confirm your Password'),
   });
 
-  const handleSignUp = async () => {
+  const resetFieldErrors = () => {
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      emailInUse: false,
+      cellphoneInUse: false,
+      email: false,
+      contactNumber: false,
+    }));
+  };
+
+  const handleSignup = async () => {
     try {
+      
+      resetFieldErrors();
 
-
-      const {data, errors} = await client.mutate({
-        mutation:RegisterUser,
-        variables:{
-          firstName,
-          lastName,
-          type:'ADMIN',
-          cellphone:'0614211737',
-          email:'giftretu',
-          password:'password'
-        }
-      })
-      console.log(data,"pppp") 
-  
-
-
-
-      await schema.validate(
+      await validationSchema.validate(
         {
           firstName,
           lastName,
           contactNumber,
           email,
-          physicalAddress,
           password,
           confirmPassword,
         },
         { abortEarly: false }
       );
 
-      // Reset errors
-      setErrors({
-        firstName: false,
-        lastName: false,
-        contactNumber: false,
-        email: false,
-        physicalAddress: false,
-        password: false,
-        confirmPassword: false,
-      });
+      console.log("trying to register", firstName, lastName, contactNumber, email, password);
 
-
-
-      // Rest of the logic for handleSignUp function
-      // router.push('/signup');
-    } catch (validationError) {
-      if (validationError instanceof Yup.ValidationError) {
-        const validationErrors: Errors = {};
-        validationError.inner.forEach((error) => {
-          if (error.path) {
-            validationErrors[error.path] = true;
-          }
+      try {
+        const { data } = await client.mutate({
+          mutation: RegisterUser,
+          variables: {
+            firstName,
+            lastName,
+            contactNumber,
+            email,
+            password,
+            type: 'COMPANY_ADMIN',
+            cellphone: contactNumber, 
+          },
         });
-        setErrors(validationErrors);
+
+        console.log(data);
+
+        if (data && data.registerUser && data.registerUser.errors.length > 0) {
+          const serverErrors = data.registerUser.errors;
+
+          serverErrors.forEach((error: { field: string; message: string }) => {
+            const { field, message } = error;
+
+            if (field === 'email') {
+              setErrors((prevErrors) => ({ ...prevErrors, emailInUse: message, email: message }));
+            } else if (field === 'cellphone') {
+              setErrors((prevErrors) => ({ ...prevErrors, cellphoneInUse: message, contactNumber: message }));
+            }
+          });
+        } else if (data && data.registerUser && data.registerUser.user !== null) {
+          console.log("Registration successful:", data);
+          router.push('/'); 
+        }
+      } catch (registrationError: any) {
+        if (registrationError.networkError) {
+          console.error('Network error:', registrationError.networkError);
+          if (registrationError.networkError.response) {
+            console.log('Response:', registrationError.networkError.response);
+          }
+        } else {
+          console.error('Other error:', registrationError);
+        }
+      }
+    } catch (validationError) {
+      console.error('Validation error:', validationError);
+
+      if (validationError instanceof yup.ValidationError) {
+        const newErrors = {} as typeof errors;
+
+        validationError.inner.forEach((error) => {
+          newErrors[error.path as keyof typeof errors] = error.message;
+        });
+
+        setErrors(newErrors);
       }
     }
   };
@@ -118,6 +146,7 @@ const Home = () => {
           onChange={(e) => setFirstName(e.target.value)}
           className={`input ${errors.firstName && 'error'}`}
         />
+        {errors.firstName && <p className="error-message">{errors.firstName}</p>}
         <br />
         <input
           type="text"
@@ -126,6 +155,16 @@ const Home = () => {
           onChange={(e) => setLastName(e.target.value)}
           className={`input ${errors.lastName && 'error'}`}
         />
+        {errors.lastName && <p className="error-message">{errors.lastName}</p>}
+        <br />
+        <input
+          type="text"
+          placeholder="Contact Number"
+          value={contactNumber}
+          onChange={(e) => setContactNumber(e.target.value)}
+          className={`input ${errors.contactNumber && 'error'}`}
+        />
+        {errors.contactNumber && <p className="error-message">{errors.contactNumber}</p>}
         <br />
         <input
           type="text"
@@ -134,6 +173,7 @@ const Home = () => {
           onChange={(e) => setEmail(e.target.value)}
           className={`input ${errors.email && 'error'}`}
         />
+        {errors.email && <p className="error-message">{errors.email}</p>}
         <br />
         <input
           type="password"
@@ -142,6 +182,7 @@ const Home = () => {
           onChange={(e) => setPassword(e.target.value)}
           className={`input ${errors.password && 'error'}`}
         />
+        {errors.password && <p className="error-message">{errors.password}</p>}
         <br />
         <input
           type="password"
@@ -150,8 +191,9 @@ const Home = () => {
           onChange={(e) => setConfirmPassword(e.target.value)}
           className={`input ${errors.confirmPassword && 'error'}`}
         />
+        {errors.confirmPassword && <p className="error-message">{errors.confirmPassword}</p>}
         <br />
-        <button onClick={handleSignUp} className="signUpButton">
+        <button onClick={handleSignup} className="signUpButton">
           Sign Up
         </button>
         <p className="already-account">
