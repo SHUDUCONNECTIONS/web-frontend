@@ -67,6 +67,7 @@
   cursor: pointer;
   font-family: Arial, sans-serif;
   border: 1px solid #ccc;
+ 
 }
 
 .button:hover {
@@ -77,7 +78,10 @@
   display: flex;
   align-items: center;
   margin-bottom: 16px;
+  flex-direction: row; 
+  gap: 15px; 
 }
+
 
 .fileInput {
   display: none;

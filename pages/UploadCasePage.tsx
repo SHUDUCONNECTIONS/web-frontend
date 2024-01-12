@@ -5,10 +5,22 @@ import styles from '../styles/UploadCasePage.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
 
-const UploadCasePage = () => {
+import { useEffect } from "react";
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  listAll,
+  list,
+} from "firebase/storage";
+import { storage } from "./firebaseConfig/config";
+import { v4 } from 'uuid';
+
+function UploadCasePage () {
   const [caseNumber, setCaseNumber] = useState('');
   const [caseType, setCaseType] = useState('');
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [fileUrl, setFileUrl] = useState<string[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleCaseNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,12 +45,42 @@ const UploadCasePage = () => {
     }
   };
 
+  const storageListRef = ref(storage, `cases/`);
   const handleUpload = () => {
-    // Implement your logic for handling case upload, including the selected file
-    console.log(`Uploading case with case number: ${caseNumber}, case type: ${caseType}, and file: ${selectedFile?.name}`);
-    // Additional logic to handle file upload can be implemented here
+    if (!selectedFile) {
+      alert('Please select a file to upload.');
+      return;
+    }else {
+      const storageRef = ref(storage, `cases/${caseNumber}/${selectedFile.name + v4()}`);
+      uploadBytes(storageRef, selectedFile)
+        .then((snapshot) => {
+          getDownloadURL(snapshot.ref)
+            .then((url) => {
+              setFileUrl((prev) => [...prev, url]);
+            })
+            .then(() => { // Move alert and clear state here
+              alert('file uploaded');
+              setCaseNumber("");
+              setCaseType("");
+              setSelectedFile(null);
+            });
+        });
+    }
+   
   };
 
+  useEffect(() => {
+    listAll(storageListRef).then((response) => {
+      response.items.forEach((item) => {
+        getDownloadURL(item).then((url) => {
+          setFileUrl((prev) => [...prev, url]);
+          
+        });
+      });
+    });
+  }, []);
+
+  
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Upload Case File</h1>
@@ -82,14 +124,19 @@ const UploadCasePage = () => {
             <FontAwesomeIcon icon={faUpload} className={styles.uploadIcon} />&nbsp;
             Select File
           </button>
+          <div className="filename">{selectedFile && selectedFile.name}</div>
         </div>
-
+        <div></div>
         <button onClick={handleUpload} className={styles.button}>
           Upload Case
-        </button>
+        </button>{fileUrl.map((url) => {
+        return url ;
+      })}
+  
       </div>
     </div>
   );
 };
 
 export default UploadCasePage;
+
