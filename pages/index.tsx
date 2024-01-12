@@ -3,41 +3,70 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import * as Yup from 'yup';
 
+import { client } from './services/graphql.service';
+import { LoginUser } from '../graphql/loginUser';
+type Errors = {
+  [key: string]: boolean;
+};
+
+const validationSchema = Yup.object().shape({
+  email: Yup.string().email('Invalid email').required('Please enter your email'),
+   password: Yup.string().min(8, 'Password should be at least 8 characters long').required('Please enter your password'),
+});
+
+
 const Home = () => {
-  const [username, setUsername] = useState('');
+ 
+ 
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
   const [error, setError] = useState<string>('');
+  
+  
+ const handleLogin = async () => {
+  try {
+    await validationSchema.validate({ email, password }, { abortEarly: true });
 
-  const validationSchema = Yup.object().shape({
-    username: Yup.string().required('Please enter your username'),
-    password: Yup.string()
-      .min(8, 'Password should be at least 8 characters long')
-      .required('Please enter your password'),
-  });
+   
 
-  const handleLogin = async () => {
-    try {
-      await validationSchema.validate({ username, password }, { abortEarly: false });
-      // Replace the console logs with your login logic
-      if (username === 'example' && password === 'password') {
-        router.push('/Main'); // Replace '/menu' with the route of your menu page
-      } else {
-        setError('Incorrect username or password');
+    const { data } = await client.mutate({ mutation: LoginUser,
+      variables:{
+      
+        email:email,
+        password:password,
       }
-    } catch (err: any) {
-      if (err.name === 'ValidationError') {
-        setError(err.errors[0]);
-      }
+      });
+    const loginResponse = data.login;
+    console.log(data,"user logged in") 
+    router.push('/Main');
+
+    if (loginResponse.errors) {
+      setError(loginResponse.errors[0].message);
+      router.push('/signup'); 
+    } else {
+     
+      router.push('/Main'); 
     }
-  };
+  } catch (validationError) {
+    if (validationError instanceof Yup.ValidationError) {
+      const validationErrors: Errors = {};
+      validationError.inner.forEach((error) => {
+        if (error.path) {
+          validationErrors[error.path] = true;
+        }
+      });
+     
+    }
+  }
+};
 
   const handleSignUp = () => {
-    router.push('/signup'); // Replace '/signup' with the route of your sign-up page
+    router.push('/signup'); 
   };
 
   const handleForgotPassword = () => {
-    router.push('/forgot-password'); // Replace '/forgotpassword' with the route of your forgot password page
+    router.push('/forgot-password'); 
   };
 
   return (
@@ -45,13 +74,15 @@ const Home = () => {
       <div className="form">
         <h1 className="title">LOGIN</h1>
         <div className="logo">
-          <Image src="/carerunnerlogo.png" width="75" height="75" alt="Your Logo" className="logo-Image" />
+          <Image src="/carerunnerlogo.png" width="75" height="75" 
+
+alt="Your Logo" className="logo-Image" />
         </div>
         <input
           type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           className="input"
         />
         <br />
@@ -63,7 +94,7 @@ const Home = () => {
           className="input"
         />
         <br />
-        {error && <p className="error-message">{error}</p>}
+        
         <button onClick={handleLogin} className="loginButton">
           Login
         </button>
@@ -71,7 +102,9 @@ const Home = () => {
         <button onClick={handleSignUp} className="signUpButton">
           Sign Up
         </button>
-        <p className="forgotPassword" onClick={handleForgotPassword}>
+        <p className="forgotPassword" onClick=
+
+{handleForgotPassword}>
           Forgot Password?
         </p>
       </div>
