@@ -2,7 +2,7 @@
 import ApolloClient, { gql, InMemoryCache } from 'apollo-boost';
 
 const client = new ApolloClient({
-  uri: 'https://9cdb-41-144-192-239.ngrok-free.app/graphql',
+  uri: 'https://sea-lion-app-j3oyi.ondigitalocean.app/graphql',
   fetchOptions: {
     credentials: 'include',
   },
