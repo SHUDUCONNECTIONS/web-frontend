@@ -1,71 +1,72 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { useMutation, gql } from '@apollo/client';
 import * as Yup from 'yup';
 
-const LOGIN_USER = gql`
-  mutation Login($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      user {
-        id
-        firstName
-        lastName
-        cellphone
-        type
-        verified
-        email
-      }
-      token
-      errors {
-        field
-        message
-      }
-    }
-  }
-`;
+import { client } from './services/graphql.service';
+import { LoginUser } from '../graphql/loginUser';
+type Errors = {
+  [key: string]: boolean;
+};
+
+const validationSchema = Yup.object().shape({
+  email: Yup.string().email('Invalid email').required('Please enter your email'),
+   password: Yup.string().min(8, 'Password should be at least 8 characters long').required('Please enter your password'),
+});
+
 
 const Home = () => {
+ 
+ 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
   const [error, setError] = useState<string>('');
+  
+  
+ const handleLogin = async () => {
+  try {
+    await validationSchema.validate({ email, password }, { abortEarly: true });
 
-  const [loginUser] = useMutation(LOGIN_USER);
+   
 
-  const validationSchema = Yup.object().shape({
-    email: Yup.string().email('Invalid email').required('Please enter your email'),
-    password: Yup.string().min(8, 'Password should be at least 8 characters long').required('Please enter your password'),
-  });
-
-  const handleLogin = async () => {
-    try {
-      await validationSchema.validate({ email, password }, { abortEarly: false });
-
-      const { data } = await loginUser({
-        variables: { email, password },
-      });
-
-      const loginResponse = data.login;
-
-      if (loginResponse.errors) {
-        setError(loginResponse.errors[0].message);
-      } else {
-        // Login successful, you may want to store the token or user information
-        router.push('/Main'); // Replace '/Main' with the route of your menu page
+    const { data } = await client.mutate({ mutation: LoginUser,
+      variables:{
+      
+        email:email,
+        password:password,
       }
-    } catch (err: any) {
-      console.error('Login error:', err.message);
-      setError('An error occurred during login. Please try again.');
+      });
+    const loginResponse = data.login;
+    console.log(data,"user logged in") 
+    router.push('/Main');
+
+    if (loginResponse.errors) {
+      setError(loginResponse.errors[0].message);
+      router.push('/signup'); 
+    } else {
+     
+      router.push('/Main'); 
     }
-  };
+  } catch (validationError) {
+    if (validationError instanceof Yup.ValidationError) {
+      const validationErrors: Errors = {};
+      validationError.inner.forEach((error) => {
+        if (error.path) {
+          validationErrors[error.path] = true;
+        }
+      });
+     
+    }
+  }
+};
 
   const handleSignUp = () => {
-    router.push('/signup'); // Replace '/signup' with the route of your sign-up page
+    router.push('/signup'); 
   };
 
   const handleForgotPassword = () => {
-    router.push('/forgot-password'); // Replace '/forgotpassword' with the route of your forgot password page
+    router.push('/forgot-password'); 
   };
 
   return (
@@ -73,7 +74,9 @@ const Home = () => {
       <div className="form">
         <h1 className="title">LOGIN</h1>
         <div className="logo">
-          <Image src="/carerunnerlogo.png" width="75" height="75" alt="Your Logo" className="logo-Image" />
+          <Image src="/carerunnerlogo.png" width="75" height="75" 
+
+alt="Your Logo" className="logo-Image" />
         </div>
         <input
           type="text"
@@ -91,7 +94,7 @@ const Home = () => {
           className="input"
         />
         <br />
-        {error && <p className="error-message">{error}</p>}
+        
         <button onClick={handleLogin} className="loginButton">
           Login
         </button>
@@ -99,7 +102,9 @@ const Home = () => {
         <button onClick={handleSignUp} className="signUpButton">
           Sign Up
         </button>
-        <p className="forgotPassword" onClick={handleForgotPassword}>
+        <p className="forgotPassword" onClick=
+
+{handleForgotPassword}>
           Forgot Password?
         </p>
       </div>
