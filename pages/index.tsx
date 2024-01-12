@@ -2,17 +2,19 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import * as Yup from 'yup';
-
 import { client } from './services/graphql.service';
-import { LoginUser } from '../graphql/loginUser';
+import { LoginUser } from '../graphql/loginUser'
 type Errors = {
   [key: string]: boolean;
 };
+
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Please enter your email'),
    password: Yup.string().min(8, 'Password should be at least 8 characters long').required('Please enter your password'),
 });
+
+
 
 
 const Home = () => {
@@ -38,16 +40,11 @@ const Home = () => {
       }
       });
     const loginResponse = data.login;
-    console.log(data,"user logged in") 
+
+  
+    console.log(data,"Welcome",email) 
     router.push('/Main');
 
-    if (loginResponse.errors) {
-      setError(loginResponse.errors[0].message);
-      router.push('/signup'); 
-    } else {
-     
-      router.push('/Main'); 
-    }
   } catch (validationError) {
     if (validationError instanceof Yup.ValidationError) {
       const validationErrors: Errors = {};
@@ -56,8 +53,13 @@ const Home = () => {
           validationErrors[error.path] = true;
         }
       });
-     
+     setError('User not found. Please check your credentials.'); 
+    setValidationErrors(validationErrors); 
+    } else {
+      console.error(validationError); 
+    setError('An unexpected error occurred. Please try again later.');
     }
+
   }
 };
 
