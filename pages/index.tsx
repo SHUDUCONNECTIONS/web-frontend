@@ -14,11 +14,7 @@ const validationSchema = Yup.object().shape({
    password: Yup.string().min(8, 'Password should be at least 8 characters long').required('Please enter your password'),
 });
 
-
-
-
 const Home = () => {
- 
  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -30,8 +26,6 @@ const Home = () => {
   try {
     await validationSchema.validate({ email, password }, { abortEarly: true });
 
-   
-
     const { data } = await client.mutate({ mutation: LoginUser,
       variables:{
       
@@ -39,9 +33,7 @@ const Home = () => {
         password:password,
       }
       });
-    const loginResponse = data.login;
-
-  
+   
     console.log(data,"Welcome",email) 
     router.push('/Main');
 
@@ -54,7 +46,7 @@ const Home = () => {
         }
       });
      setError('User not found. Please check your credentials.'); 
-    setValidationErrors(validationErrors); 
+    
     } else {
       console.error(validationError); 
     setError('An unexpected error occurred. Please try again later.');
