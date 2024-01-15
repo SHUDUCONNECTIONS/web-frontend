@@ -68,6 +68,17 @@
   width: 100%;
 }
 
+.centeredButtonContainer1 {
+  display: flex;
+  justify-content: center;
+  margin-top: 3%; /* Stick to the bottom */
+  width: 100%;
+}
+
+.spaceBetweenButtons {
+  margin-bottom: 20px; /* You can adjust the margin value based on your preference */
+}
+
 .centeredButton {
   padding: 10px 20px;
   font-size: 16px;
