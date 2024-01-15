@@ -1,5 +1,8 @@
+
 import { useState } from 'react';
 import styles from '../styles/MembershipPage.module.css';
+import { client } from './services/graphql.service';
+import { Subscription } from '../graphql/subscription';
 
 interface Package {
   id: number;
@@ -12,6 +15,29 @@ interface Package {
 const MembershipPage = () => {
   const [selectedPackage, setSelectedPackage] = useState<number | null>(null);
 
+  const handlePackageSelect = async (packageId: number) => {
+    setSelectedPackage(packageId);
+
+    try {
+      const { data } = await client.mutate({
+        mutation: Subscription,
+        variables: {
+          subscriptionTypeId: packageId,
+        },
+      });
+
+      if (data.createSubscription && data.createSubscription.subscription) {
+        console.log('Subscription created successfully!', data.createSubscription.subscription);
+      } else if (data.createSubscription && data.createSubscription.errors) {
+        data.createSubscription.errors.forEach((error: any) => {
+          console.error(`Error creating subscription - Field: ${error.field}, Message: ${error.message}`);
+        });
+      }
+    } catch (error: any) {
+      console.error('Error creating subscription:', error);
+    }
+  };
+
   const packages: Package[] = [
     { id: 1, name: 'Bronze', price: 'R350.00/month', stars: 1, description: 'RAM: 2 GB | Support & Maintenance' },
     { id: 2, name: 'Silver', price: 'R550.00/month', stars: 2, description: 'RAM: 4 GB | Support & Maintenance' },
@@ -19,10 +45,6 @@ const MembershipPage = () => {
     { id: 4, name: 'Platinum', price: 'R750.00/month', stars: 4, description: 'RAM: 4 GB | Support & Maintenance' },
     { id: 5, name: 'Palladium', price: 'R1 200.00/month', stars: 5, description: 'RAM: 6 GB | Support & Maintenance' },
   ];
-
-  const handlePackageSelect = (packageId: number) => {
-    setSelectedPackage(packageId);
-  };
 
   return (
     <div className={styles.container}>
