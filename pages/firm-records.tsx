@@ -1,41 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import styles from '../styles/firm-records.module.css'; // Adjusted import path
+import styles from '../styles/firm-records.module.css';
+
+import { client } from './services/graphql.service';
+import { GetFiles } from '../graphql/filesRecords';
 
 interface File {
   id: number;
-  name: string;
-  type: string;
+  caseNumber: string;
+  caseType: string;
+  url: string;
+  mimeType: string;
   dateUploaded: string;
 }
 
 const CaseFiles = () => {
-  const [files, setFiles] = useState<File[]>([
-    {
-      id: 1,
-      name: 'Case file 1',
-      type: 'PDF',
-      dateUploaded: '2023-11-28', // Example date uploaded
-    },
-    {
-      id: 2,
-      name: 'Case file 2',
-      type: 'DOCX',
-      dateUploaded: '2023-11-27', // Example date uploaded
-    },
-    {
-      id: 3,
-      name: 'Case file 3',
-      type: 'XLSX',
-      dateUploaded: '2023-11-26', // Example date uploaded
-    },
-  ]);
+  const [files, setFiles] = useState<File[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
+  
 
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+
+      try {
+        const response = await client.query({
+          query: GetFiles,
+          variables: { userId: "1" },
+        });
+
+        const values = response.data.getFiles;
+        setFiles(values);
+       console.log('Files', files.id)
+        
+      } catch (error) {
+        console.log( 'Error...');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+  
   const handleDelete = (id: number) => {
-    const updatedFiles = files.filter((file) => file.id !== id);
-    setFiles(updatedFiles);
+    const updatedFiles = files?.filter((file) => file.id !== id);
+    
   };
+
 
   return (
     <div className={styles.container}>
@@ -56,13 +70,13 @@ const CaseFiles = () => {
             </tr>
           </thead>
           <tbody>
-            {files.map((file) => (
-              <tr key={file.id}>
-                <td>{file.id}</td>
-                <td>{file.name}</td>
-                <td>{file.type}</td>
+            {files?.map((file) => (
+              <tr key={file?.id}>
+                <td>{file?.id}</td>
+                <td>{file?.caseNumber}</td>
+                <td>{file?.mimeType}</td>
                 <td>
-                  <a href={`#`} download={`${file.name}.${file.type.toLowerCase()}`}>
+                  <a href={`#`} download={`${file.caseNumber}.${file.mimeType.toLowerCase()}`}>
                   <FontAwesomeIcon icon={faDownload} />
                     
                   </a>
@@ -74,7 +88,7 @@ const CaseFiles = () => {
                   </button>
                 </td>
               </tr>
-            ))}
+           ))}
           </tbody>
         </table>
       </div>
