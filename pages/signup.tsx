@@ -1,122 +1,137 @@
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import * as Yup from 'yup';
 import Image from 'next/image';
-import '../styles/globals.css';
+import * as yup from 'yup';
 
-import { useMutation, gql, ApolloClient, InMemoryCache } from '@apollo/client';
+import { client } from './services/graphql.service';
+import { RegisterUser } from '../graphql/registerUser';
 
+type Errors = {
+  [key: string]: boolean | string;
+};
 
-const client = new ApolloClient({
-  uri: 'https://sea-lion-app-j3oyi.ondigitalocean.app/graphql',
-  cache: new InMemoryCache()
-});
-
-
-const REGISTER_USER = gql`
-  mutation RegisterUser(
-    $firstName: String!
-    $lastName: String!
-    $email: String!
-    $cellphone: String!
-    $password: String!
-    $type: String!
-  ) {
-    registerUser(
-      firstName: $firstName
-      lastName: $lastName
-      email: $email
-      cellphone: $cellphone
-      password: $password
-      type: $type
-    ) {
-      user {
-        id
-        firstName
-        lastName
-        cellphone
-        type
-        verified
-        email
-      }
-      errors {
-        field
-        message
-      }
-    }
-  }
-`;
-
-const SignupForm = () => {
-  const [registerUser] = useMutation(REGISTER_USER);
+const Home = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [cellphone, setCellphone] = useState('');
+  const [contactNumber, setContactNumber] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const router = useRouter();
+  const [errors, setErrors] = useState<Errors>({
+    firstName: false,
+    lastName: false,
+    contactNumber: false,
+    email: false,
+    password: false,
+    confirmPassword: false,
+    emailInUse: false,
+    cellphoneInUse: false,
+  });
 
-  const [errors, setErrors] = useState<{
-    firstName?: string;
-    lastName?: string;
-    cellphone?: string;
-    email?: string;
-    password?: string;
-    confirmPassword?: string;
-  }>({});
+  const validationSchema = yup.object().shape({
+    firstName: yup.string().required('Please enter your First Name'),
+    lastName: yup.string().required('Please enter your Last Name'),
+    contactNumber: yup
+      .string()
+      .matches(/^\d{10}$/, 'Phone number must be 10 digits')
+      .required('Please enter your Contact Number'),
+    email: yup.string().email('Please enter a valid Email').required('Please enter your Email'),
+    password: yup.string().min(8, 'Password should be at least 8 characters Long').required('Please enter your Password'),
+    confirmPassword: yup.string().oneOf([yup.ref('password')], 'Passwords must Match').required('Please Confirm your Password'),
+  });
 
-  const handleSignUp = async () => {
-    const schema = Yup.object().shape({
-      firstName: Yup.string().required(),
-      lastName: Yup.string().required(),
-      cellphone: Yup.string().required(),
-      email: Yup.string().email().required(),
-      password: Yup.string().min(8).required(),
-      confirmPassword: Yup.string().oneOf([Yup.ref('password')]).required(),
-    });
+  const resetFieldErrors = () => {
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      emailInUse: false,
+      cellphoneInUse: false,
+      email: false,
+      contactNumber: false,
+    }));
+  };
 
+  const handleSignup = async () => {
     try {
-      await schema.validate({
-        firstName, lastName, cellphone, email, password, confirmPassword,
-      }, { abortEarly: false });
+      resetFieldErrors();
 
-      setErrors({}); 
-
-      const { data } = await registerUser({
-        variables: {firstName, lastName, email, cellphone,
+      await validationSchema.validate(
+        {
+          firstName,
+          lastName,
+          contactNumber,
+          email,
           password,
-          type: 'driver'
+          confirmPassword,
         },
-      });
+        { abortEarly: false }
+      );
 
+      console.log("trying to register", firstName, lastName, contactNumber, email, password);
 
-      if (data && data.registerUser && data.registerUser.user) {
-        router.push('/Main');
-      }
-    } catch (validationError: any) {
-      console.error('Validation error:', validationError); 
-    
-      if (validationError instanceof Yup.ValidationError) {
-        const validationErrors: { [key: string]: string } = {};
-        validationError.inner.forEach((error) => {
-          if (error.path) {
-            validationErrors[error.path] = error.message;
-          }
+      try {
+        const { data } = await client.mutate({
+          mutation: RegisterUser,
+          variables: {
+            firstName,
+            lastName,
+            contactNumber,
+            email,
+            password,
+            type: 'COMPANY_ADMIN',
+            cellphone: contactNumber,
+          },
         });
-        setErrors(validationErrors);
+
+        console.log(data);
+
+        if (data && data.registerUser && data.registerUser.errors.length > 0) {
+          const serverErrors = data.registerUser.errors;
+
+          serverErrors.forEach((error: { field: string; message: string }) => {
+            const { field, message } = error;
+
+            if (field === 'email') {
+              setErrors((prevErrors) => ({ ...prevErrors, emailInUse: message, email: message }));
+            } else if (field === 'cellphone') {
+              setErrors((prevErrors) => ({ ...prevErrors, cellphoneInUse: message, contactNumber: message }));
+            }
+          });
+        } else if (data && data.registerUser && data.registerUser.user !== null) {
+          console.log("Registration successful:", data);
+          router.push('/');
+        }
+      } catch (registrationError: any) {
+        if (registrationError.networkError) {
+          console.error('Network error:', registrationError.networkError);
+          if (registrationError.networkError.response) {
+            console.log('Response:', registrationError.networkError.response);
+          }
+        } else {
+          console.error('Other error:', registrationError);
+        }
+      }
+    } catch (validationError) {
+      console.error('Validation error:', validationError);
+
+      if (validationError instanceof yup.ValidationError) {
+        const newErrors = {} as typeof errors;
+
+        validationError.inner.forEach((error) => {
+          newErrors[error.path as keyof typeof errors] = error.message;
+        });
+
+        setErrors(newErrors);
       }
     }
   };
-
 
   const handleLogin = () => {
     router.push('/');
   };
 
-  
- return (
+  return (
     <div className="container">
       <div className="form">
         <h1 className="title">SIGN UP</h1>
@@ -130,6 +145,7 @@ const SignupForm = () => {
           onChange={(e) => setFirstName(e.target.value)}
           className={`input ${errors.firstName && 'error'}`}
         />
+        {errors.firstName && <p className="error-message1">{errors.firstName}</p>}
         <br />
         <input
           type="text"
@@ -138,6 +154,16 @@ const SignupForm = () => {
           onChange={(e) => setLastName(e.target.value)}
           className={`input ${errors.lastName && 'error'}`}
         />
+        {errors.lastName && <p className="error-message1">{errors.lastName}</p>}
+        <br />
+        <input
+          type="text"
+          placeholder="Contact Number"
+          value={contactNumber}
+          onChange={(e) => setContactNumber(e.target.value)}
+          className={`input ${errors.contactNumber && 'error'}`}
+        />
+        {errors.contactNumber && <p className="error-message">{errors.contactNumber}</p>}
         <br />
         <input
           type="text"
@@ -146,14 +172,7 @@ const SignupForm = () => {
           onChange={(e) => setEmail(e.target.value)}
           className={`input ${errors.email && 'error'}`}
         />
-        <br />
-        <input
-          type="text"
-          placeholder="Cellphone"
-          value={cellphone}
-          onChange={(e) => setCellphone(e.target.value)}
-          className={`input ${errors.cellphone && 'error'}`}
-        />
+        {errors.email && <p className="error-message2">{errors.email}</p>}
         <br />
         <input
           type="password"
@@ -162,6 +181,7 @@ const SignupForm = () => {
           onChange={(e) => setPassword(e.target.value)}
           className={`input ${errors.password && 'error'}`}
         />
+        {errors.password && <p className="error-message3">{errors.password}</p>}
         <br />
         <input
           type="password"
@@ -170,8 +190,9 @@ const SignupForm = () => {
           onChange={(e) => setConfirmPassword(e.target.value)}
           className={`input ${errors.confirmPassword && 'error'}`}
         />
+        {errors.confirmPassword && <p className="error-message4">{errors.confirmPassword}</p>}
         <br />
-        <button onClick={handleSignUp} className="signUpButton">
+        <button onClick={handleSignup} className="signUpButton">
           Sign Up
         </button>
         <p className="already-account">
@@ -182,7 +203,7 @@ const SignupForm = () => {
         </p>
       </div>
     </div>
- );
+  );
 };
 
-export default SignupForm;
+export default Home;
