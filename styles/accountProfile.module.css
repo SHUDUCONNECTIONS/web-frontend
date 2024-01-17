@@ -24,12 +24,12 @@
 }
 
 .form {
-  margin-top: 45%;
+  margin-top: 65%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 80%; /* Adjust as needed */
-  max-width: 800px; /* Adjust maximum width */
+  width: 80%; 
+  max-width: 800px; 
   padding: 20px;
   background-color: rgba(44, 44, 44, 0.781);
   border-radius: 10px;
@@ -41,7 +41,7 @@
   font-family: Arial, sans-serif;
   text-align: center;
   color: rgb(185, 185, 185);
-  margin-right: 0; /* Adjusted margin */
+  margin-right: 0; 
 }
 
 .label {
@@ -68,17 +68,6 @@
   width: 100%;
 }
 
-.centeredButtonContainer1 {
-  display: flex;
-  justify-content: center;
-  margin-top: 3%; /* Stick to the bottom */
-  width: 100%;
-}
-
-.spaceBetweenButtons {
-  margin-bottom: 20px; /* You can adjust the margin value based on your preference */
-}
-
 .centeredButton {
   padding: 10px 20px;
   font-size: 16px;
@@ -94,12 +83,12 @@
 
 /* User Profile Section */
 .profileSection {
-  width: 70%; /* Adjust as needed */
+  width: 70%; 
 }
 
 /* Company Profile Section */
 .companyprofileSection {
-  width: 70%; /* Adjust as needed */
+  width: 70%; 
 }
 
 

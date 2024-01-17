@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
+
+
+import React, { useState, useEffect } from 'react';
 import styles from '../styles/accountProfile.module.css';
 import { client } from './services/graphql.service';
-import { ComProfile } from '../graphql/comProfile';
+import { ViewProfile } from '../graphql/viewUser';
+import {  ViewFirm } from '../graphql/viewFirm';
+import { FirmCreate } from '../graphql/comProfile';
+import { EditProfile } from '../graphql/editUser';
+import { EditAccount } from '../graphql/editProfile';
+
 import * as yup from 'yup';
 
 interface UserProfile {
-  name: string;
+  firstName: string;
   lastName: string;
   email: string;
-  phoneNumber: string;
+  cellphone: string;
 }
 
 interface CompanyProfile {
@@ -23,10 +30,10 @@ interface CompanyProfile {
 
 const LawFirmAccountProfile: React.FC = () => {
   const [userProfile, setUserProfile] = useState<UserProfile>({
-    name: '',
+    firstName: '',
     lastName: '',
     email: '',
-    phoneNumber: '',
+    cellphone: '',
   });
 
   const [companyProfile, setCompanyProfile] = useState<CompanyProfile>({
@@ -50,8 +57,8 @@ const LawFirmAccountProfile: React.FC = () => {
   });
 
   const [validationTriggered, setValidationTriggered] = useState(false);
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false); 
 
-  // Validation schema for company profile
   const companyProfileValidationSchema = yup.object().shape({
     name: yup.string().required('Please enter your company name'),
     placeId: yup.string().required('Please enter your company address'),
@@ -62,14 +69,14 @@ const LawFirmAccountProfile: React.FC = () => {
     companyRegistration: yup.string().required('Please enter company registration number'),
   });
 
-  // Update user profile state
   const handleUserProfileUpdate = (updatedProfile: UserProfile) => {
     setUserProfile(updatedProfile);
+    setHasUnsavedChanges(true);
   };
 
-  // Update company profile state
   const handleCompanyProfileUpdate = (updatedProfile: CompanyProfile) => {
     setCompanyProfile(updatedProfile);
+    setHasUnsavedChanges(true); 
   };
 
   const handleCreateCompany = async () => {
@@ -95,14 +102,13 @@ const LawFirmAccountProfile: React.FC = () => {
       }
     }
 
-    // Only proceed with the create company logic if there are no validation errors
     if (
       Object.values(errors).every((error) => error === '') &&
       Object.values(companyProfile).every((value) => value !== '')
     ) {
       try {
         await client.mutate({
-          mutation: ComProfile,
+          mutation: FirmCreate,
           variables: {
             name: companyProfile.name,
             placeId: companyProfile.placeId,
@@ -126,9 +132,127 @@ const LawFirmAccountProfile: React.FC = () => {
     }
   };
 
-  const handleUpdate = () => {
-    console.log('Updating profiles:', userProfile, companyProfile);
+  const handleUpdate = async () => {
+    try {
+      setValidationTriggered(true);
+
+      const { data: userData } = await client.query({
+        query: ViewProfile,
+        variables: { userId: 116 },
+      });
+
+      const { data: companyData, errors: companyErrors } = await client.query({
+        query:  ViewFirm,
+        variables: { firmId: 14 },
+      });
+
+      if (userData && userData.user) {
+        setUserProfile({
+          firstName: userData.user.firstName || '',
+          lastName: userData.user.lastName || '',
+          email: userData.user.email || '',
+          cellphone: userData.user.cellphone || '',
+        });
+      } else {
+        console.error('User data not found in the response');
+      }
+
+      if (companyErrors) {
+        console.error('Error fetching company data:', companyErrors);
+      } else if (companyData && companyData.firm) {
+        setCompanyProfile({
+          name: companyData.firm.name || '',
+          placeId: companyData.firm.placeId || '',
+          contactPerson: companyData.firm.contactPerson || '',
+          postalCode: companyData.firm.postalCode || '',
+          companyEmail: companyData.firm.companyEmail || '',
+          telephoneNo: companyData.firm.telephoneNo || '',
+          companyRegistration: companyData.firm.companyRegistration || '',
+        });
+      } else {
+        console.error('Company data not found in the response');
+      }
+
+      console.log('Profile data fetched successfully');
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error('Error fetching profile data:', error.message);
+      } else {
+        console.error('An unknown error occurred:', error);
+      }
+    }
   };
+
+  const handleUpdateProfile = async () => {
+    try {
+      setValidationTriggered(true);
+  
+      // Update user profile
+      const updatedUserVariables = {
+        updateUserId: 116, // I NEED TO ADD THE ID LOGIC HERE
+        firstName: userProfile.firstName,
+        lastName: userProfile.lastName,
+        email: userProfile.email,
+        cellphone: userProfile.cellphone,
+      };
+  
+      const filteredUserVariables = Object.fromEntries(
+        Object.entries(updatedUserVariables).filter(([_, value]) => value !== undefined)
+      );
+  
+      console.log('Mutation Variables (User):', filteredUserVariables);
+  
+      const { data: updatedUserData } = await client.mutate({
+        mutation: EditProfile,
+        variables: filteredUserVariables,
+      });
+  
+      if (updatedUserData && updatedUserData.updateUser) {
+        console.log('User profile updated successfully');
+      } else {
+        console.error('Error updating user profile:', updatedUserData?.updateUser?.errors);
+        return;
+      }
+  
+      // Update company profile
+      const updatedCompanyVariables = {
+        updateFirmId: 14, // I NEED TO ADD THE ID LOGIC HERE
+        name: companyProfile.name,
+        placeId: companyProfile.placeId,
+        postalCode: companyProfile.postalCode,
+        contactPerson: companyProfile.contactPerson,
+        companyEmail: companyProfile.companyEmail,
+        telephoneNo: companyProfile.telephoneNo,
+        companyRegistration: companyProfile.companyRegistration,
+      };
+  
+      const filteredCompanyVariables = Object.fromEntries(
+        Object.entries(updatedCompanyVariables).filter(([_, value]) => value !== undefined)
+      );
+  
+      console.log('Mutation Variables (Company):', filteredCompanyVariables);
+  
+      const { data: updatedCompanyData } = await client.mutate({
+        mutation: EditAccount,
+        variables: filteredCompanyVariables,
+      });
+  
+      if (updatedCompanyData && updatedCompanyData.updateFirm) {
+        console.log('Company profile updated successfully');
+      } else {
+        console.error('Error updating company profile:', updatedCompanyData?.updateFirm?.errors);
+      }
+  
+      setHasUnsavedChanges(false);
+  
+  
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
+  };
+  
+
+
 
   return (
     <div className={styles.body}>
@@ -146,20 +270,9 @@ const LawFirmAccountProfile: React.FC = () => {
                 `}
                 type="text"
                 placeholder="Enter your name"
-                value={userProfile.name}
-                onChange={(e) => handleUserProfileUpdate({ ...userProfile, name: e.target.value })}
-                style={{
-                  borderBottomColor: validationTriggered && errors.name ? 'red' : 'initial',
-                }}
+                value={userProfile.firstName}
+                onChange={(e) => handleUserProfileUpdate({ ...userProfile, firstName: e.target.value })}
               />
-              {validationTriggered && errors.name && (
-                <span
-                  className={`${styles.errorMessage} ${styles.center}`}
-                  style={{ color: 'red' }}
-                >
-                  {errors.name}
-                </span>
-              )}
             </label>
             <br />
             <label className={styles.label}>
@@ -193,15 +306,14 @@ const LawFirmAccountProfile: React.FC = () => {
                 className={styles.input}
                 type="text"
                 placeholder="Enter your contact number"
-                value={userProfile.phoneNumber}
-                onChange={(e) => handleUserProfileUpdate({ ...userProfile, phoneNumber: e.target.value })}
+                value={userProfile.cellphone}
+                onChange={(e) => handleUserProfileUpdate({ ...userProfile, cellphone: e.target.value })}
               />
+                <div className={styles.centeredButtonContainer}>
+ 
+
+              </div>
             </label>
-            <div className={styles.centeredButtonContainer}>
-            <button className={styles.centeredButton} onClick={handleUpdate}>
-              Update Profile
-            </button>
-          </div>
           </div>
           <div className={styles.companyprofileSection}>
             <h2 className={styles.heading}>Company Profile</h2>
@@ -263,15 +375,30 @@ const LawFirmAccountProfile: React.FC = () => {
               Address:
               <br />
               <input
-                className={styles.input}
-                type="text"
-                placeholder="Enter company's physical address"
-                value={companyProfile.placeId}
-                onChange={(e) =>
+               className={`
+                 ${styles.input}
+                 ${validationTriggered && errors.placeId && styles.error}
+               `}
+               type="text"
+               placeholder="Enter company's physical address"
+               value={companyProfile.placeId}
+               onChange={(e) =>
                   handleCompanyProfileUpdate({ ...companyProfile, placeId: e.target.value })
                 }
-              />
+                style={{
+                  borderBottomColor: validationTriggered && errors.placeId ? 'red' : 'initial',
+               }}
+             />
+             {validationTriggered && errors.placeId && (
+               <span
+                 className={`${styles.errorMessage} ${styles.center}`}
+                 style={{ color: 'red' }}
+               >
+                 {errors.placeId}
+               </span>
+              )}
             </label>
+
             <br />
             <label className={styles.label}>
               Postal Code:
@@ -361,12 +488,25 @@ const LawFirmAccountProfile: React.FC = () => {
             </label>
           </div>
           <div className={styles.centeredButtonContainer1}>
-            <button className={styles.centeredButton} onClick={handleCreateCompany} type="button">
-              Register Company
-            </button>
-          </div>
-          <div className={styles.spaceBetweenButtons}></div>
 
+            <div className={styles.centeredButtonContainer}>
+                <button
+                  className={styles.centeredButton}
+                  onClick={handleUpdateProfile}
+                  type="button"
+                  disabled={!hasUnsavedChanges} 
+                >
+                  Update Profile
+                </button>
+          </div>
+            <br />
+          </div>
+          <br />
+          <div className={styles.centeredButtonContainer1}>
+          <button className={styles.centeredButton} onClick={handleUpdate} type="button">
+            View Profile
+          </button>
+          </div>
         </form>
       </div>
     </div>

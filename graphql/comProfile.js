@@ -1,16 +1,17 @@
+
 import { gql } from '../services/graphql.service'
 
-export const ComProfile = gql`
+export const FirmCreate = gql`
 mutation CreateFirm($name: String!, $placeId: String!) {
-    createFirm(name: $name, placeId: $placeId) {
-      firm {
-        name
-        placeId
-      }
-      errors {
-        field
-        message
-      }
+  createFirm(name: $name, placeId: $placeId) {
+    firm {
+      name
+      placeId
+    }
+    errors {
+      field
+      message
     }
   }
-  `
+}
+` 
