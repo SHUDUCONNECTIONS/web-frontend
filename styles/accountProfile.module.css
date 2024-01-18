@@ -24,12 +24,12 @@
 }
 
 .form {
-  margin-top: 45%;
+  margin-top: 18%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 80%; /* Adjust as needed */
-  max-width: 800px; /* Adjust maximum width */
+  width: 80%; 
+  max-width: 800px; 
   padding: 20px;
   background-color: rgba(44, 44, 44, 0.781);
   border-radius: 10px;
@@ -64,7 +64,7 @@
 .centeredButtonContainer {
   display: flex;
   justify-content: center;
-  margin-bottom: 10%; /* Stick to the bottom */
+  margin-bottom: 10%; 
   width: 100%;
 }
 
@@ -83,7 +83,7 @@
 
 /* User Profile Section */
 .profileSection {
-  width: 70%; /* Adjust as needed */
+  width: 70%; 
 }
 
 /* Company Profile Section */
