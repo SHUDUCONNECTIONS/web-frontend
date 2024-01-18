@@ -3,7 +3,9 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import * as Yup from 'yup';
 import { client } from './services/graphql.service';
-import { LoginUser } from '../graphql/loginUser'
+import { LoginUser } from '../graphql/loginUser';
+import { gql } from './services/graphql.service';
+
 type Errors = {
   [key: string]: boolean;
 };

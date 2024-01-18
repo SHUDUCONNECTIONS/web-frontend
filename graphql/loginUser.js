@@ -1,4 +1,4 @@
-import { gql } from '../services/graphql.service'
+import { gql } from '../services/graphql.service';
 
 
 export const LoginUser = gql`
