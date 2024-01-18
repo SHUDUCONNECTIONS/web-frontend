@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import * as yup from 'yup';
-
 import { client } from './services/graphql.service';
 import { RegisterUser } from '../graphql/registerUser';
 
@@ -100,7 +99,7 @@ const Home = () => {
           });
         } else if (data && data.registerUser && data.registerUser.user !== null) {
           console.log("Registration successful:", data);
-          router.push('/');
+          router.push('/registerFirm');
         }
       } catch (registrationError: any) {
         if (registrationError.networkError) {
