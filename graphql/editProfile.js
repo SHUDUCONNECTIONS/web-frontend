@@ -1,4 +1,4 @@
-import { gql } from '../services/graphql.service'
+import { gql } from '../pages/services/graphql.service'
 
 export const EditAccount = gql`
 mutation UpdateFirm($updateFirmId: ID!, $name: String, $placeId: String) {

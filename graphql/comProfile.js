@@ -1,5 +1,4 @@
-
-import { gql } from '../services/graphql.service'
+import { gql } from '../pages/services/graphql.service'
 
 export const FirmCreate = gql`
 mutation CreateFirm($name: String!, $placeId: String!) {

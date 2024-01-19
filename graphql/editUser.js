@@ -1,4 +1,4 @@
-import { gql } from '../services/graphql.service'
+import { gql } from '../pages/services/graphql.service'
 
 export const EditProfile = gql`
 mutation Mutation($updateUserId: ID!, $firstName: String, $lastName: String, $cellphone: String, $type: String, $verified: Boolean, $email: String) {
