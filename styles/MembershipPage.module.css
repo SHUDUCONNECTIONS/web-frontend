@@ -1,3 +1,4 @@
+
 .container {
   display: flex;
   flex-direction: column;
@@ -116,6 +117,77 @@
   cursor: pointer;
   font-family: Arial, sans-serif;
 }
+.packageSelectedPopup {
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: rgba(44, 44, 44, 0.781);
+  font-family: Arial, sans-serif;
+}
+
+.packageAlreadySelectedPopup {
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: rgb(185, 185, 185);
+  font-family: Arial, sans-serif;
+}
+
+.selected {
+  background-color: #bdbcbc;
+  
+}
+.selected {
+  background-color: #bdbcbc;
+}
+
+.selected * {
+  color: rgba(44, 44, 44, 0.781);
+}
+
+.selected .button-style {
+  background-color: rgba(44, 44, 44, 0.781);
+  color: #cccbcb;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+}
+
+.confirmationPopup {
+  border: 2px solid rgb(185, 185, 185);
+  padding: 20px; 
+  position: relative;
+  top: -40px; 
+  border-radius: 10px;
+  font-family: Arial, sans-serif;
+  background-color: rgba(44, 44, 44, 0.781);
+  color: rgb(185, 185, 185);
+}
+
+.confirmationPopup button {
+  background-color: rgb(185, 185, 185);
+  color: rgba(44, 44, 44, 0.9);
+  border: 2.3px solid rgb(131, 129, 129);
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  transition: all 0.3s ease-in-out;
+  margin-right: 10px; 
+}
+
+.confirmationPopup button:hover {
+ 
+  background-color: rgb(185, 185, 185);
+  color: rgba(44, 44, 44, 0.9);
+}
+
+
+.confirmationPopup button + button {
+  margin-left: 20px; 
+  background-color: rgb(185, 185, 185);
+  color: rgba(44, 44, 44, 0.9);
+}
 
 
 
@@ -125,19 +197,23 @@
 /* For mobile view */
 @media only screen and (max-width: 375px) {
 
+  .selected {
+    background-color: #bdbcbc;
+  }
+
   .container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start; /* Adjust alignment */
+    justify-content: flex-start; 
     background-color: rgba(36, 35, 35, 0.781);
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    padding: 4.5rem 10px 0; /* Adjust padding for title visibility and scroll effect */
-    height: calc(100vh - 4.5rem); /* Adjust height for the viewport minus the title */
-    overflow-y: auto; /* Enable vertical scroll */
+    padding: 4.5rem 10px 0;
+    height: calc(100vh - 4.5rem);
+    overflow-y: auto; 
     
   }
   
@@ -148,9 +224,9 @@
     font-family: Arial, sans-serif;
     text-align: center;
     color: rgb(185, 185, 185);
-    width: 70%; /* Adjust width */
-    margin-right: auto; /* Move title to the left */
-    margin-left: auto; /* Move title to the right */
+    width: 70%; 
+    margin-right: auto; 
+    margin-left: auto;
   }
   
   .packages {
@@ -246,6 +322,20 @@
     padding: 8px 16px;
     border-radius: 4px;
     cursor: pointer;
+    font-family: Arial, sans-serif;
+  }
+
+  .packageSelectedPopup {
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: rgb(185, 185, 185);
+    font-family: Arial, sans-serif;
+  }
+  
+  .packageAlreadySelectedPopup {
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: rgb(185, 185, 185);
     font-family: Arial, sans-serif;
   }
   
