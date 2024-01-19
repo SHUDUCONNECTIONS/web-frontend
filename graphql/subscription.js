@@ -15,5 +15,5 @@ mutation CreateSubscription($subscriptionTypeId: Int!) {
         message
       }
     }
-  }
+  } 
   `
