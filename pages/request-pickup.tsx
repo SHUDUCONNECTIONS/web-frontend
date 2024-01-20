@@ -2,6 +2,9 @@ import React, { useState, useRef, useEffect } from 'react';
 import styles from '../styles/RequestPickupPage.module.css';
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 
+import { client } from './services/graphql.service';
+import { CreateRequest } from '../graphql/requestPickup';
+
 interface RequestPickUpPageProps {
   googleMapsApiKey: string;
 }
@@ -12,9 +15,13 @@ const RequestPickUpPage: React.FC<RequestPickUpPageProps> = ({ googleMapsApiKey 
   const [map, setMap] = useState<google.maps.Map | null>(null);
   const [position, setPosition] = useState<google.maps.LatLngLiteral | null>(null);
   const [recipientName, setRecipientName] = useState('');
-  const [recipientPhone, setRecipientPhone] = useState('');
-  const [rideType, setRideType] = useState('');
+  const [recipientNo, setRecipientNo] = useState('');
+  const [deliveryAddress, setDeliveryAddress] = useState('');
+  const [pickupAddress, setPickupAddress] = useState('');
+  const [deliveryState, setDeliveryState] = useState('');
+  const [rideFee, setRideFee] = useState('');
   const [loadError, setLoadError] = useState<boolean>(false);
+  
 
   const defaultCenter = {
     lat: -33.918861,
@@ -75,15 +82,34 @@ const RequestPickUpPage: React.FC<RequestPickUpPageProps> = ({ googleMapsApiKey 
   };
   
 
-  const handleRequestPickUp = () => {
-    console.log('Pick-up requested:', {
-      position,
-      recipientName,
-      recipientPhone,
-      rideType: 'Normal',
-    });
-  };
+  const handleRequestPickUp = async () => {
+    try {
+      const { data } = await client.mutate({
+        mutation: CreateRequest, 
+        variables: {
+          pickupAddress : "Arinate",
+          deliveryAddress: "Davel",
+          recipientName,
+          recipientNo ,
+          deliveryState: "Normal",
+          rideFee : 70,
+        },
+      });
+  
+      console.log('Pick-up requested successfully:', data);
+     
+      setRecipientName('');
+      setRecipientNo('');
+      setDeliveryAddress('');
+      setPickupAddress('');
+      setDeliveryState('');
+      setRideFee('');
 
+    } catch (error) {
+      console.error('Error requesting pick-up:', error);
+      // Handle errors (e.g., display an error message to the user)
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -114,11 +140,11 @@ const RequestPickUpPage: React.FC<RequestPickUpPageProps> = ({ googleMapsApiKey 
         </label>
         <label>
           Recipient&apos;s Cellphone Number:
-          <input type="text" value={recipientPhone} onChange={(e) => setRecipientPhone(e.target.value)} />
+          <input type="text" value={recipientNo} onChange={(e) => setRecipientNo(e.target.value)} />
         </label>
         <label>
           Select Ride Type:
-          <select value={rideType} onChange={(e) => setRideType(e.target.value)}>
+          <select value={deliveryState} onChange={(e) => setDeliveryState(e.target.value)}>
             <option value="">Select Ride Type</option>
             <option value="standard">Standard</option>
             <option value="premium">Premium</option>
@@ -128,9 +154,12 @@ const RequestPickUpPage: React.FC<RequestPickUpPageProps> = ({ googleMapsApiKey 
         <button onClick={handleFindLocation}>Find Location</button>
         <button onClick={handleRequestPickUp}>Request Pick Up</button>
       </div>
+      
     </div>
+    
   );
 };
 
 export default RequestPickUpPage;
+
 
