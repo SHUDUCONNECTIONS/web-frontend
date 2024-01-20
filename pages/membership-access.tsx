@@ -19,10 +19,13 @@ const MembershipPage = () => {
   const [showConfirmationPopup, setShowConfirmationPopup] = useState(false);
   const [selectedPackageId, setSelectedPackageId] = useState<number | null>(null); 
 
-  useEffect(() => {
-    const storedPackage = localStorage.getItem('selectedPackage');
-    setSelectedPackage(storedPackage ? parseInt(storedPackage, 10) : null);
-  }, []);
+useEffect(() => {
+  const storedPackage = localStorage.getItem('selectedPackage');
+
+  if (storedPackage && !selectedPackage) {
+    setSelectedPackage(parseInt(storedPackage, 10));
+  }
+}, [selectedPackage]);
 
   const handlePackageSelect = async (packageId: number) => {
     if (selectedPackage === packageId) {

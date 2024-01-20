@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import styles from '../styles/accountProfile.module.css';
+import styles from '../styles/profile.module.css';
 import { client } from './services/graphql.service';
 import { ViewProfile } from '../graphql/viewUser';
 import {  ViewFirm } from '../graphql/viewFirm';
@@ -498,17 +498,17 @@ const LawFirmAccountProfile: React.FC = () => {
                   Update Profile
                 </button>
           </div>
-            <br />
           </div>
-          <br />
           <div className={styles.centeredButtonContainer1}>
           <button className={styles.centeredButton} onClick={handleUpdate} type="button">
             View Profile
           </button>
+          <br />
           </div>
         </form>
       </div>
     </div>
+  
   );
 };
 

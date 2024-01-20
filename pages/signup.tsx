@@ -1,9 +1,7 @@
-
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import * as yup from 'yup';
-
 import { client } from './services/graphql.service';
 import { RegisterUser } from '../graphql/registerUser';
 
@@ -54,7 +52,6 @@ const Home = () => {
 
   const handleSignup = async () => {
     try {
-      
       resetFieldErrors();
 
       await validationSchema.validate(
@@ -81,7 +78,7 @@ const Home = () => {
             email,
             password,
             type: 'COMPANY_ADMIN',
-            cellphone: contactNumber, 
+            cellphone: contactNumber,
           },
         });
 
@@ -101,7 +98,7 @@ const Home = () => {
           });
         } else if (data && data.registerUser && data.registerUser.user !== null) {
           console.log("Registration successful:", data);
-          router.push('/'); 
+          router.push('/registerFirm');
         }
       } catch (registrationError: any) {
         if (registrationError.networkError) {
@@ -132,6 +129,14 @@ const Home = () => {
     router.push('/');
   };
 
+  const handleInputFocus = (fieldName: keyof Errors) => {
+    // Reset the specific error when the input field is clicked
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [fieldName]: false,
+    }));
+  };
+
   return (
     <div className="container">
       <div className="form">
@@ -144,24 +149,27 @@ const Home = () => {
           placeholder="First Name"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
+          onFocus={() => handleInputFocus('firstName')}
           className={`input ${errors.firstName && 'error'}`}
         />
-        {errors.firstName && <p className="error-message">{errors.firstName}</p>}
+        {errors.firstName && <p className="error-message1">{errors.firstName}</p>}
         <br />
         <input
           type="text"
           placeholder="Last Name"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
+          onFocus={() => handleInputFocus('lastName')}
           className={`input ${errors.lastName && 'error'}`}
         />
-        {errors.lastName && <p className="error-message">{errors.lastName}</p>}
+        {errors.lastName && <p className="error-message1">{errors.lastName}</p>}
         <br />
         <input
           type="text"
           placeholder="Contact Number"
           value={contactNumber}
           onChange={(e) => setContactNumber(e.target.value)}
+          onFocus={() => handleInputFocus('contactNumber')}
           className={`input ${errors.contactNumber && 'error'}`}
         />
         {errors.contactNumber && <p className="error-message">{errors.contactNumber}</p>}
@@ -171,27 +179,30 @@ const Home = () => {
           placeholder="Email Address"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          onFocus={() => handleInputFocus('email')}
           className={`input ${errors.email && 'error'}`}
         />
-        {errors.email && <p className="error-message">{errors.email}</p>}
+        {errors.email && <p className="error-message2">{errors.email}</p>}
         <br />
         <input
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          onFocus={() => handleInputFocus('password')}
           className={`input ${errors.password && 'error'}`}
         />
-        {errors.password && <p className="error-message">{errors.password}</p>}
+        {errors.password && <p className="error-message3">{errors.password}</p>}
         <br />
         <input
           type="password"
           placeholder="Confirm Password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
+          onFocus={() => handleInputFocus('confirmPassword')}
           className={`input ${errors.confirmPassword && 'error'}`}
         />
-        {errors.confirmPassword && <p className="error-message">{errors.confirmPassword}</p>}
+        {errors.confirmPassword && <p className="error-message4">{errors.confirmPassword}</p>}
         <br />
         <button onClick={handleSignup} className="signUpButton">
           Sign Up

@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import styles from '../styles/accountProfile.module.css';
+import styles from '../styles/registerFirm.module.css';
 import { FirmCreate } from '../graphql/registerFirm';
 import { client } from './services/graphql.service';
 import React, { useState, useEffect } from 'react';
