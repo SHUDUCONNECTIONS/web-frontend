@@ -1,4 +1,4 @@
-import { gql } from '../services/graphql.service'
+import { gql } from '../pages/services/graphql.service'
 
 export const CreateRequest = gql`
 mutation Mutation($pickupAddress: String!, $deliveryAddress: String!, $recipientName: String!, $recipientNo: String!, $deliveryState: String!) {

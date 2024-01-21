@@ -2,11 +2,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import styles from '../styles/RequestPickupPage.module.css';
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 
-import { client } from './services/graphql.service';
+import { client } from '../pages/services/graphql.service';
 import { CreateRequest } from '../graphql/requestPickup';
 
 interface RequestPickUpPageProps {
-  googleMapsApiKey: string;
+  googleMapsApiKey: string; 
 }
 
 const RequestPickUpPage: React.FC<RequestPickUpPageProps> = ({ googleMapsApiKey }) => {
