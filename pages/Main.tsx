@@ -5,9 +5,9 @@ import { customImageLoader } from '../src/Components/customImageLoader';
 import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from '../styles/menu2.module.css';
-import { ViewProfile } from '../graphql/viewUser';
-import { ViewFirm } from '../graphql/viewFirm';
-import { client } from '../pages/services/graphql.service';
+//import { ViewProfile } from '../graphql/viewUser';
+//import { ViewFirm } from '../graphql/viewFirm';
+//import { client } from '../pages/services/graphql.service';
 
 import {
   faCar,
@@ -38,74 +38,9 @@ interface CompanyProfile {
 const Main = () => {
   const router = useRouter();
 
-  // State variables for user and company profiles
-  const [userProfile, setUserProfile] = useState<UserProfile>({
-    firstName: '',
-    lastName: '',
-    email: '',
-    cellphone: '',
-  });
 
-  const [companyProfile, setCompanyProfile] = useState<CompanyProfile>({
-    name: '',
-    placeId: '',
-    contactPerson: '',
-    postalCode: '',
-    companyEmail: '',
-    telephoneNo: '',
-    companyRegistration: '',
-  });
-
-  // Function to handle navigation to the Lawyer Account Profile page
-  const handleAccountProfile = async () => {
-    try {
-      // Fetch user profile data
-      const { data: userData } = await client.query({
-        query: ViewProfile,
-        variables: { userId: 116 },
-      });
-
-      // Fetch company profile data
-      const { data: companyData } = await client.query({
-        query: ViewFirm,
-        variables: { firmId: 14 },
-      });
-
-      // Handle user profile data
-      if (userData && userData.user) {
-        console.log('User Profile Data:', userData.user);
-        setUserProfile({
-          firstName: userData.user.firstName || '',
-          lastName: userData.user.lastName || '',
-          email: userData.user.email || '',
-          cellphone: userData.user.cellphone || '',
-        });
-      } else {
-        console.error('User data not found in the response');
-      }
-
-      // Handle company profile data
-      if (companyData && companyData.firm) {
-        console.log('Company Profile Data:', companyData.firm);
-        setCompanyProfile({
-          name: companyData.firm.name || '',
-          placeId: companyData.firm.placeId || '',
-          contactPerson: companyData.firm.contactPerson || '',
-          postalCode: companyData.firm.postalCode || '',
-          companyEmail: companyData.firm.companyEmail || '',
-          telephoneNo: companyData.firm.telephoneNo || '',
-          companyRegistration: companyData.firm.companyRegistration || '',
-        });
-      } else {
-        console.error('Company data not found in the response');
-      }
-
-      // Redirect to the Lawyer Account Profile page
-      router.push('/account-profile').catch((err) => console.error('Error navigating to account-profile:', err));
-
-    } catch (error) {
-      console.error('Error fetching profile data:', error);
-    }
+  const handleAccountProfile = () => {
+    router.push('/account-profile');
   };
 
   const handleBillingInfo = () => {

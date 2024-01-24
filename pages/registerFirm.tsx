@@ -1,9 +1,12 @@
-import { useRouter } from 'next/router';
-import styles from '../styles/registerFirm.module.css';
-import { FirmCreate } from '../graphql/registerFirm';
-import { client } from './services/graphql.service';
+
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import Image from 'next/image';
 import * as yup from 'yup';
+import { client } from './services/graphql.service';
+import { FirmCreate } from '../graphql/registerFirm';
+import styles from '../styles/registerFirm.module.css';
+import '../src/Components/loader.module.css';
 
 interface CompanyProfile {
   name: string;
@@ -15,8 +18,8 @@ interface CompanyProfile {
 }
 
 const RegisterFirm: React.FC = () => {
+ 
   const router = useRouter();
-
   const [companyProfile, setCompanyProfile] = useState<CompanyProfile>({
     name: '',
     placeId: '',
@@ -25,7 +28,6 @@ const RegisterFirm: React.FC = () => {
     telephoneNo: '',
     companyRegistration: '',
   });
-
   const [validationTriggered, setValidationTriggered] = useState(false);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   const [errors, setErrors] = useState<{ [key in keyof CompanyProfile]: string }>({
@@ -36,8 +38,11 @@ const RegisterFirm: React.FC = () => {
     telephoneNo: '',
     companyRegistration: '',
   });
+  const [loading, setLoading] = useState(false); 
 
+  
   const companyProfileValidationSchema = yup.object().shape({
+    
     name: yup.string().required('Please enter your company name'),
     placeId: yup.string().required('Please enter your company address'),
     postalCode: yup.string().required('Please enter the postal code'),
@@ -50,6 +55,7 @@ const RegisterFirm: React.FC = () => {
     if (validationTriggered) {
       companyProfileValidationSchema.validate(companyProfile, { abortEarly: false })
         .then(() => {
+         
           setErrors({
             name: '',
             placeId: '',
@@ -60,6 +66,7 @@ const RegisterFirm: React.FC = () => {
           });
         })
         .catch((validationError) => {
+          
           if (validationError instanceof yup.ValidationError) {
             const newErrors: { [key in keyof CompanyProfile]: string } = {
               name: '',
@@ -78,72 +85,77 @@ const RegisterFirm: React.FC = () => {
     }
   }, [companyProfile, validationTriggered]);
 
+ 
   const handleCompanyProfileUpdate = (updatedProfile: CompanyProfile) => {
     setCompanyProfile(updatedProfile);
     setHasUnsavedChanges(true);
   };
 
-  const handleRegisterFirm = async () => {
-    console.log('Register Firm button clicked');
+  
+ const handleRegisterFirm = async () => {
+  setLoading(true);
 
-    setValidationTriggered(true);
+  setValidationTriggered(true);
 
-    if (
-      Object.values(errors).every((error) => error === '') &&
-      Object.values(companyProfile).every((value) => value.trim() !== '')
-    ) {
-      console.log('Validation successful. Proceeding with registration.');
-      console.log('Company Profile:', companyProfile);
+  // Retrieve userId from localStorage
+  const userId = localStorage.getItem('userId');
 
-      try {
-        await client.mutate({
-          mutation: FirmCreate,
-          variables: {
-            name: companyProfile.name,
-            placeId: companyProfile.placeId,
-            postalCode: companyProfile.postalCode,
-            companyEmail: companyProfile.companyEmail,
-            telephoneNo: companyProfile.telephoneNo,
-            companyRegistration: companyProfile.companyRegistration,
-          },
-        });
+  if (
+    Object.values(errors).every((error) => error === '') &&
+    Object.values(companyProfile).every((value) => value.trim() !== '') &&
+    userId
+  ) {
+    try {
+      await client.mutate({
+        mutation: FirmCreate,
+        variables: {
+          userId,
+          name: companyProfile.name,
+          placeId: companyProfile.placeId,
+          postalCode: companyProfile.postalCode,
+          companyEmail: companyProfile.companyEmail,
+          telephoneNo: companyProfile.telephoneNo,
+          companyRegistration: companyProfile.companyRegistration,
+        },
+      });
 
-        console.log('Company created successfully');
+      setErrors({
+        name: '',
+        placeId: '',
+        postalCode: '',
+        companyEmail: '',
+        telephoneNo: '',
+        companyRegistration: '',
+      });
+      setValidationTriggered(false);
+      setHasUnsavedChanges(false);
 
-        setErrors({
-          name: '',
-          placeId: '',
-          postalCode: '',
-          companyEmail: '',
-          telephoneNo: '',
-          companyRegistration: '',
-        });
-        setValidationTriggered(false);
-        setHasUnsavedChanges(false);
+      router.push('/');
 
-        console.log('Redirecting to Login page');
-        router.push('/ ');
-
-      } catch (error) {
-        if (error instanceof Error) {
-          console.error('Error creating company:', error.message);
-        } else {
-          console.error('An unknown error occurred:', error);
-        }
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error('Error creating company:', error.message);
+      } else {
+        console.error('An unknown error occurred:', error);
       }
-    } else {
-      console.log('Validation failed. Please check the form for errors.');
-      console.log('Validation Errors:', errors);
-
-      // Additional logging for individual fields
-      console.log('Name:', companyProfile.name);
-      console.log('Place ID:', companyProfile.placeId);
-      console.log('Postal Code:', companyProfile.postalCode);
-      console.log('Company Email:', companyProfile.companyEmail);
-      console.log('Telephone No:', companyProfile.telephoneNo);
-      console.log('Company Registration:', companyProfile.companyRegistration);
+    } finally {
+      setLoading(false);
     }
-  };
+  } else {
+    console.log('Validation failed. Please check the form for errors.');
+    console.log('Validation Errors:', errors);
+
+    console.log('Name:', companyProfile.name);
+    console.log('Place ID:', companyProfile.placeId);
+    console.log('Postal Code:', companyProfile.postalCode);
+    console.log('Company Email:', companyProfile.companyEmail);
+    console.log('Telephone No:', companyProfile.telephoneNo);
+    console.log('Company Registration:', companyProfile.companyRegistration);
+
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className={styles.body}>
@@ -322,9 +334,17 @@ const RegisterFirm: React.FC = () => {
               )}
             </label>
           </div>
+          {loading && <span className="loader"></span>}
+
           <div className={styles.centeredButtonContainer1}>
-            <button className={styles.centeredButton} onClick={handleRegisterFirm} type="button">
-              Register Firm
+           
+            <button
+              className={styles.centeredButton}
+              onClick={handleRegisterFirm}
+              type="button"
+              disabled={loading}
+            >
+              {loading ? 'Registering...' : 'Register Firm'}
             </button>
           </div>
         </form>

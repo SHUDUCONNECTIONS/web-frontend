@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import styles from '../styles/MembershipPage.module.css';
 import { client } from './services/graphql.service';
@@ -17,15 +16,15 @@ const MembershipPage = () => {
   const [showPackageSelectedPopup, setShowPackageSelectedPopup] = useState(false);
   const [showPackageAlreadySelectedPopup, setShowPackageAlreadySelectedPopup] = useState(false);
   const [showConfirmationPopup, setShowConfirmationPopup] = useState(false);
-  const [selectedPackageId, setSelectedPackageId] = useState<number | null>(null); 
+  const [selectedPackageId, setSelectedPackageId] = useState<number | null>(null);
 
-useEffect(() => {
-  const storedPackage = localStorage.getItem('selectedPackage');
+  useEffect(() => {
+    const storedPackage = localStorage.getItem('selectedPackage');
 
-  if (storedPackage && !selectedPackage) {
-    setSelectedPackage(parseInt(storedPackage, 10));
-  }
-}, [selectedPackage]);
+    if (storedPackage && !selectedPackage) {
+      setSelectedPackage(parseInt(storedPackage, 10));
+    }
+  }, [selectedPackage]);
 
   const handlePackageSelect = async (packageId: number) => {
     if (selectedPackage === packageId) {
@@ -34,38 +33,45 @@ useEffect(() => {
     }
 
     setShowConfirmationPopup(true);
-    setSelectedPackageId(packageId); 
+    setSelectedPackageId(packageId);
   };
 
   const handleConfirmation = async (confirm: boolean) => {
     setShowConfirmationPopup(false);
 
     if (!confirm) {
-      setSelectedPackageId(null); 
+      setSelectedPackageId(null);
       return;
     }
 
     if (selectedPackageId !== null) {
-      setSelectedPackage(selectedPackageId); 
+      setSelectedPackage(selectedPackageId);
 
       try {
-        const { data } = await client.mutate({
-          mutation: Subscription,
-          variables: {
-            subscriptionTypeId: selectedPackageId,
-          },
-        });
+        const selectedPackage = packages.find((pkg) => pkg.id === selectedPackageId);
 
-        if (data.createSubscription && data.createSubscription.subscription) {
-          console.log('Subscription created successfully!', data.createSubscription.subscription);
-          localStorage.setItem('selectedPackage', selectedPackageId.toString());
-        } else if (data.createSubscription && data.createSubscription.errors) {
-          data.createSubscription.errors.forEach((error: any) => {
-            console.error(`Error creating subscription - Field: ${error.field}, Message: ${error.message}`);
+        if (selectedPackage) {
+          const { data } = await client.mutate({
+            mutation: Subscription,
+            variables: {
+              subscriptionTypeId: selectedPackageId,
+            },
           });
-        }
 
-        setSelectedPackageId(null); 
+          if (data.createSubscription && data.createSubscription.subscription) {
+            console.log('Subscription created successfully!', data.createSubscription.subscription);
+            localStorage.setItem('selectedPackage', selectedPackageId.toString());
+            setShowPackageSelectedPopup(true);
+          } else if (data.createSubscription && data.createSubscription.errors) {
+            data.createSubscription.errors.forEach((error: any) => {
+              console.error(`Error creating subscription - Field: ${error.field}, Message: ${error.message}`);
+            });
+          }
+
+          setSelectedPackageId(null);
+        } else {
+          console.error('Selected package not found in the packages array.');
+        }
       } catch (error: any) {
         console.error('Error creating subscription:', error);
       }
@@ -88,15 +94,15 @@ useEffect(() => {
 
       {showPackageSelectedPopup && (
         <div className={styles.popup}>
-          <p >
-            Package successfully selected
+          <p>
+            Package successfully selected: {packages.find((pkg) => pkg.id === selectedPackage)?.name}
           </p>
         </div>
       )}
 
       {showPackageAlreadySelectedPopup && (
         <div className={styles.popup}>
-          <p >
+          <p>
             Package already selected
           </p>
         </div>
@@ -104,16 +110,15 @@ useEffect(() => {
 
       {showConfirmationPopup && (
         <div className={styles.confirmationPopup}>
-         <p>
-           Are you sure you want to select this package?
-         </p>
+          <p>
+            Are you sure you want to select the {packages.find((pkg) => pkg.id === selectedPackageId)?.name} package?
+          </p>
           <div>
             <button className={styles.buttonStyle} onClick={() => handleConfirmation(true)}>Yes</button>
             <button className={styles.buttonStyle} onClick={() => handleConfirmation(false)}>No</button>
           </div>
         </div>
       )}
-
 
       <div className={styles.packages}>
         {packages.map((pkg) => (

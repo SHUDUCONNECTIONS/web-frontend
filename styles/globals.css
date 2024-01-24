@@ -1,5 +1,51 @@
 
 @media only screen and (min-width: 100px) {
+
+  .container.loading {
+    opacity: 0.3;
+    pointer-events: none; 
+  }
+  
+  .signUpButton.loading {
+    cursor: not-allowed;
+  }
+
+  .loader {
+    width: 58px;
+    height: 58px;
+    display: inline-block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .loader::after,
+  .loader::before {
+    content: '';  
+    box-sizing: border-box;
+    width: 58px;
+    height: 58px;
+    border: 4px solid #FF3D00;
+    position: absolute;
+    left: 0;
+    animation: rotation 2s ease-in-out infinite alternate;
+  }
+  
+  .loader::after {
+    border-color: rgb(2, 124, 133);
+    animation-direction: alternate-reverse;
+  }
+  
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
   .container {
     display: flex;
     justify-content: center;
@@ -55,14 +101,14 @@
     padding: 15px;
     margin-bottom: 10px;
     border-radius: 8px;
-    cursor: text;
+    cursor: pointer;
     border: none;
-    box-sizing: border-box; /* Adding box-sizing property to include padding and border in the element's total width and height */
+    box-sizing: border-box; 
   }
   
   .input {
     border: 2px solid #ddd;
-    height: 50px; /* Adjusting the height for the input */
+    height: 50px; 
   }
   
   .input:focus {
@@ -75,7 +121,7 @@
     background-color: #3498db;
     color: #fff;
     border: none;
-    height: 50px; /* Adjusting the height for the button */
+    height: 50px; 
     font-family: Arial, sans-serif;
     font-weight: bold;
   }
@@ -176,7 +222,7 @@
     }
   
     .input.error {
-      border-color: #ff0000; /* Red border for error */
+      border-color: #ff0000; 
   }
   
   .error-message {

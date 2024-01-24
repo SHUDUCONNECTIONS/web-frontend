@@ -70,7 +70,14 @@
   .centeredButtonContainer {
     display: flex;
     justify-content: center;
-    margin-bottom: 10%; 
+    margin-bottom: 1%; 
+    width: 100%;
+  }
+
+  .centeredButtonContainer1 {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1%; 
     width: 100%;
   }
   
@@ -87,12 +94,12 @@
     max-width: 200px;
   }
   
-  /* User Profile Section */
+ 
   .profileSection {
     width: 70%; 
   }
   
-  /* Company Profile Section */
+ 
   .companyprofileSection {
     width: 70%; 
   }

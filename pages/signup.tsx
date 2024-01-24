@@ -4,6 +4,7 @@ import Image from 'next/image';
 import * as yup from 'yup';
 import { client } from './services/graphql.service';
 import { RegisterUser } from '../graphql/registerUser';
+import '../src/Components/loader.module.css';
 
 type Errors = {
   [key: string]: boolean | string;
@@ -27,6 +28,7 @@ const Home = () => {
     emailInUse: false,
     cellphoneInUse: false,
   });
+  const [loading, setLoading] = useState(false);
 
   const validationSchema = yup.object().shape({
     firstName: yup.string().required('Please enter your First Name'),
@@ -52,8 +54,9 @@ const Home = () => {
 
   const handleSignup = async () => {
     try {
+      setLoading(true);
       resetFieldErrors();
-
+  
       await validationSchema.validate(
         {
           firstName,
@@ -65,9 +68,9 @@ const Home = () => {
         },
         { abortEarly: false }
       );
-
+  
       console.log("trying to register", firstName, lastName, contactNumber, email, password);
-
+  
       try {
         const { data } = await client.mutate({
           mutation: RegisterUser,
@@ -81,15 +84,15 @@ const Home = () => {
             cellphone: contactNumber,
           },
         });
-
+  
         console.log(data);
-
+  
         if (data && data.registerUser && data.registerUser.errors.length > 0) {
           const serverErrors = data.registerUser.errors;
-
+  
           serverErrors.forEach((error: { field: string; message: string }) => {
             const { field, message } = error;
-
+  
             if (field === 'email') {
               setErrors((prevErrors) => ({ ...prevErrors, emailInUse: message, email: message }));
             } else if (field === 'cellphone') {
@@ -97,6 +100,9 @@ const Home = () => {
             }
           });
         } else if (data && data.registerUser && data.registerUser.user !== null) {
+          // Save userId to localStorage
+          localStorage.setItem('userId', data.registerUser.user.id);
+  
           console.log("Registration successful:", data);
           router.push('/registerFirm');
         }
@@ -109,17 +115,19 @@ const Home = () => {
         } else {
           console.error('Other error:', registrationError);
         }
+      } finally {
+        setLoading(false);
       }
     } catch (validationError) {
       console.error('Validation error:', validationError);
-
+  
       if (validationError instanceof yup.ValidationError) {
         const newErrors = {} as typeof errors;
-
+  
         validationError.inner.forEach((error) => {
           newErrors[error.path as keyof typeof errors] = error.message;
         });
-
+  
         setErrors(newErrors);
       }
     }
@@ -130,7 +138,6 @@ const Home = () => {
   };
 
   const handleInputFocus = (fieldName: keyof Errors) => {
-    // Reset the specific error when the input field is clicked
     setErrors((prevErrors) => ({
       ...prevErrors,
       [fieldName]: false,
@@ -138,7 +145,7 @@ const Home = () => {
   };
 
   return (
-    <div className="container">
+    <div className={`container ${loading ? 'loading' : ''}`}>
       <div className="form">
         <h1 className="title">SIGN UP</h1>
         <div className="logo">
@@ -204,8 +211,8 @@ const Home = () => {
         />
         {errors.confirmPassword && <p className="error-message4">{errors.confirmPassword}</p>}
         <br />
-        <button onClick={handleSignup} className="signUpButton">
-          Sign Up
+        <button onClick={handleSignup} className={`signUpButton ${loading ? 'loading' : ''}`} disabled={loading}>
+          {loading ? <span className="loader"></span> : 'Sign Up'}
         </button>
         <p className="already-account">
           Already have an account?{' '}
