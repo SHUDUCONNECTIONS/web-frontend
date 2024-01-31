@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
-  const excludePages = ['/', '/signup', '/forgot-password'];
+  const excludePages = ['/', '/signup', '/forgot-password', '/registerFirm'];
 
   return (
     <>

@@ -100,7 +100,7 @@ const Home = () => {
             }
           });
         } else if (data && data.registerUser && data.registerUser.user !== null) {
-          // Save userId to localStorage
+          
           localStorage.setItem('userId', data.registerUser.user.id);
   
           console.log("Registration successful:", data);
