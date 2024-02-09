@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '../styles/MembershipPage.module.css';
 import { client } from './services/graphql.service';
 import { Subscription } from '../graphql/subscription';
@@ -51,21 +51,31 @@ const MembershipPage = () => {
         const selectedPackage = packages.find((pkg) => pkg.id === selectedPackageId);
 
         if (selectedPackage) {
-          const { data } = await client.mutate({
-            mutation: Subscription,
-            variables: {
-              subscriptionTypeId: selectedPackageId,
-            },
-          });
+          const mutationVariables = {
+            subscriptionTypeId: selectedPackageId,
+          };
 
-          if (data.createSubscription && data.createSubscription.subscription) {
-            console.log('Subscription created successfully!', data.createSubscription.subscription);
-            localStorage.setItem('selectedPackage', selectedPackageId.toString());
-            setShowPackageSelectedPopup(true);
-          } else if (data.createSubscription && data.createSubscription.errors) {
-            data.createSubscription.errors.forEach((error: any) => {
-              console.error(`Error creating subscription - Field: ${error.field}, Message: ${error.message}`);
+          try {
+            const { data } = await client.mutate({
+              mutation: Subscription,
+              variables: mutationVariables,
             });
+
+            if (data.createSubscription && data.createSubscription.subscription) {
+              console.log('Subscription created successfully!', data.createSubscription.subscription);
+              // Assuming you want to save the details to the database,
+              // you can handle the database storage here or make another mutation call if needed.
+
+              // Update local storage
+              localStorage.setItem('selectedPackage', selectedPackageId.toString());
+              setShowPackageSelectedPopup(true);
+            } else if (data.createSubscription && data.createSubscription.errors) {
+              data.createSubscription.errors.forEach((error: any) => {
+                console.error(`GraphQL Subscription Error - Field: ${error.field}, Message: ${error.message}`);
+              });
+            }
+          } catch (mutationError) {
+            console.error('Error during GraphQL Mutation:', mutationError);
           }
 
           setSelectedPackageId(null);
@@ -93,7 +103,8 @@ const MembershipPage = () => {
       <h1 className={styles.title}>Membership Packages</h1>
 
       {showPackageSelectedPopup && (
-        <div className={styles.popup}>
+         <div className={`${styles.popup} ${showPackageSelectedPopup ? styles.fadeOut : ''}`}>
+
           <p>
             Package successfully selected: {packages.find((pkg) => pkg.id === selectedPackage)?.name}
           </p>
@@ -113,6 +124,7 @@ const MembershipPage = () => {
           <p>
             Are you sure you want to select the {packages.find((pkg) => pkg.id === selectedPackageId)?.name} package?
           </p>
+          
           <div>
             <button className={styles.buttonStyle} onClick={() => handleConfirmation(true)}>Yes</button>
             <button className={styles.buttonStyle} onClick={() => handleConfirmation(false)}>No</button>

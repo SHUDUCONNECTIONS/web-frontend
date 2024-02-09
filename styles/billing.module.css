@@ -1,5 +1,5 @@
-@media only screen and (min-width: 425px) {
 
+@media only screen and (min-width: 150px) {
   .container {
     display: flex;
     flex-direction: column;
@@ -20,30 +20,31 @@
     border-radius: 15px;
     background-color: rgba(36, 35, 35, 0.781);
     width: 75%;
-    height: 22rem;
- 
+    height: 70%;
   }
 
   .title {
-    font-size: 30px;
+    width: 100%;
     font-weight: bold;
     margin-bottom: 2rem;
     font-family: Arial, sans-serif;
     color: rgb(185, 185, 185);
     text-align: center;
     margin-right: 53rem;
+    font-size: 1.6rem;
   }
 
-  .billing-info {
+  .billingInfo {
     margin-top: 20px;
     font-family: Arial, sans-serif;
     color: rgb(185, 185, 185);
   }
 
-  .info-group {
+  .infoGroup {
     display: flex;
+    font-size: 1rem;
     align-items: center;
-    margin-bottom: 15px;
+    margin-left: 15px;
     font-family: Arial, sans-serif;
     color: rgb(185, 185, 185);
   }
@@ -56,14 +57,15 @@
   }
 
   .icon {
-    width: 24px;
-    height: 24px;
-    margin-right: 10px;
+    width: 34px;
+    height: 34px;
     color: #3498db;
   }
+}
+
 
  
-}
+
 
 
 @media only screen and (min-width: 768px) {

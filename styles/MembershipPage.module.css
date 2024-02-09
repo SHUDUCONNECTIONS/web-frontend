@@ -191,6 +191,27 @@
 
 
 
+.popup {
+  color: rgb(185, 185, 185);
+  font-family: Arial, sans-serif;
+  font-size: 17px;
+}
+
+.fadeOut {
+  animation: fadeOutAnimation 6s forwards;
+}
+
+@keyframes fadeOutAnimation {
+  from {
+    opacity: 5;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+
+
 
 
 
@@ -245,9 +266,9 @@
     border-radius: 20px;
     color: rgb(185, 185, 185);
     padding: 1rem;
-    width: 70%; /* Adjust width */
-    max-width: 100%; /* Set max-width to 100% */
-    margin-bottom: 20px; /* Increase space between cards */
+    width: 70%; 
+    max-width: 100%;
+    margin-bottom: 20px; 
     text-align: center;
     transition: all 0.3s ease-in-out;
     background-color: rgba(44, 44, 44, 0.781);
@@ -268,7 +289,7 @@
     padding: 8px 16px;
     border-radius: 4px;
     cursor: pointer;
-    width: 70%; /* Adjust button width */
+    width: 70%; 
     transition: all 0.3s ease-in-out;
     font-family: Arial, sans-serif;
   }

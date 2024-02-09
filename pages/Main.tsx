@@ -59,6 +59,10 @@ const Main = () => {
     router.push('/UploadCasePage');
   };
 
+  const handleRequestPickup = () => {
+    router.push('/request-pickup');
+  };
+
   return (
     <div className={styles.container}>
       <div className={`${styles.container2} ${styles.mobile}`}>
@@ -74,11 +78,11 @@ const Main = () => {
             />
           </div>
 
-          <button onClick={() => console.log('Button 1 clicked')} className={`${styles['button-menu']} ${styles.mobile}`}>
-            <span className="icon">
+          <button onClick={handleRequestPickup} className={styles['button-menu']}>
+          <span className="icon">
               <FontAwesomeIcon icon={faCar} />
             </span>
-            <span className={`${styles['button-text']} ${styles.mobile}`}>Pick Up Request</span>
+            <span className={styles['button-text']}>Pick Up Request</span>
           </button>
 
           <button onClick={handleUploadCase} className={styles['button-menu']}>
@@ -96,11 +100,11 @@ const Main = () => {
           </button>
 
           <button onClick={handleAccountProfile} className={styles['button-menu']}>
-  <span className="icon">
-    <FontAwesomeIcon icon={faUser} />
-  </span>
-  <span className={styles['button-text']}>Account Profile</span>
-</button>
+           <span className="icon">
+              <FontAwesomeIcon icon={faUser} />
+           </span>
+            <span className={styles['button-text']}>Account Profile</span>
+          </button>
 
           <button onClick={handleMemberAccess} className={styles['button-menu']}>
             <span className="icon">
@@ -118,8 +122,11 @@ const Main = () => {
         </div>
       </div>
 
+
+
+
       <div className={`${styles.container} ${styles.desktop}`}>
-        <Link href="/link-to-desired-url" className={styles['card-menu']} onClick={() => console.log('Button 1 clicked')}>
+        <Link href="/request-pickup" className={styles['card-menu']} onClick={(handleRequestPickup) => console.log('Button 1 clicked')}>
           <Image
             loader={customImageLoader}
             src="menu1.png"
