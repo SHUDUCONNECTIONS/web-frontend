@@ -9,6 +9,7 @@ import { EditAccount } from '../graphql/editProfile';
 import '../src/Components/loader.module.css';
 import * as yup from 'yup';
 import { useCookies } from 'react-cookie';
+import { fetchUserProfileAndFirmData } from './services/graphqlUtils';
 
 interface UserProfile {
   firstName: string;
@@ -74,57 +75,47 @@ const LawFirmAccountProfile: React.FC = () => {
   const handleUpdate = async () => {
     try {
       setValidationTriggered(true);
-
-
+  
       const userIdFromStorage = localStorage.getItem('userId');
-
+  
       if (!userIdFromStorage) {
         console.error('User ID not found in localStorage');
         return;
       }
-
-      const { data: userData } = await client.query({
-        query: ViewProfile,
-        variables: { userId: userIdFromStorage },
-      });
-
-      const { data: companyData, errors: companyErrors } = await client.query({
-        query: ViewFirm,
-        variables: { firmId: 29 }, 
-      });
-
-      if (userData && userData.user) {
+  
+      const { user, firm } = await fetchUserProfileAndFirmData(userIdFromStorage);
+  
+      if (user) {
         setUserProfile({
-          firstName: userData.user.firstName || '',
-          lastName: userData.user.lastName || '',
-          email: userData.user.email || '',
-          cellphone: userData.user.cellphone || '',
+          firstName: user.firstName || '',
+          lastName: user.lastName || '',
+          email: user.email || '',
+          cellphone: user.cellphone || '',
         });
       } else {
         console.error('User data not found in the response');
       }
-
-      if (companyErrors) {
-        console.error('Error fetching company data:', companyErrors);
-      } else if (companyData && companyData.firm) {
+  
+      if (firm) {
         setCompanyProfile({
-          name: companyData.firm.name || '',
-          placeId: companyData.firm.placeId || '',
-          contactPerson: companyData.firm.contactPerson || '',
-          postalCode: companyData.firm.postalCode || '',
-          companyEmail: companyData.firm.companyEmail || '',
-          telephoneNo: companyData.firm.telephoneNo || '',
-          companyRegistration: companyData.firm.companyRegistration || '',
+          name: firm.name || '',
+          placeId: firm.placeId || '',
+          contactPerson: firm.contactPerson || '',
+          postalCode: firm.postalCode || '',
+          companyEmail: firm.companyEmail || '',
+          telephoneNo: firm.telephoneNo || '',
+          companyRegistration: firm.companyRegistration || '',
         });
       } else {
         console.error('Company data not found in the response');
       }
-
+  
       console.log('Profile data fetched successfully');
     } catch (error) {
       console.error('An error occurred:', error);
     }
   };
+  
 
   const handleUpdateProfile = async () => {
     try {
@@ -254,6 +245,13 @@ const LawFirmAccountProfile: React.FC = () => {
       handleUpdate();
     }
   }, [userId]);
+
+  useEffect(() => {
+    const viewProfileButton = document.getElementById('viewProfileButton');
+    if (viewProfileButton) {
+      viewProfileButton.click();
+    }
+  }, []);
 
 
 
@@ -499,7 +497,7 @@ const LawFirmAccountProfile: React.FC = () => {
               className={styles.centeredButton}
               onClick={handleUpdateProfile}
               type="button"
-              disabled={!hasUnsavedChanges || isLoading} // Disable button when loading
+              disabled={!hasUnsavedChanges || isLoading} 
               style={{ marginBottom: '10px' }}
             >
               {isLoading ? <span className="loader"></span> : 'Update Profile'}
@@ -507,9 +505,14 @@ const LawFirmAccountProfile: React.FC = () => {
           </div>
           </div>
           <div className={styles.centeredButtonContainer}>
-          <button className={styles.centeredButton} onClick={handleUpdate} type="button">
-            View Profile
-          </button>
+          <button
+              id="viewProfileButton"
+              className={styles.centeredButton}
+              onClick={handleUpdate}
+              type="button"
+            >
+              View Profile
+            </button>
           <br />
           </div>
         </form>

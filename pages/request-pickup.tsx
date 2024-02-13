@@ -86,7 +86,7 @@ const RequestPickUpPage: React.FC<RequestPickUpPageProps> = ({ googleMapsApiKey 
           deliveryAddress: "Davel",
           recipientName,
           recipientNo,
-          deliveryState: "Normal",
+          deliveryState: " ",
           rideFee: 70,
         },
       });
@@ -99,7 +99,7 @@ const RequestPickUpPage: React.FC<RequestPickUpPageProps> = ({ googleMapsApiKey 
       setRideFee('');
     } catch (error) {
       console.error('Error requesting pick-up:', error);
-      // Handle errors (e.g., display an error message to the user)
+      
     }
   };
 
