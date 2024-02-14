@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -31,7 +32,7 @@ const Billing = ({ getBillingInfoId }: { getBillingInfoId: number }) => {
       try {
         const { data } = await client.query({
           query: GetBillingInfo,
-          variables: { getBillingInfoId : 13 },
+          variables: { getBillingInfoId : 2 },
         });
         setBillingData(data.getBillingInfo);
         
@@ -56,33 +57,30 @@ const Billing = ({ getBillingInfoId }: { getBillingInfoId: number }) => {
           {billingData && (
             <>
               <div className={styles.infoGroup}>
-                <label>
-                  <FontAwesomeIcon icon={faUser} className={styles.icon} />
-                  Membership:
-                </label>
-                <p>{billingData?.planType}</p>
-              </div>
-              <div className={styles.infoGroup}>
-                <label>
-                  <FontAwesomeIcon icon={faDollarSign} className={styles.icon} />
-                  Membership Fee:
-                </label>
-                <p>{billingData?.price?.toFixed(2)}</p>
-              </div>
-              <div className={styles.infoGroup}>
-                <label>
-                  <FontAwesomeIcon icon={faTruck} className={styles.icon} />
-                  Delivery Fee:
-                </label>
-                <p>{billingData?.rideFee?.toFixed(2)}</p>
-              </div>
-              <div className={styles.infoGroup}>
-                <label>
-                  <FontAwesomeIcon icon={faFileInvoiceDollar} className={styles.icon} />
-                  Total Amount Due:
-                </label>
-                <p>{(billingData?.totalCount?.toFixed(2))}</p>
-              </div>
+              <label>
+                <FontAwesomeIcon icon={faUser} className={styles.icon} />
+                <p>Membership: {billingData?.planType}</p>
+              </label>
+             
+            </div>
+            <div className={styles.infoGroup}>
+              <label>
+                <FontAwesomeIcon icon={faDollarSign} className={styles.icon} />
+                <p> Membership Fee: {billingData?.price?.toFixed(2)}</p>
+              </label>
+            </div>
+            <div className={styles.infoGroup}>
+              <label>
+                <FontAwesomeIcon icon={faTruck} className={styles.icon} />
+                <p>Delivery Fee: {billingData?.rideFee?.toFixed(2)}</p>
+              </label>
+            </div>
+            <div className={styles.infoGroup}>
+              <label>
+                <FontAwesomeIcon icon={faFileInvoiceDollar} className={styles.icon} />
+                <p>Total Amount Due: {billingData?.totalCount?.toFixed(2)}</p>
+              </label>
+            </div>
             </>
           )}
         </div>
