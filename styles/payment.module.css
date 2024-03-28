@@ -1,0 +1,40 @@
+/* paymentStyles.module.css */
+
+.paymentContainer {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Center align text */
+  }
+  
+  .logoContainer {
+    margin-bottom: 20px;
+  }
+  
+  .logoImage {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  
+  .paymentHeading {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .paymentPrice {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  
+  .paymentForm {
+    margin-top: 20px;
+  }
+  
+  .paymentScript {
+    margin-top: 20px;
+  }
+  
