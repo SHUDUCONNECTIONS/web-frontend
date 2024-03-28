@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from '../styles/MembershipPage.module.css';
 import { client } from './services/graphql.service';
 import { Subscription } from '../graphql/subscription';
+import { useRouter } from 'next/router';
 
 interface Package {
   id: number;
@@ -10,107 +11,80 @@ interface Package {
   stars: number;
   description: string;
 }
-
 const MembershipPage = () => {
-  const [selectedPackage, setSelectedPackage] = useState<number | null>(null);
   const [showPackageSelectedPopup, setShowPackageSelectedPopup] = useState(false);
   const [showPackageAlreadySelectedPopup, setShowPackageAlreadySelectedPopup] = useState(false);
   const [showConfirmationPopup, setShowConfirmationPopup] = useState(false);
+  const [userId, setUserId] = useState<string | null>(null);
+  const [firmId, setFirmId] = useState<string | null>(null);
+  const [planName, setPlanName] = useState<string | null>(null);
   const [selectedPackageId, setSelectedPackageId] = useState<number | null>(null);
-
+  const [amount, setAmount] = useState<string | null>(null);
+  const router = useRouter();
+  const [error, setError] = useState<string>('');
+  
   useEffect(() => {
-    const storedPackage = localStorage.getItem('selectedPackage');
+    // Retrieve userId and firmId from localStorage
+    const storedUserId = "186";
 
-    if (storedPackage && !selectedPackage) {
-      setSelectedPackage(parseInt(storedPackage, 10));
-    }
-  }, [selectedPackage]);
-
-  const handlePackageSelect = async (packageId: number) => {
-    if (selectedPackage === packageId) {
-      setShowPackageAlreadySelectedPopup(true);
-      return;
-    }
-
+    const storedFirmId = "67";
+    setUserId(storedUserId);
+    setFirmId(storedFirmId);
+    // Pre-select all packages (use null to represent unselected state)
+    setSelectedPackageId(null);
+  }, []);
+  const handlePackageSelect = async (packageId: number, price: string) => {
     setShowConfirmationPopup(true);
     setSelectedPackageId(packageId);
+    setAmount(price);
+    setSelectedPackageId(packageId);
+    localStorage.setItem('packageId', packageId.toString());
   };
-
-  const handleConfirmation = async (confirm: boolean) => {
+  const handleConfirmation = (confirm: boolean) => {
     setShowConfirmationPopup(false);
-
     if (!confirm) {
       setSelectedPackageId(null);
+      console.log(userId)
       return;
     }
-
-    if (selectedPackageId !== null) {
-      setSelectedPackage(selectedPackageId);
-
-      try {
-        const selectedPackage = packages.find((pkg) => pkg.id === selectedPackageId);
-
-        if (selectedPackage) {
-          const mutationVariables = {
-            subscriptionTypeId: selectedPackageId,
-          };
-
-          try {
-            const { data } = await client.mutate({
-              mutation: Subscription,
-              variables: mutationVariables,
-            });
-
-            if (data.createSubscription && data.createSubscription.subscription) {
-              console.log('Subscription created successfully!', data.createSubscription.subscription);
-              // Assuming you want to save the details to the database,
-              // you can handle the database storage here or make another mutation call if needed.
-
-              // Update local storage
-              localStorage.setItem('selectedPackage', selectedPackageId.toString());
-              setShowPackageSelectedPopup(true);
-            } else if (data.createSubscription && data.createSubscription.errors) {
-              data.createSubscription.errors.forEach((error: any) => {
-                console.error(`GraphQL Subscription Error - Field: ${error.field}, Message: ${error.message}`);
-              });
-            }
-          } catch (mutationError) {
-            console.error('Error during GraphQL Mutation:', mutationError);
-          }
-
-          setSelectedPackageId(null);
-        } else {
-          console.error('Selected package not found in the packages array.');
-        }
-      } catch (error: any) {
-        console.error('Error creating subscription:', error);
+    const selectedPackage = packages.find((pkg) => pkg.id === selectedPackageId);
+    if (selectedPackage) {
+      const planName = selectedPackage.name;
+            
+      if (selectedPackageId !== null && amount !== null && planName !== null) {
+        
+        router.push({
+          pathname: '/packagePayment',
+          query: {
+            packageName: planName,
+            price: amount,
+           
+          },
+        });
+        
       }
-    } else {
-      console.error('selectedPackageId is null. Cannot proceed.');
     }
   };
 
+  
+  
   const packages: Package[] = [
-    { id: 1, name: 'Bronze', price: 'R350.00/month', stars: 1, description: 'RAM: 2 GB | Support & Maintenance' },
-    { id: 2, name: 'Silver', price: 'R550.00/month', stars: 2, description: 'RAM: 4 GB | Support & Maintenance' },
-    { id: 3, name: 'Gold', price: 'R650.00/month', stars: 3, description: 'RAM: 6 GB | Support & Maintenance' },
-    { id: 4, name: 'Platinum', price: 'R750.00/month', stars: 4, description: 'RAM: 4 GB | Support & Maintenance' },
-    { id: 5, name: 'Palladium', price: 'R1 200.00/month', stars: 5, description: 'RAM: 6 GB | Support & Maintenance' },
+    { id: 1, name: 'Bronze', price: '350.00', stars: 1, description: '3 users | RAM: 2 GB | Support & Maintenance' },
+    { id: 2, name: 'Silver', price: '550.00', stars: 2, description: '5 users | RAM: 4 GB | Support & Maintenance' },
+    { id: 3, name: 'Gold', price: '650.00', stars: 3, description: '8 users | RAM: 6 GB | Support & Maintenance' },
+    { id: 4, name: 'Platinum', price: '750.00', stars: 4, description: '15 users | RAM: 8 GB | Support & Maintenance' },
+    { id: 5, name: 'Palladium', price: '1 200.00', stars: 5, description: '25 users | RAM: unlimited | Support & Maintenance' },
   ];
-
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Membership Packages</h1>
-
       {showPackageSelectedPopup && (
-         <div className={`${styles.popup} ${showPackageSelectedPopup ? styles.fadeOut : ''}`}>
-
+        <div className={`${styles.popup} ${showPackageSelectedPopup ? styles.fadeOut : ''}`}>
           <p>
-            Package successfully selected: {packages.find((pkg) => pkg.id === selectedPackage)?.name}
+            Package successfully selected: {packages.find((pkg) => pkg.id === selectedPackageId)?.name}
           </p>
         </div>
       )}
-
       {showPackageAlreadySelectedPopup && (
         <div className={styles.popup}>
           <p>
@@ -118,25 +92,22 @@ const MembershipPage = () => {
           </p>
         </div>
       )}
-
       {showConfirmationPopup && (
         <div className={styles.confirmationPopup}>
           <p>
             Are you sure you want to select the {packages.find((pkg) => pkg.id === selectedPackageId)?.name} package?
           </p>
-          
           <div>
             <button className={styles.buttonStyle} onClick={() => handleConfirmation(true)}>Yes</button>
             <button className={styles.buttonStyle} onClick={() => handleConfirmation(false)}>No</button>
           </div>
         </div>
       )}
-
       <div className={styles.packages}>
         {packages.map((pkg) => (
-          <div key={pkg.id} className={`${styles.package} ${selectedPackage === pkg.id ? styles.selected : ''}`}>
+          <div key={pkg.id} className={`${styles.package}`}>
             <h2>{pkg.name}</h2>
-            <p className={styles.price}>{pkg.price}</p>
+            <p className={styles.price}>{`R${pkg.price}/month`}</p>
             <div className={styles.stars}>
               {Array.from({ length: pkg.stars }, (_, index) => (
                 <span key={index}>&#9733;</span>
@@ -144,11 +115,11 @@ const MembershipPage = () => {
             </div>
             <p className={styles.description}>{pkg.description}</p>
             <button
-              className={`${styles['button-style']} ${selectedPackage === pkg.id ? styles.disabled : ''}`}
-              onClick={() => handlePackageSelect(pkg.id as number)}
-              disabled={selectedPackage === pkg.id}
+              className={styles['button-style']}
+              onClick={() => handlePackageSelect(pkg.id as number, pkg.price)}
+              disabled={selectedPackageId === pkg.id}
             >
-              {selectedPackage === pkg.id ? 'Package Selected' : 'Select Package'}
+              {selectedPackageId === pkg.id ? 'Package Selected' : 'Select Package'}
             </button>
           </div>
         ))}
@@ -156,5 +127,4 @@ const MembershipPage = () => {
     </div>
   );
 };
-
 export default MembershipPage;
