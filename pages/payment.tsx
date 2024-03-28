@@ -88,7 +88,7 @@ const Payment = () => {
       </div>
       {/* Ensure packageName and price are strings or provide appropriate fallbacks */}
       {/*<h2 className={styles.paymentHeading}>Package Name: {packageName || 'Package Name Unavailable'}</h2>*/}
-      <p className={styles.paymentPrice}>Price: {price || 'Price Unavailable'}</p>
+      <p className={styles.paymentPrice}>Ride Price: {price  || 'Price Unavailable'}</p>
       <div className={styles.paymentForm}>
         {checkoutId && (
           <div className={styles.paymentScript}>

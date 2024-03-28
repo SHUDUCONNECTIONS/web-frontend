@@ -250,9 +250,10 @@ const RequestPickUpPage: React.FC = () => {
 
   const handleRequestPickUp = async () => {
     try {
-      const rideFee = price;
+      const rideFee = price !== null ? price : 0;
+      const priceString = rideFee.toFixed(2);
 
-      localStorage.setItem('price', rideFee.toString());
+      localStorage.setItem('price', priceString);
       localStorage.setItem('pickupAddress', pickupLocation);
       localStorage.setItem('deliveryAddress', destinationAddress);
       localStorage.setItem('recipientName', recipientName);

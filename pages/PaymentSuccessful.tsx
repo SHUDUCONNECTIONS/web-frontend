@@ -18,7 +18,7 @@ const PaymentSuccessful = () => {
   
   useEffect(() => {
     // Retrieve data from localStorage
-     const userIdFromStorage = "186";
+    const userIdFromStorage = localStorage.getItem('userId');
      const priceFromStorage = localStorage.getItem('price');
      const packageIdFromStorage = localStorage.getItem('packageId');
  

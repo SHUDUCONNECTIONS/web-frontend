@@ -25,8 +25,8 @@ const MembershipPage = () => {
   
   useEffect(() => {
     // Retrieve userId and firmId from localStorage
-    const storedUserId = "186";
-
+    const storedUserId = localStorage.getItem('userId');
+    
     const storedFirmId = "67";
     setUserId(storedUserId);
     setFirmId(storedFirmId);
